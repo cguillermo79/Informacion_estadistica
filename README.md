@@ -1,43 +1,39 @@
-# Información del curso de Estadística
+# Estadística Descriptiva — Proyecto integrador
 
-Este repositorio reúne las bases de datos que utilizarán los estudiantes para desarrollar el proyecto integrador de la asignatura de Estadística.
+**Carrera de Ingeniería Ambiental · Universidad Nacional de Loja · Ciclo septiembre 2026 – febrero 2027**
+**Docente:** Carlos Guillermo Chuncho Morocho
 
-## Descripción general
+Este repositorio reúne el material del proyecto integrador de la asignatura. Durante todo el semestre, cada grupo trabaja con datos ambientales reales y georreferenciados del cantón Loja (2019–2024) del proyecto FIRELAB-Loja: relieve, cobertura vegetal, clima e incendios forestales.
 
-Las bases contienen observaciones espaciales y temporales del cantón Loja correspondientes al periodo 2019–2024. La información está organizada por celdas geográficas y por meses, lo que permite estudiar cómo cambian distintas condiciones del territorio a lo largo del tiempo.
+## Unidad 1
 
-Cada grupo trabajará con un bloque temático diferente:
+| Carpeta | Contenido |
+|---|---|
+| [`Unidad 1/guia_proyecto_integrador`](Unidad%201/guia_proyecto_integrador/guia_proyecto_integrador_estadistica.pdf) | **Guía del proyecto integrador** (PDF y fuente LaTeX): grupos e integrantes, bases, fases, fechas y qué presentar en cada unidad. |
+| [`Unidad 1/formato_proyecto_integrador`](Unidad%201/formato_proyecto_integrador/) | **Formato LaTeX del informe** (`proyecto_integrador_estadistica.tex` + `referencias.bib`, normas APA 7). |
+| [`Unidad 1/bases_datos_proyecto_integrador`](Unidad%201/bases_datos_proyecto_integrador/README.md) | **Bases de datos** de los cuatro grupos, diccionario de variables y descripción de la muestra. |
 
-| Grupo | Tema general de la base |
-|---:|---|
-| 1 | Relieve y accesibilidad |
-| 2 | Cobertura vegetal y uso del suelo |
-| 3 | Clima y condiciones atmosféricas |
-| 4 | Incendios forestales y riesgo |
+## Grupos
 
-Las bases incluyen variables de ubicación y tiempo, indicadores del tema asignado y campos de control que permiten revisar la calidad y disponibilidad de los datos.
+| Grupo | Tema | Base |
+|---:|---|---|
+| 1 | Relieve y accesibilidad | `grupo_01_relieve/` |
+| 2 | Cobertura vegetal y uso del suelo | `grupo_02_cobertura/` |
+| 3 | Clima y condiciones atmosféricas | `grupo_03_clima/` |
+| 4 | Incendios forestales y riesgo | `grupo_04_incendios/` |
 
-## Trabajo que deben realizar los estudiantes
+Los integrantes de cada grupo están en la guía del proyecto integrador.
 
-A partir de la base asignada, cada grupo deberá formular una pregunta de investigación relacionada con su tema y aplicar los contenidos estudiados en la asignatura. El trabajo comprende:
+## Descarga
 
-1. Identificar y describir las variables relevantes.
-2. Revisar la estructura, calidad y posibles datos faltantes.
-3. Elaborar tablas, resúmenes estadísticos y gráficos adecuados.
-4. Analizar patrones, variaciones y relaciones entre variables.
-5. Aplicar técnicas estadísticas acordes con la pregunta planteada.
-6. Interpretar los resultados dentro del contexto territorial y temporal de los datos.
-7. Presentar conclusiones sustentadas en la evidencia obtenida.
+```bash
+git clone https://github.com/cguillermo79/Informacion_estadistica.git
+```
 
-El proyecto se desarrolla progresivamente durante las tres unidades: inicia con el planteamiento del problema, continúa con la metodología y los resultados preliminares, y concluye con el análisis final, la discusión y las conclusiones.
+También puede usar **Code → Download ZIP** en la página del repositorio. La carpeta `Unidad 1` tiene un espacio en el nombre: en la terminal escríbala entre comillas (`cd "Unidad 1"`).
 
-## Organización de los archivos
+## Reglas de los datos
 
-La carpeta `bases_datos_proyecto_integrador` contiene:
-
-- Una carpeta independiente para cada grupo.
-- La base de datos CSV correspondiente a cada tema.
-- Un manifiesto con el resumen de los archivos disponibles.
-- Archivos auxiliares con información sobre la estructura y validación de las variables.
-
-Cada grupo debe utilizar únicamente la base asignada y conservar sin modificaciones el archivo original. Para el análisis se recomienda trabajar con una copia y documentar claramente los procedimientos realizados.
+- Cada grupo usa únicamente su base y el periodo 2019–2024.
+- Los CSV son de solo lectura: toda limpieza o transformación se hace con código y se documenta.
+- Las bases son una muestra estratificada de 400 de las 7.997 celdas del cantón; los resultados describen la muestra y se generalizan al cantón con inferencia (Unidad 3).

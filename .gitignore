@@ -1,0 +1,13 @@
+# Listado de participantes con correos personales: no se publica
+Unidad 1/courseid_*_participants.xlsx
+
+# Archivos auxiliares de LaTeX
+*.aux
+*.log
+*.out
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.toc
+*.synctex.gz

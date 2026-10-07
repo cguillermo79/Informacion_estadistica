@@ -1,0 +1,336 @@
+% Guía del proyecto integrador - Estadística Descriptiva
+% Compilar con: pdflatex guia_proyecto_integrador_estadistica.tex (dos veces)
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,top=2.4cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xurl}
+\usepackage{hyperref}
+
+\definecolor{petroleo}{HTML}{0B4F6C}
+\definecolor{verde}{HTML}{2E7D32}
+\definecolor{ambar}{HTML}{B26A00}
+\definecolor{rojo}{HTML}{B3261E}
+\definecolor{fondo}{HTML}{EEF4F7}
+
+\hypersetup{colorlinks=true,linkcolor=petroleo,urlcolor=petroleo}
+\titleformat{\section}{\large\bfseries\color{petroleo}}{\thesection.}{0.5em}{}[\vspace{-0.4em}{\color{petroleo}\rule{\textwidth}{0.6pt}}]
+\titleformat{\subsection}{\normalsize\bfseries\color{petroleo}}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.1em}{0.6em}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\newtcolorbox{nota}[1][]{colback=fondo,colframe=petroleo,boxrule=0.6pt,arc=1pt,left=5pt,right=5pt,top=3pt,bottom=3pt,fonttitle=\bfseries,#1}
+\newtcolorbox{alerta}[1][]{colback=rojo!5,colframe=rojo,boxrule=0.6pt,arc=1pt,left=5pt,right=5pt,top=3pt,bottom=3pt,fonttitle=\bfseries,#1}
+\newtcolorbox{ahora}[1][]{colback=verde!6,colframe=verde,boxrule=0.8pt,arc=1pt,left=5pt,right=5pt,top=3pt,bottom=3pt,fonttitle=\bfseries,#1}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\footnotesize\color{petroleo}\textbf{Estadística Descriptiva} $\vert$ Ingeniería Ambiental -- UNL}
+\fancyhead[R]{\footnotesize Guía del proyecto integrador}
+\fancyfoot[C]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist{itemsep=1.5pt,topsep=2pt}
+
+\begin{document}
+
+\begin{center}
+{\large\bfseries UNIVERSIDAD NACIONAL DE LOJA}\\[2pt]
+{\normalsize Facultad Agropecuaria y de Recursos Naturales Renovables -- Carrera de Ingeniería Ambiental}\\[2pt]
+{\small Ciclo septiembre 2026 -- febrero 2027}
+\end{center}
+\vspace{-0.3em}
+\begin{tcolorbox}[colback=petroleo,colframe=petroleo,arc=1pt,halign=center,top=6pt,bottom=6pt]
+\color{white}{\Large\bfseries GUÍA DEL PROYECTO INTEGRADOR}\\[3pt]
+{\normalsize\bfseries Estadística Descriptiva: un caso ambiental real del cantón Loja (2019--2024)}\\[3pt]
+{\footnotesize Docente: Carlos Guillermo Chuncho Morocho \quad$\vert$\quad Peso: 25\,\% de cada unidad (2,50 de 10,00)}
+\end{tcolorbox}
+
+\section{¿De qué se trata?}
+
+Durante todo el semestre cada equipo trabaja con un conjunto \textbf{real} de datos ambientales georreferenciados del cantón Loja (periodo 2019--2024) del proyecto FIRELAB-Loja: relieve, cobertura vegetal, clima e incendios forestales. El \textbf{mismo conjunto de datos} del equipo se usa en las tres unidades, aplicando en cada una herramientas estadísticas más avanzadas: de organizar los datos a inferir con ellos.
+
+El proyecto es \textbf{una sola investigación} con \textbf{tres partes, una por unidad}. Cada parte retoma y corrige la anterior; nunca se empieza desde cero.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{C{1.3cm}L{3.6cm}Y}
+\toprule
+\textbf{Unidad} & \textbf{Parte del proyecto} & \textbf{Producto técnico de la unidad} \\
+\midrule
+1 & Formulación de la investigación & Título, introducción (problema, pregunta e hipótesis), objetivos y referencias. \\
+2 & Metodología y análisis descriptivo & Informe con la Parte 1 corregida + metodología + tablas, gráficos, medidas y series temporales. \\
+3 & Inferencia, resultados y conclusiones & Informe final: Partes 1 y 2 corregidas + inferencia estadística, discusión y conclusiones. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Los 4 equipos, su tema y sus integrantes}
+
+Los equipos quedaron conformados según los grupos registrados en el curso. Cada estudiante pertenece a un solo equipo durante las tres unidades. Todo cambio debe ser autorizado por el docente.
+
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{C{0.9cm}L{3.2cm}L{4.2cm}Y}
+\toprule
+\textbf{Grupo} & \textbf{Tema} & \textbf{Integrantes} & \textbf{Variables del dataset} \\
+\midrule
+\textbf{1} & Relieve y accesibilidad &
+Mayra Alejandra Curimilma Tuqueres\newline María Emilia Urjilez Cango\newline Alejandra Nicole Verdesoto Ortiz &
+Elevación, pendiente, orientación de la ladera, distancia a asentamientos y a vías. \\
+\midrule
+\textbf{2} & Cobertura vegetal y uso del suelo &
+Milena Fernanda Anguisaca Narváez\newline Jeniffer Paulina Cevallos Arrobo\newline Zhina Alexandra Jiménez Jiménez\newline Joselin Anai Ulloa Zhanay &
+Proporción de bosque nativo, páramo, área agropecuaria, plantación forestal y cuerpos de agua; índices espectrales de vegetación (NDVI, NDMI, NBR, NDWI). \\
+\midrule
+\textbf{3} & Clima y condiciones atmosféricas &
+Alex Eduardo Bustamante Masache\newline Franks Rodrigo Cofre Rueda\newline Juan Diego Silva Cueva &
+Precipitación acumulada, días secos y húmedos, velocidad del viento. \\
+\midrule
+\textbf{4} & Incendios forestales y riesgo &
+Sara Lissette Criollo Montalván\newline Emily Nohelia Deleg Barreto\newline Jasmin Guadalupe Luna Jiménez\newline Lisbeth Liliana Sandoval Mendoza &
+Evidencia satelital de fuego y ocurrencia de incendios por celda, mes y año. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Preguntas guía} (punto de partida; su pregunta final debe ser más concreta y medible):
+
+\begin{itemize}
+  \item \textbf{Grupo 1:} ¿Cómo varía el relieve del territorio lojano y qué relación aparente tiene con la presencia humana?
+  \item \textbf{Grupo 2:} ¿Cómo se distribuye la cobertura vegetal del cantón y cómo cambia su condición en el tiempo?
+  \item \textbf{Grupo 3:} ¿Qué patrones estacionales y de variabilidad climática presenta el cantón Loja?
+  \item \textbf{Grupo 4:} ¿En qué zonas y periodos se concentra la ocurrencia de incendios forestales?
+\end{itemize}
+
+\begin{nota}
+Cada equipo aplica a \emph{su} bloque de variables las mismas herramientas que ve toda la clase. Así el curso se vuelve un solo proyecto de investigación ambiental compartido, visto desde cuatro ángulos. Para conectar los cuatro ángulos, \textbf{todas las bases incluyen la ocurrencia de incendios} (\nolinkurl{y_incendio_ge7_obs90}), que podrá relacionarse con su tema en la Unidad 3.
+\end{nota}
+
+\section{Las bases de datos: dónde descargarlas y qué contienen}
+
+\subsection{Descarga}
+
+Las bases están en el repositorio del curso en GitHub: \url{https://github.com/cguillermo79/Informacion_estadistica}, dentro de la carpeta \nolinkurl{Unidad 1/bases_datos_proyecto_integrador}. Puede descargarlas de dos formas:
+
+\begin{enumerate}
+  \item \textbf{Con Git} (recomendado; permite recibir actualizaciones con \texttt{git pull}):
+\begin{verbatim}
+git clone https://github.com/cguillermo79/Informacion_estadistica.git
+\end{verbatim}
+  \item \textbf{Sin Git:} en la página del repositorio, botón \textbf{Code} $\rightarrow$ \textbf{Download ZIP}, y descomprima el archivo.
+\end{enumerate}
+
+La carpeta \texttt{Unidad 1} tiene un espacio en el nombre: en la terminal escríbala entre comillas (\texttt{cd "Unidad 1"}).
+
+\subsection{Qué contiene cada base}
+
+La población de estudio son las \textbf{7.997 celdas de 500\,m $\times$ 500\,m} (25\,ha) que cubren el cantón Loja. Para que las bases sean manejables, cada equipo recibe una \textbf{muestra aleatoria estratificada de 400 celdas} (200 de la zona norte y 200 de la zona sur, semilla 2026), las mismas para los cuatro equipos. Este diseño es, en sí mismo, un ejemplo de los contenidos de la Unidad 1 (población, marco muestral, estratos y tamaño de muestra):
+\[
+n_0=\frac{Z^2\,p\,q}{e^2}=\frac{1{,}96^2(0{,}5)(0{,}5)}{0{,}05^2}=384{,}2,
+\qquad
+n=\frac{n_0}{1+\frac{n_0-1}{N}}=\frac{384{,}2}{1+\frac{383{,}2}{7997}}\approx 367
+\;\Rightarrow\; n=400 .
+\]
+
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{C{0.9cm}L{3.3cm}L{5.4cm}C{1.4cm}Y}
+\toprule
+\textbf{Grupo} & \textbf{Carpeta} & \textbf{Archivo} & \textbf{Filas} & \textbf{Unidad de observación} \\
+\midrule
+1 & \nolinkurl{grupo_01_relieve} & \nolinkurl{grupo_01_relieve.csv} & 400 & Celda (relieve fijo) \\
+  &                              & \nolinkurl{grupo_01_incendios_mensuales.csv} & 28.800 & Celda--mes \\
+2 & \nolinkurl{grupo_02_cobertura} & \nolinkurl{grupo_02_cobertura.csv} & 28.800 & Celda--mes \\
+3 & \nolinkurl{grupo_03_clima} & \nolinkurl{grupo_03_clima.csv} & 28.800 & Celda--mes \\
+4 & \nolinkurl{grupo_04_incendios} & \nolinkurl{grupo_04_incendios.csv} & 28.800 & Celda--mes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+En la misma carpeta están el \texttt{README.md} de las bases, el \textbf{diccionario de variables} (\nolinkurl{DICCIONARIO_VARIABLES.csv}: significado, unidad, tipo y escala de cada columna), la lista de celdas de la muestra (\nolinkurl{muestra_celdas.csv}) y el manifiesto con las huellas SHA-256 (\nolinkurl{MANIFIESTO_BASES.csv}).
+
+\begin{alerta}[title=Reglas de uso de los datos]
+\begin{itemize}[leftmargin=*]
+  \item Use \textbf{solo la base de su grupo} y solo el periodo 2019--2024. El año 2025 no se incluye y no debe incorporarse.
+  \item El CSV es de \textbf{solo lectura}: no lo edite, renombre ni sobrescriba. Toda limpieza se hace con código (R o Python) y se documenta.
+  \item Los resultados describen la \textbf{muestra de 400 celdas}; para hablar del cantón deberá usar inferencia (Unidad 3).
+  \item Estas bases permiten describir patrones y asociaciones, \textbf{no demostrar causas}.
+  \item No suba los datos a herramientas externas de inteligencia artificial.
+\end{itemize}
+\end{alerta}
+
+\section{Cómo se evalúa (se repite en cada unidad)}
+
+Dentro de cada unidad el proyecto se evalúa en las mismas cuatro fases (escala 0--10 por fase):
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{L{3.2cm}C{1.4cm}YC{1.8cm}}
+\toprule
+\textbf{Fase} & \textbf{Peso} & \textbf{Qué se evalúa} & \textbf{Modalidad} \\
+\midrule
+1. Formulación & 3\,\% & Planteamiento inicial de la parte de la unidad. & Grupal \\
+2. Avance & 4\,\% & Evidencia de desarrollo con los datos y atención a la retroalimentación. & Grupal \\
+3. Producto técnico & 10\,\% & Documento formal en \LaTeX{} con normas APA 7 (formato del curso). & Grupal \\
+4. Defensa individual & 8\,\% & Sustentación oral individual y respuesta a preguntas o modificaciones. & Individual \\
+\midrule
+\textbf{Total por unidad} & \textbf{25\,\%} & \textbf{2,50 puntos sobre 10,00 en cada unidad.} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Escala: 0 = sin evidencia; 1--4,9 = insuficiente; 5--6,9 = parcial; 7--8,9 = adecuado; 9--10 = sólido. Celda vacía = pendiente; 0 = no presentó evidencia válida. Nota mínima de la unidad: 7/10.
+
+\section{Unidad 1 -- Formulación de la investigación (lo que deben presentar ahora)}
+
+\begin{ahora}[title=Producto de la Unidad 1]
+Un documento en \LaTeX{} (formato del curso, carpeta \nolinkurl{formato_proyecto_integrador}) con:
+\textbf{título}; \textbf{1. Introducción} --planteamiento del problema, pregunta de investigación e hipótesis-- (\textbf{máximo 2 páginas}); \textbf{2. Objetivos} --un objetivo general y tres objetivos específicos--; y \textbf{Referencias} en APA 7. Todo lo que se afirme en la problemática debe estar \textbf{citado} con normas APA.
+\end{ahora}
+
+\subsection{Fases y fechas de la Unidad 1}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{L{2.9cm}C{1.7cm}Y}
+\toprule
+\textbf{Fase} & \textbf{Fecha} & \textbf{Qué se entrega} \\
+\midrule
+1. Formulación (3\,\%) & jue 08-oct & \textbf{Ficha de formulación} (1 página): título tentativo; tema y bloque de variables del grupo; descripción del problema ambiental en 5--8 líneas con al menos 2 citas; borrador de la pregunta; lista de 5--8 variables que usarán, con su significado. \\
+2. Avance (4\,\%) & jue 15-oct & \textbf{Exploración preliminar de los datos} que sustente la pregunta: población, muestra y unidad de observación; tipo y escala de medición de cada variable; al menos dos tablas de frecuencias (absolutas, relativas y acumuladas); tres hechos observados en los datos que justifiquen la pregunta. Pregunta, hipótesis y objetivos mejorados. \\
+3. Producto técnico (10\,\%) & jue 22-oct & \textbf{Documento \LaTeX{} con normas APA} (archivo \texttt{.tex}, \texttt{.bib} y PDF): título, introducción (problema, pregunta, hipótesis; máximo 2 páginas), objetivos y referencias. \\
+4. Defensa individual (8\,\%) & mar 27-oct & \textbf{Sustentación oral individual} del planteamiento: problema, pregunta, hipótesis y objetivos, y por qué se eligieron. \\
+Examen de Unidad 1 & jue 29-oct & Evaluación individual (componente aparte del proyecto). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+{\footnotesize\textit{Fechas estimadas a partir del calendario institucional 2026--2027; confirmar en el SIAAF/EVA. Pase de calificaciones de la Unidad 1: 30-oct al 06-nov-2026.}}
+
+\subsection{Cómo redactar cada elemento}
+
+\textbf{Título.} Máximo 15 palabras; indica la variable o fenómeno, el lugar (cantón Loja) y el periodo (2019--2024).
+
+\textbf{Planteamiento del problema} (1 a 1,5 páginas, con citas APA en cada afirmación). Construya el problema en tres pasos:
+\begin{enumerate}
+  \item \textbf{Situación:} qué ocurre con su tema en el territorio o en la región andina, y por qué importa ambientalmente (con datos y citas).
+  \item \textbf{Vacío:} qué no se conoce, no se ha cuantificado o no se ha descrito para el cantón Loja.
+  \item \textbf{Aporte:} cómo un análisis estadístico de la base del grupo ayuda a llenar ese vacío.
+\end{enumerate}
+El párrafo final del problema conduce directamente a la pregunta.
+
+\textbf{Pregunta de investigación.} Una sola pregunta, clara y respondible con la base del grupo. Debe mencionar \emph{qué} variables, \emph{dónde} (cantón Loja; puede comparar zonas norte y sur) y \emph{cuándo} (2019--2024). Evite preguntas que se respondan con «sí» o «no», o que pidan demostrar causas.
+
+\textbf{Hipótesis.} Una afirmación \textbf{contrastable} que anticipa la respuesta. Debe incluir variables, lugar, periodo y un \textbf{criterio cuantitativo} (una proporción, una diferencia entre grupos, un orden, una asociación). Se contrastará en la Unidad 3 con intervalos de confianza, pruebas chi-cuadrado o regresión logística; si los resultados la refutan, también es un hallazgo válido.
+
+\textbf{Objetivos.} Un \textbf{objetivo general} que responda la pregunta (verbo en infinitivo: determinar, caracterizar, analizar, evaluar) y \textbf{tres objetivos específicos} medibles, uno por unidad del curso:
+\begin{enumerate}
+  \item \textbf{OE1 (Unidad 1):} describir/clasificar las variables y su distribución de frecuencias.
+  \item \textbf{OE2 (Unidad 2):} caracterizar con gráficos, medidas y series temporales.
+  \item \textbf{OE3 (Unidad 3):} estimar o contrastar con inferencia estadística.
+\end{enumerate}
+Evite verbos no verificables como «conocer», «entender» o «estudiar».
+
+\subsection{Orientación por grupo (no copie: adapte a su pregunta)}
+
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{C{0.9cm}YY}
+\toprule
+\textbf{Grupo} & \textbf{Ideas de problema y pregunta} & \textbf{Forma posible de la hipótesis} \\
+\midrule
+1 & Relación entre elevación, pendiente y cercanía a vías y asentamientos; zonas norte y sur; relieve en celdas con y sin incendios. & «Las celdas con pendiente mayor a X° están más alejadas de las vías que las de pendiente menor, y la diferencia se mantiene en ambas zonas». \\
+2 & Composición de la cobertura vegetal; estacionalidad del NDVI; diferencias de NDVI entre coberturas dominantes o entre celdas con y sin incendio. & «El NDVI medio de las celdas con bosque nativo dominante supera en al menos X unidades al de las celdas agropecuarias, en todos los años». \\
+3 & Régimen de lluvias y meses secos; variabilidad interanual; diferencias norte--sur; condiciones climáticas en los meses con incendio. & «Los meses de junio a septiembre concentran más del X\,\% de los días secos del año en el cantón». \\
+4 & Concentración temporal (meses, años) y espacial (zonas) de los incendios; sensibilidad a la definición de incendio. & «Más del X\,\% de los incendios válidos ocurre entre agosto y noviembre, y la proporción de celdas con incendio difiere entre las zonas norte y sur». \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Lista de comprobación del producto de la Unidad 1}
+
+\begin{itemize}[label=$\square$]
+  \item El título indica variable, lugar y periodo.
+  \item La introducción ocupa como máximo 2 páginas y cada afirmación del problema tiene cita APA.
+  \item Hay \textbf{una} pregunta, \textbf{una} hipótesis con criterio cuantitativo y \textbf{un} objetivo general.
+  \item Hay tres objetivos específicos medibles, coherentes con la pregunta y con las tres unidades.
+  \item Las referencias son reales y verificables (autor, año, título, fuente y DOI o enlace) y todas se citan en el texto.
+  \item El documento compila en \LaTeX{} sin errores y se entregan \texttt{.tex}, \texttt{.bib} y PDF.
+  \item Todas las personas del grupo pueden explicar cualquier parte del documento.
+\end{itemize}
+
+\section{Unidad 2 -- Metodología y análisis descriptivo}
+
+\textbf{Producto:} informe que integra la Parte 1 corregida + \textbf{3. Metodología} (población, muestra, variables, depuración y técnicas) + \textbf{4. Resultados descriptivos}: gráficos (histogramas, polígonos, diagramas de caja y de dispersión), medidas de tendencia central, posición y dispersión, percentiles y cuartiles, asimetría y curtosis, y \textbf{series temporales} (tendencia, medias móviles y estacionalidad) de las variables del grupo.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{L{2.9cm}C{1.7cm}Y}
+\toprule
+\textbf{Fase} & \textbf{Fecha} & \textbf{Qué se entrega} \\
+\midrule
+1. Formulación (3\,\%) & jue 12-nov & Matriz metodológica por objetivo: variables, técnica, gráfico y tabla previstos; Parte 1 corregida. \\
+2. Avance (4\,\%) & jue 19-nov & Script o cuaderno reproducible con depuración documentada y primeras tablas, gráficos y medidas. \\
+3. Producto técnico (10\,\%) & jue 26-nov & Informe en \LaTeX{} (Partes 1 y 2) con metodología y resultados descriptivos interpretados. \\
+4. Defensa individual (8\,\%) & mar 01-dic & Sustentación individual de la metodología y de los resultados descriptivos. \\
+Examen de Unidad 2 & jue 03-dic & Evaluación individual. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Unidad 3 -- Inferencia, resultados y conclusiones}
+
+\textbf{Producto:} informe final que integra las Partes 1 y 2 corregidas + \textbf{inferencia estadística}: estimación con intervalos de confianza (de la muestra de 400 celdas al cantón), tablas de contingencia y pruebas chi-cuadrado (independencia, bondad de ajuste u homogeneidad), regresión logística con la ocurrencia de incendios como respuesta y una introducción a la geoestadística con las coordenadas de las celdas; \textbf{contraste de la hipótesis}, discusión, limitaciones y conclusiones (una por objetivo específico).
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{L{2.9cm}C{1.7cm}Y}
+\toprule
+\textbf{Fase} & \textbf{Fecha} & \textbf{Qué se entrega} \\
+\midrule
+1. Formulación (3\,\%) & jue 17-dic & Plan de análisis inferencial: qué parámetro se estimará y qué prueba contrastará la hipótesis. \\
+\multicolumn{3}{l}{\textit{Receso académico estimado: 21-dic-2026 al 04-ene-2027.}} \\
+2. Avance (4\,\%) & jue 07-ene & Intervalos de confianza y primeras pruebas, con su interpretación. \\
+3. Producto técnico (10\,\%) & jue 21-ene & Informe final en \LaTeX{} (Partes 1, 2 y 3) con resultados, discusión y conclusiones. \\
+4. Defensa individual (8\,\%) & mar 26-ene & Sustentación individual de todo el proyecto. \\
+Examen de Unidad 3 & jue 28-ene & Evaluación individual. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Formato, citas y uso de inteligencia artificial}
+
+\begin{itemize}
+  \item El informe se redacta en \LaTeX{} a partir del formato del curso (\nolinkurl{Unidad 1/formato_proyecto_integrador}): Times 12\,pt, interlineado doble y referencias con \texttt{biblatex} estilo APA 7. Se entregan \texttt{.tex}, \texttt{.bib} y PDF.
+  \item Cite como mínimo el dataset FIRELAB-Loja y las fuentes que sustentan el problema. \textbf{No invente referencias}: toda cita debe poder verificarse.
+  \item Puede usar IA para entender errores o revisar redacción, pero debe declararlo en un anexo, verificar todo lo que produzca y poder explicar cada línea en la defensa individual.
+\end{itemize}
+
+\vspace{0.6em}
+\begin{center}
+\rule{0.5\textwidth}{0.5pt}\\[2pt]
+{\footnotesize Carlos Guillermo Chuncho Morocho -- Docente de Estadística Descriptiva\\
+Carrera de Ingeniería Ambiental, Universidad Nacional de Loja -- \texttt{carlos.chuncho@unl.edu.ec}}
+\end{center}
+
+\end{document}
