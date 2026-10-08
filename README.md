@@ -38,7 +38,7 @@ Este repositorio reúne el material oficial del proyecto integrador y los recurs
 
 | Carpeta | Contenido |
 |---|---|
-| [`Unidad 1/01_guias`](Unidad%201/01_guias/) | **Guías de estudio y Dashboard**: Guía 1, Guía 2 (PDF y fuente LaTeX) y Dashboard interactivo con Microreto de razonamiento del Bloque C. |
+| [`Unidad 1/01_guias`](Unidad%201/01_guias/) | **Guías de estudio Bloque C**: Guía 1 (Fundamentos Teóricos de Muestreo Ambiental, PDF y LaTeX), Guía 2 (Taller Práctico y Microreto de Razonamiento, PDF y LaTeX) y Dashboard interactivo con simulador y evaluación. |
 | [`Unidad 1/guia_proyecto_integrador`](Unidad%201/guia_proyecto_integrador/guia_proyecto_integrador_estadistica.pdf) | **Guía del proyecto integrador** (PDF y fuente LaTeX): grupos e integrantes, bases, fases, fechas y qué presentar en cada unidad. |
 | [`Unidad 1/formato_proyecto_integrador`](Unidad%201/formato_proyecto_integrador/) | **Formato LaTeX del informe** (`proyecto_integrador_estadistica.tex` + `referencias.bib`, normas APA 7). |
 | [`Unidad 1/bases_datos_proyecto_integrador`](Unidad%201/bases_datos_proyecto_integrador/README.md) | **Bases de datos** de los cuatro grupos, diccionario de variables y descripción de la muestra. |

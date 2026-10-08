@@ -1,0 +1,311 @@
+\documentclass[11pt,a4paper]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot,es-noquoting]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+% ============================================================
+% CONFIGURACIÓN DE PÁGINA
+% ============================================================
+\geometry{
+  top=2.0cm,
+  bottom=2.0cm,
+  left=2.0cm,
+  right=2.0cm
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\renewcommand{\arraystretch}{1.2}
+
+% ============================================================
+% COLORES INSTITUCIONALES Y TÉCNICOS
+% ============================================================
+\definecolor{unlgreen}{RGB}{0,91,65}
+\definecolor{azulOscuro}{RGB}{12,43,92}
+\definecolor{azulMedio}{RGB}{30,80,140}
+\definecolor{verdeBosque}{RGB}{27,107,74}
+\definecolor{acentoDorado}{RGB}{197,143,39}
+\definecolor{rojoAlerta}{RGB}{165,40,40}
+\definecolor{grisFondo}{RGB}{247,249,252}
+\definecolor{grisBorde}{RGB}{209,217,230}
+\definecolor{grisTexto}{RGB}{55,65,75}
+
+% ============================================================
+% CONFIGURACIÓN DE HYPERREF
+% ============================================================
+\hypersetup{
+  colorlinks=true,
+  linkcolor=azulOscuro,
+  urlcolor=azulMedio,
+  citecolor=verdeBosque
+}
+
+% ============================================================
+% ENCABEZADO Y PIE DE PÁGINA
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{22pt}
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{unlgreen}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\small\textbf{\color{unlgreen}UNIVERSIDAD NACIONAL DE LOJA} $\vert$ FARNR}
+\fancyhead[R]{\small\textbf{Estadística Descriptiva} $\vert$ Guía 1: Bloque C}
+\fancyfoot[L]{\footnotesize Carrera de Ingeniería Ambiental $\vert$ Guillermo Chuncho}
+\fancyfoot[R]{\footnotesize Pág. \thepage\ de \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[L]{\footnotesize Carrera de Ingeniería Ambiental $\vert$ Guillermo Chuncho}%
+  \fancyfoot[R]{\footnotesize Pág. \thepage\ de \pageref{LastPage}}%
+}
+
+% ============================================================
+% COLUMNAS TABULARES
+% ============================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+% ============================================================
+% CAJAS DE DISEÑO
+% ============================================================
+\newtcolorbox{bannerbox}[1][]{
+  colback=azulOscuro, colframe=azulOscuro, arc=4pt, boxrule=1pt,
+  fonttitle=\bfseries\color{white}, colbacktitle=azulOscuro,
+  top=6pt, bottom=6pt, left=8pt, right=8pt, breakable, #1
+}
+
+\newtcolorbox{objetivobox}[1][]{
+  colback=green!3!white, colframe=unlgreen, arc=3pt, boxrule=1pt,
+  title=\textbf{Propósito y Resultados de Aprendizaje},
+  fonttitle=\bfseries\color{white}, colbacktitle=unlgreen,
+  top=5pt, bottom=5pt, left=8pt, right=8pt, breakable, #1
+}
+
+\newtcolorbox{teoriabox}[1][]{
+  colback=grisFondo, colframe=azulMedio, arc=3pt, boxrule=1pt,
+  title=\textbf{Fundamento Conceptual -- Bloque C: Diseños de Muestreo Ambiental},
+  fonttitle=\bfseries\color{white}, colbacktitle=azulMedio,
+  top=5pt, bottom=5pt, left=8pt, right=8pt, breakable, #1
+}
+
+\newtcolorbox{casobox}[2][]{
+  colback=white, colframe=azulOscuro, arc=3pt, boxrule=1pt,
+  title=\textbf{#2}, fonttitle=\bfseries\color{white}, colbacktitle=azulOscuro,
+  top=6pt, bottom=6pt, left=8pt, right=8pt, breakable, #1
+}
+
+\newtcolorbox{alertbox}[1][]{
+  colback=red!3!white, colframe=rojoAlerta, arc=3pt, boxrule=1pt,
+  title=\textbf{Advertencia Metodológica: Error Muestral vs. Sesgo Sistemático},
+  fonttitle=\bfseries\color{white}, colbacktitle=rojoAlerta,
+  top=5pt, bottom=5pt, left=8pt, right=8pt, breakable, #1
+}
+
+\begin{document}
+
+% ============================================================
+% ENCABEZADO INSTITUCIONAL
+% ============================================================
+\begin{bannerbox}
+\centering
+{\large\bfseries\color{white} UNIVERSIDAD NACIONAL DE LOJA}\\[2pt]
+{\small\bfseries\color{white} FACULTAD AGROPECUARIA Y DE RECURSOS NATURALES RENOVABLES}\\[2pt]
+{\footnotesize\color{white} CARRERA DE INGENIERÍA AMBIENTAL $\cdot$ ASIGNATURA: ESTADÍSTICA DESCRIPTIVA}\\[4pt]
+\rule{\linewidth}{0.5pt}\\[4pt]
+{\large\bfseries\color{white} GUÍA DE ESTUDIO 1: ELEMENTOS DE MUESTREO Y DISEÑO DEL ESTUDIO}\\[2pt]
+{\footnotesize\color{white} BLOQUE C: POBLACIÓN, MUESTRA, MARCO MUESTRAL, PARÁMETROS, SESGO Y MÉTODOS DE MUESTREO}\\[2pt]
+{\scriptsize\color{white} Docente: Guillermo Chuncho $\cdot$ Contacto: \texttt{carlos.chuncho@unl.edu.ec} $\cdot$ Ciclo 2026--2027}
+\end{bannerbox}
+
+\vspace{0.3cm}
+
+\begin{objetivobox}
+\begin{itemize}[leftmargin=*,noitemsep]
+  \item \textbf{Resultado de Aprendizaje:} Dominar la transición epistemológica y técnica que va desde la pregunta de investigación ambiental hasta la estructuración de la matriz de datos muestrales representativa.
+  \item \textbf{Competencias Específicas:} Diferenciar con rigor técnico población objetivo, población accesible, marco muestral, unidad muestral y unidad de análisis. Distinguir formalmente parámetros de estadísticos, cuantificar el error muestral frente al sesgo sistemático, y seleccionar el método de muestreo adecuado (probabilístico vs. no probabilístico) para la cuenca del cantón Loja.
+\end{itemize}
+\end{objetivobox}
+
+\vspace{0.2cm}
+
+% ============================================================
+% SECCIÓN 1: ELEMENTOS OPERATIVOS DEL MUESTREO
+% ============================================================
+\section*{1. Los Cinco Componentes Operativos del Muestreo}
+
+En investigaciones ambientales, uno de los errores más frecuentes consiste en confundir el ámbito conceptual de estudio con la unidad física de medición o con el registro operativo de selección.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabularx}{\linewidth}{p{3.2cm}p{4.2cm}p{4.2cm}Y}
+\toprule
+\textbf{Elemento} & \textbf{Definición Técnica} & \textbf{Pregunta Clave} & \textbf{Ejemplo Cantón Loja} \\
+\midrule
+\textbf{Población Objetivo} ($N$) & Totalidad de elementos o eventos sobre los cuales se desea formular inferencias. & ¿A qué universo completo se desea extrapolar? & Todos los tramos fluviales continuos del Río Malacatos en el cantón Loja en estiaje. \\
+\midrule
+\textbf{Población Accesible} & Subconjunto de la población objetivo que es física y operativamente muestreable. & ¿Qué elementos están realmente disponibles? & 140 tramos fluviales con servidumbre de paso público o puentes comunitarios. \\
+\midrule
+\textbf{Marco Muestral} & Listado formal, base cartográfica o catálogo operativo desde donde se extrae la muestra. & ¿Cuál es la lista tangible y numerada de sorteo? & Archivo shapefile SIG con 140 tramos elegibles codificados de \texttt{ID\_001} a \texttt{ID\_140}. \\
+\midrule
+\textbf{Unidad Muestral} & Entidad operativa seleccionada en el sorteo o procedimiento de selección. & ¿Qué objeto o punto se extrae en cada sorteo? & El tramo fluvial de 50 metros georreferenciado en el sorteo. \\
+\midrule
+\textbf{Unidad de Análisis} & Objeto indivisible donde se mide la variable o parámetro ambiental. & ¿En qué ente se mide la variable en laboratorio? & La alícuota de 500 mL de agua sometida a análisis de turbidez y DBO$_5$. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{alertbox}
+\textbf{El Defecto de Subcobertura en el Marco Muestral:}\\
+Si el marco muestral no coincide exactamente con la población objetivo, se produce un \textbf{sesgo de cobertura (subregistro)}. Por ejemplo, si se evalúa la contaminación en huertos periurbanos utilizando únicamente el catastro formal de predios con título, se excluyen sistemáticamente los asentamientos informales, donde la vulnerabilidad y la exposición a metales pesados suelen ser mayores. Aumentar el tamaño de la muestra jamás corrige este defecto.
+\end{alertbox}
+
+\vspace{0.2cm}
+
+% ============================================================
+% SECCIÓN 2: PARÁMETRO VS ESTADÍSTICO
+% ============================================================
+\section*{2. Parámetro Poblacional vs. Estadístico Muestral}
+
+La inferencia estadística descansa sobre la dualidad entre la \textbf{verdad global inobservable} y la \textbf{evidencia muestral calculada}:
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabularx}{\linewidth}{p{3.5cm}p{4.2cm}p{4.2cm}Y}
+\toprule
+\textbf{Criterio} & \textbf{Parámetro Poblacional ($\theta$)} & \textbf{Estadístico Muestral ($\hat{\theta}$)} & \textbf{Relación Inferencial} \\
+\midrule
+\textbf{Ámbito de Origen} & Proviene de la \textbf{Población total ($N$)}. & Proviene de la \textbf{Muestra observada ($n$)}. & $\hat{\theta}$ estima a $\theta$ con incertidumbre. \\
+\midrule
+\textbf{Naturaleza Matemática} & Constante fija. Prácticamente siempre desconocida (requiere censo total). & Variable aleatoria. Cambia de una muestra a otra según la ley de probabilidad. & Su varianza muestral es el error estándar: $\sigma_{\hat{\theta}}$. \\
+\midrule
+\textbf{Simbología Habitual} & Letras griegas: $\mu$ (media), $\sigma^2$ (varianza), $\sigma$ (desviación), $p$ (proporción). & Letras latinas: $\bar{x}$ (media), $s^2$ (varianza), $s$ (desviación), $\hat{p}$ (proporción). & Notación formal obligatoria en artículos y reportes técnicos. \\
+\midrule
+\textbf{Ejemplo Numérico} & $\mu = 45.00$ NTU (turbidez real desconocida de toda la cuenca). & $\bar{x} = 43.80$ NTU (calculado en $n = 30$ estaciones de campo). & Error muestral puntual: $\vert \bar{x} - \mu \vert = 1.20$ NTU. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\vspace{0.2cm}
+
+% ============================================================
+% SECCIÓN 3: ERROR MUESTRAL VS SESGO SISTEMÁTICO
+% ============================================================
+\section*{3. Error Muestral vs. Sesgo Sistemático (Bias)}
+
+\begin{figure}[h!]
+\centering
+\small
+\begin{tabularx}{\linewidth}{YY}
+\begin{tcolorbox}[colback=blue!3!white,colframe=azulMedio,title=\textbf{Error Muestral ($\epsilon = \hat{\theta} - \theta$)}]
+\begin{itemize}[leftmargin=*,noitemsep]
+  \item \textbf{Origen:} Fluctuación propia del azar por observar una fracción y no toda la población.
+  \item \textbf{Propiedad:} Es aleatorio y centrado en cero: $\mathbb{E}[\hat{\theta} - \theta] = 0$.
+  \item \textbf{Efecto de $n$:} \textbf{Disminuye} conforme $n$ aumenta, a razón de $1/\sqrt{n}$.
+  \item \textbf{Impacto:} Afecta la \textbf{precisión} (dispersión de estimaciones).
+\end{itemize}
+\end{tcolorbox}
+&
+\begin{tcolorbox}[colback=red!3!white,colframe=rojoAlerta,title=\textbf{Sesgo Sistemático ($Bias = \mathbb{E}[\hat{\theta}] - \theta$)}]
+\begin{itemize}[leftmargin=*,noitemsep]
+  \item \textbf{Origen:} Defectos estructurales en calibración de sensores, diseño muestral o marco.
+  \item \textbf{Propiedad:} Es unidireccional y persistente: $\mathbb{E}[\hat{\theta}] \neq \theta$.
+  \item \textbf{Efecto de $n$:} \textbf{NO DISMINUYE}. Con $n = 500.000$ el sesgo se perpetúa intacto.
+  \item \textbf{Impacto:} Destruye la \textbf{exactitud y validez científica} del estudio.
+\end{itemize}
+\end{tcolorbox}
+\end{tabularx}
+\end{figure}
+
+\vspace{0.2cm}
+
+% ============================================================
+% SECCIÓN 4: MÉTODOS DE MUESTREO AMBIENTAL
+% ============================================================
+\section*{4. Clasificación Rigurosa de Métodos de Muestreo}
+
+\subsection*{4.1 Diseños Probabilísticos (Permiten Inferencia y Cálculo de Confianza)}
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Aleatorio Simple (MAS):} Cada unidad tiene probabilidad idéntica ($1/N$). Requiere marco muestral completo y variabilidad uniforme. \textit{Ejemplo: Sorteo de 35 parcelas de una cuadrícula de 400 predios.}
+  \item \textbf{Estratificado:} La población se divide en estratos internamente homogéneos y heterogéneos entre sí.
+  \begin{itemize}
+    \item \textit{Proporcional:} $n_h = n \cdot \frac{N_h}{N}$. Mantiene la representatividad poblacional relativa.
+    \item \textit{No Proporcional / Óptima:} Se asigna mayor cuota a estratos raros pero de alto valor ecológico (ej. turberas del Parque Podocarpus) o de mayor variabilidad interna ($\sigma_h$).
+  \end{itemize}
+  \item \textbf{Sistemático:} Se elige un inicio aleatorio $r \in [1, k]$ y luego cada $k = N/n$ elementos continuos.
+  \textit{Riesgo crítico:} Si $k$ coincide con la periodicidad del fenómeno (ej. vertidos industriales semanales), se genera un sesgo masivo.
+  \item \textbf{Por Conglomerados (Clusters):} Se seleccionan grupos completos (microcuencas, parroquias) y se censan todas sus unidades internas para minimizar costos de transporte.
+  \item \textbf{Polietápico:} Combinación jerárquica de sorteos probabilísticos en fases sucesivas (ej. Parroquias $\to$ Barrios $\to$ Intersecciones viales).
+\end{enumerate}
+
+\subsection*{4.2 Diseños No Probabilísticos (Exploratorios o de Juicio Técnico)}
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Por Conveniencia:} Selección por proximidad o bajo costo (ej. tomar muestras de agua solo donde hay puentes vehiculares). \textit{Alto riesgo de sesgo.}
+  \item \textbf{Por Cuotas:} Se fijan cupos por categoría pero la selección final no es aleatoria.
+  \item \textbf{Intencional o por Juicio Experto:} El investigador escoge sitios críticos conocidos (ej. inspeccionar las 3 descargas mineras más conflictivas).
+  \item \textbf{Bola de Nieve (Snowball):} Participantes iniciales contactan y refieren a otros miembros de poblaciones clandestinas o sin registro formal (ej. tala no autorizada de madera nativa o quemas agrícolas ilegales).
+\end{enumerate}
+
+\vspace{0.2cm}
+
+% ============================================================
+% SECCIÓN 5: LOS CUATRO CASOS DE ESTUDIO DE LOJA
+% ============================================================
+\section*{5. Análisis Metodológico de los Casos de Estudio en Loja}
+
+\begin{casobox}{Caso 1: Calidad de Agua en la Microcuenca del Río Malacatos}
+\textbf{Objetivo:} Evaluar coliformes fecales y DBO$_5$ en tramos periurbanos y rurales durante el invierno.\\
+\textbf{Población Objetivo:} Todos los tramos del Río Malacatos en el cantón Loja ($N$ continuo).\\
+\textbf{Población Accesible:} 140 tramos con senderos públicos accesibles y seguros.\\
+\textbf{Marco Muestral:} Mapa SIG con 140 tramos identificados (\texttt{ID\_001} a \texttt{ID\_140}).\\
+\textbf{Unidad Muestral:} Tramo de 50 metros seleccionado en el sorteo. $\vert$ \textbf{Unidad de Análisis:} Muestra de 500 mL analizada en laboratorio.\\
+\textbf{Diseño Recomendado:} \textbf{Estratificado por Piso Altitudinal} (alto rural, medio urbano, bajo periurbano).
+\end{casobox}
+
+\begin{casobox}{Caso 2: Generación y Separación de Residuos Domiciliarios}
+\textbf{Objetivo:} Estimar la proporción cantonal ($p$) de hogares que realizan separación en origen.\\
+\textbf{Población Objetivo:} Todos los hogares habitados de las áreas urbanas de Loja ($N \approx 55.000$).\\
+\textbf{Marco Muestral:} Catastro de contribuyentes de aseo y agua potable.\\
+\textbf{Unidad Muestral:} Vivienda o predio sorteado. $\vert$ \textbf{Unidad de Análisis:} El hogar habitante (kg/persona/día).\\
+\textbf{Diseño Recomendado:} \textbf{Estratificado Proporcional} por circuito barrial o estrato socioeconómico.
+\end{casobox}
+
+\begin{casobox}{Caso 3: Ocurrencia de Incendios Forestales (Datos Satelitales VIIRS 375 m)}
+\textbf{Objetivo:} Estimar la proporción cantonal de superficie afectada por incendios en el estiaje.\\
+\textbf{Población Objetivo:} 7.997 celdas espaciales de $500 \times 500$ m del cantón Loja.\\
+\textbf{Marco Muestral:} Malla raster/vectorial con 7.997 filas identificadas de \texttt{cell\_id = 1} a \texttt{7997}.\\
+\textbf{Unidad Muestral y de Análisis:} La celda de $500 \times 500$ m (variable binaria 0/1 y severidad dNBR).\\
+\textbf{Diseño Recomendado:} \textbf{Estratificado por Tipo de Cobertura Vegetal} (páramo, matorral, pino, pastos).
+\end{casobox}
+
+\begin{casobox}{Caso 4: Monitoreo de Material Particulado PM$_{2.5}$ en el Anillo Urbano Céntrico}
+\textbf{Objetivo:} Determinar el promedio anual de PM$_{2.5}$ en horas pico de flujo vehicular.\\
+\textbf{Población Objetivo:} Todas las horas diurnas del año en la malla vial céntrica ($N = 5.110$ horas).\\
+\textbf{Marco Muestral:} Calendario cronológico de días y puntos georreferenciados para instalación.\\
+\textbf{Unidad Muestral:} Tramo vial y franja horaria de 1 hora. $\vert$ \textbf{Unidad de Análisis:} Metro cúbico de aire aspirado.\\
+\textbf{Diseño Recomendado:} \textbf{Sistemático Temporal} (cada $k = 3$ días en horarios punta fijos).
+\end{casobox}
+
+\end{document}

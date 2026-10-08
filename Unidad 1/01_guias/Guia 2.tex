@@ -60,7 +60,7 @@
 }
 
 % ============================================================
-% ENCABEZADO Y PIE DE PÁGINA (SIN SUPERPOSICIONES)
+% ENCABEZADO Y PIE DE PÁGINA
 % ============================================================
 \pagestyle{fancy}
 \fancyhf{}
@@ -68,16 +68,14 @@
 \renewcommand{\headrulewidth}{0.8pt}
 \renewcommand{\headrule}{\hbox to\headwidth{\color{unlgreen}\leaders\hrule height \headrulewidth\hfill}}
 \fancyhead[L]{\small\textbf{\color{unlgreen}UNIVERSIDAD NACIONAL DE LOJA} $\vert$ FARNR}
-\fancyhead[R]{\small\textbf{Estadística Descriptiva} $\vert$ Guía 2: Bloque B}
-\fancyfoot[L]{\footnotesize Carrera de Ingeniería Ambiental}
-\fancyfoot[C]{} % Dejado vacio para evitar superposicion de texto
+\fancyhead[R]{\small\textbf{Estadística Descriptiva} $\vert$ Guía 2: Taller Bloque C}
+\fancyfoot[L]{\footnotesize Carrera de Ingeniería Ambiental $\vert$ Guillermo Chuncho}
 \fancyfoot[R]{\footnotesize Pág. \thepage\ de \pageref{LastPage}}
 
 \fancypagestyle{plain}{%
   \fancyhf{}%
   \renewcommand{\headrulewidth}{0pt}%
-  \fancyfoot[L]{\footnotesize Carrera de Ingeniería Ambiental}%
-  \fancyfoot[C]{}%
+  \fancyfoot[L]{\footnotesize Carrera de Ingeniería Ambiental $\vert$ Guillermo Chuncho}%
   \fancyfoot[R]{\footnotesize Pág. \thepage\ de \pageref{LastPage}}%
 }
 
@@ -97,254 +95,247 @@
   top=6pt, bottom=6pt, left=8pt, right=8pt, breakable, #1
 }
 
-\newtcolorbox{objetivobox}[1][]{
-  colback=green!3!white, colframe=unlgreen, arc=3pt, boxrule=1pt,
-  title=\textbf{Propósito y Resultados de Aprendizaje},
+\newtcolorbox{estudiantebox}[1][]{
+  colback=white, colframe=unlgreen, arc=3pt, boxrule=1pt,
+  title=\textbf{Ficha de Identificación del Estudiante / Equipo},
   fonttitle=\bfseries\color{white}, colbacktitle=unlgreen,
   top=5pt, bottom=5pt, left=8pt, right=8pt, breakable, #1
 }
 
-\newtcolorbox{teoriabox}[1][]{
-  colback=grisFondo, colframe=azulMedio, arc=3pt, boxrule=1pt,
-  title=\textbf{Fundamento Conceptual -- Bloque B: Enfoques de Investigación},
-  fonttitle=\bfseries\color{white}, colbacktitle=azulMedio,
+\newtcolorbox{instruccionbox}[1][]{
+  colback=green!3!white, colframe=unlgreen, arc=3pt, boxrule=1pt,
+  title=\textbf{Instrucciones Metodológicas para el Estudiante},
+  fonttitle=\bfseries\color{white}, colbacktitle=unlgreen,
+  top=5pt, bottom=5pt, left=8pt, right=8pt, breakable, #1
+}
+
+\newtcolorbox{reactivobox}[2][]{
+  colback=white, colframe=azulMedio, arc=3pt, boxrule=1pt,
+  title=\textbf{#2}, fonttitle=\bfseries\color{white}, colbacktitle=azulMedio,
   top=5pt, bottom=5pt, left=8pt, right=8pt, breakable, #1
 }
 
 \newtcolorbox{casobox}[2][]{
-  colback=white, colframe=azulOscuro, arc=3pt, boxrule=1pt,
+  colback=grisFondo, colframe=azulOscuro, arc=3pt, boxrule=1pt,
   title=\textbf{#2}, fonttitle=\bfseries\color{white}, colbacktitle=azulOscuro,
-  top=6pt, bottom=6pt, left=8pt, right=8pt, breakable, #1
-}
-
-\newtcolorbox{desafiobox}[1][]{
-  colback=yellow!5!white, colframe=acentoDorado, arc=3pt, boxrule=1pt,
-  title=\textbf{Cuestionario y Reto de Razonamiento Crítico},
-  fonttitle=\bfseries\color{white}, colbacktitle=acentoDorado,
-  top=5pt, bottom=5pt, left=8pt, right=8pt, breakable, #1
-}
-
-\newtcolorbox{alertbox}[1][]{
-  colback=red!3!white, colframe=rojoAlerta, arc=3pt, boxrule=1pt,
-  title=\textbf{Advertencia Metodológica: Falacias Científicas},
-  fonttitle=\bfseries\color{white}, colbacktitle=rojoAlerta,
   top=5pt, bottom=5pt, left=8pt, right=8pt, breakable, #1
 }
 
 \begin{document}
-\thispagestyle{plain}
 
 % ============================================================
 % ENCABEZADO INSTITUCIONAL
 % ============================================================
-\begin{center}
-  {\Large\textbf{\color{azulOscuro}UNIVERSIDAD NACIONAL DE LOJA}}\vspace{0.10cm}\\
-  {\large\textbf{\color{unlgreen}FACULTAD AGROPECUARIA Y DE RECURSOS NATURALES RENOVABLES}}\vspace{0.06cm}\\
-  {\normalsize\textbf{CARRERA DE INGENIERÍA AMBIENTAL}}\vspace{0.08cm}\\
-  {\small Período Académico: Septiembre 2026 -- Febrero 2027 $\quad\vert\quad$ Modalidad: Presencial}
-\end{center}
-
-\vspace{0.10cm}
-
 \begin{bannerbox}
-  \centering\color{white}
-  {\Large\bfseries GUÍA DE TRABAJO PRÁCTICO Y RAZONAMIENTO N° 2}\\[0.10cm]
-  {\Large\bfseries BLOQUE B: ENFOQUES DE INVESTIGACIÓN CIENTÍFICA}\\[0.08cm]
-  {\normalsize\textbf{Cuantitativo, Cualitativo y Mixto: Distintas Formas de Generar Evidencia Ambiental}}\\[0.06cm]
-  {\footnotesize\textit{Asignatura: Estadística Descriptiva $\quad\vert\quad$ Docente: Dr. Guillermo Chuncho}}
+\centering
+{\large\bfseries\color{white} UNIVERSIDAD NACIONAL DE LOJA}\\[2pt]
+{\small\bfseries\color{white} FACULTAD AGROPECUARIA Y DE RECURSOS NATURALES RENOVABLES}\\[2pt]
+{\footnotesize\color{white} CARRERA DE INGENIERÍA AMBIENTAL $\cdot$ ASIGNATURA: ESTADÍSTICA DESCRIPTIVA}\\[4pt]
+\rule{\linewidth}{0.5pt}\\[4pt]
+{\large\bfseries\color{white} GUÍA DE ESTUDIO 2: TALLER PRÁCTICO Y MICRORETO DE RAZONAMIENTO}\\[2pt]
+{\footnotesize\color{white} BLOQUE C: POBLACIÓN, MUESTRA, MARCO MUESTRAL, PARÁMETROS, SESGOS Y DISEÑOS DE MUESTREO}\\[2pt]
+{\scriptsize\color{white} Docente: Guillermo Chuncho $\cdot$ Contacto: \texttt{carlos.chuncho@unl.edu.ec} $\cdot$ Ciclo 2026--2027}
 \end{bannerbox}
 
-\vspace{0.25cm}
+\vspace{0.2cm}
 
 % ============================================================
-% 1. PROPÓSITO Y OBJETIVOS
+% FICHA DEL ESTUDIANTE
 % ============================================================
-\begin{objetivobox}
-El propósito de esta guía es que el estudiante desarrolle capacidad crítica y criterio epistemológico para determinar, a partir de situaciones ambientales reales del cantón Loja y la región sur del Ecuador, \textbf{qué tipo de evidencia exige una problemática ambiental para ser comprendida y resuelta}, superando la falsa dicotomía entre medición numérica y comprensión social.
-
-\textbf{Resultados de aprendizaje esperados:}
-\begin{enumerate}[leftmargin=*,itemsep=1.5pt]
-  \item Diferenciar con rigurosidad técnica la naturaleza de las preguntas cuantitativas (magnitudes, comparaciones, inferencias) y cualitativas (comprensión profunda, significados, motivaciones, contextos).
-  \item Diseñar estrategias de \textbf{investigación mixta} (secuencial explicativa, secuencial exploratoria y convergente), articulando armónicamente variables físico-químicas/geoespaciales con evidencia comunitaria y social.
-  \item Auditar críticamente propuestas de investigación para identificar y corregir falacias metodológicas comunes en estudios ambientales.
-\end{enumerate}
-\end{objetivobox}
-
-% ============================================================
-% 2. SÍNTESIS TEÓRICA CLAVE (BLOQUE B)
-% ============================================================
-\begin{teoriabox}
-\textbf{Regla epistemológica de oro:} \textit{El enfoque metodológico no se elige por preferencia personal ni por facilidad técnica; depende estrictamente de la pregunta de investigación y de la naturaleza de la evidencia necesaria para responderla.}
-
-\vspace{0.15cm}
-\centering
+\begin{estudiantebox}
 \small
-\renewcommand{\arraystretch}{1.20}
-\begin{tabularx}{\textwidth}{L{2.5cm} Y Y Y}
-\toprule
-\textbf{Criterio} & \textbf{Enfoque Cuantitativo} & \textbf{Enfoque Cualitativo} & \textbf{Enfoque Mixto} \\
-\midrule
-\textbf{Pregunta guía} & ¿Cuánto? ¿En qué magnitud? ¿Con qué diferencia estadística? & ¿Cómo? ¿Por qué? ¿Qué significado atribuyen los actores locales? & ¿Cómo se articulan la magnitud biofísica y la dimensión social? \\
-\textbf{Naturaleza del dato} & Numérico, continuo/discreto, escalas e índices medibles. & Textos, relatos, entrevistas, transcripciones, notas de campo. & Integración de bases cuantitativas y discursos cualitativos. \\
-\textbf{Lógica operativa} & Población $\to$ Muestra $n$ $\to$ Variables $\to$ Estadísticos ($\bar{x}, s$). & Fenómeno $\to$ Relato $\to$ Categorías $\to$ Interpretación contextual. & Triangulación simultánea o secuencial de fuentes. \\
-\textbf{Resultado típico} & Parámetros, tablas de frecuencia, pruebas de hipótesis, modelos. & Patrones temáticos, tipologías, comprensión contextual profunda. & Diagnóstico integral: magnitud del problema y causas estructurales. \\
-\bottomrule
+\begin{tabularx}{\linewidth}{p{3.5cm}Xp{2.5cm}X}
+\textbf{Estudiante:} & \hrulefill & \textbf{Fecha:} & \hrulefill \\
+\textbf{Correo Institucional:} & \hrulefill & \textbf{Paralelo:} & \hrulefill \\
+\textbf{Equipo Integrador:} & \hrulefill & \textbf{Calificación:} & \textbf{\large \dots\dots / 10.0} \\
 \end{tabularx}
+\end{estudiantebox}
 
-\vspace{0.25cm}
-\RaggedRight
-\textbf{Tipología de Diseños Mixtos Fundamentales:}
-\begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item \textbf{Secuencial Explicativo ($CUAN \to CUAL$):} Se recolectan y analizan primero datos numéricos; luego se usan datos cualitativos para profundizar y explicar las razones de las anomalías o patrones encontrados.
-  \item \textbf{Secuencial Exploratorio ($CUAL \to CUAN$):} Se exploran primero las percepciones o categorías locales mediante entrevistas; luego se diseñan instrumentos cuantitativos para medir su frecuencia y alcance poblacional.
-  \item \textbf{Convergente ($CUAN + CUAL$):} Se recolectan y analizan datos cuantitativos y cualitativos en paralelo de forma simultánea, comparando ambos hallazgos para corroborar y contrastar la evidencia.
+\vspace{0.2cm}
+
+\begin{instruccionbox}
+\begin{itemize}[leftmargin=*,noitemsep]
+  \item Esta guía constituye el instrumento de evaluación práctica individual y de grupo correspondiente al \textbf{Bloque C}.
+  \item \textbf{Parte 1:} Complete la matriz de caracterización de muestreo para los 4 casos ambientales reales del cantón Loja.
+  \item \textbf{Parte 2:} Resuelva los 10 reactivos de razonamiento crítico. En cada reactivo, marque la alternativa seleccionada y \textbf{redacte la justificación técnica} fundamentada en la teoría del muestreo ambiental.
+  \item Puede validar y enviar sus respuestas interactivamente en la aplicación web: \url{https://estadistica-unl.streamlit.app}.
 \end{itemize}
-\end{teoriabox}
+\end{instruccionbox}
 
-\newpage
-
-% ============================================================
-% 3. PARTE I: 4 CASOS DE ESTUDIO (UNO POR CADA EQUIPO)
-% ============================================================
-
-\section*{\color{azulOscuro}Parte I: Casos de Estudio Ambientales del Cantón Loja (4 Equipos)}
-
-\noindent\textit{Instrucción: Cada equipo de trabajo analizará el caso de estudio correspondiente a su bloque temático del proyecto integrador (o los casos indicados por el docente), respondiendo a los desafíos de razonamiento en la plantilla oficial de entrega.}
-
-\vspace{0.20cm}
-
-\begin{casobox}{Caso de Estudio 1 (Equipo 1): Relieve, Accesibilidad Territorial y Riesgo de Deslizamientos}
-\textbf{Contexto territorial:} El cantón Loja presenta una topografía andina altamente quebrada, con pendientes que superan frecuentemente el $45\%$ en laderas periurbanas (barrios nororientales y occidentales) y parroquias rurales. El Equipo 1 cuenta con variables geoespaciales como elevación (\texttt{dem\_mean}), pendiente (\texttt{slope\_mean}), orientación de ladera (\texttt{aspect\_sin}) y distancias euclidianas a vías y asentamientos (\texttt{dist\_vias\_m}, \texttt{dist\_asentamientos\_m}).
-
-Los mapas de susceptibilidad física indican que varias zonas habitadas se encuentran en "riesgo muy alto de deslizamiento en masa". No obstante, planes municipales de reubicación y estabilización física fracasaron: los pobladores regresan a sus terrenos o desobedecen las alertas tempranas. Al aplicar encuestas cerradas, los residentes reportan que "conocen el riesgo", pero no se trasladan a los albergues.
-
-\vspace{0.15cm}
-\textbf{Retos de Razonamiento para el Equipo 1:}
-\begin{enumerate}[leftmargin=*,itemsep=2pt]
-  \item \textbf{Limitación cuantitativa:} ¿Por qué modelar numéricamente la pendiente y la estabilidad física del talud es insuficiente para reducir la vulnerabilidad real de estos asentamientos? ¿Qué factores decisivos quedan sin medir?
-  \item \textbf{Aporte cualitativo:} Si realizara entrevistas en profundidad con jefes de hogar y dirigentes comunitarios, ¿qué dimensiones socioculturales (arraigo, tenencia de la tierra, redes de solidaridad, desconfianza institucional) emergerían?
-  \item \textbf{Diseño Mixto Secuencial Explicativo ($CUAN \to CUAL$):} Diseñe una investigación que utilice primero el modelo espacial cuantitativo para identificar las 50 celdas más críticas, y luego una fase cualitativa para explicar las razones de permanencia comunitaria, articulando ambos resultados en un plan de gestión del riesgo socialmente viable.
-\end{enumerate}
-\end{casobox}
-
-\vspace{0.30cm}
-
-\begin{casobox}{Caso de Estudio 2 (Equipo 2): Pérdida de Cobertura Vegetal Nativa y Cambio de Uso del Suelo}
-\textbf{Contexto territorial:} El cantón Loja alberga ecosistemas de alto valor como el bosque montano nativo y el páramo andino. El Equipo 2 analiza variables satelitales que cuantifican la proporción de bosque, páramo, áreas agrícolas y plantaciones exóticas, junto con índices espectrales multitemporales (NDVI, NDMI, NBR) a lo largo de 72 meses.
-
-Las imágenes satelitales confirman una retracción continua del bosque nativo y un aumento del área de pastos en microcuencas abastecedoras de agua. Un informe técnico sugiere simplemente "colocar cercados perimetrales y multar a los infractores detectados satelitalmente". Sin embargo, los comuneros reclaman que los límites de las áreas protegidas no respetan sus zonas históricas de pastoreo y que necesitan alimentar a sus familias.
-
-\vspace{0.15cm}
-\textbf{Retos de Razonamiento para el Equipo 2:}
-\begin{enumerate}[leftmargin=*,itemsep=2pt]
-  \item \textbf{Limitación cuantitativa:} Los sensores satelitales miden con exactitud \textit{cuántas hectáreas} se perdieron y en \textit{qué coordenadas}, pero ¿por qué esta tecnología es incapaz de responder \textit{por qué} los comuneros expanden la frontera agropecuaria en esas zonas específicas?
-  \item \textbf{Aporte cualitativo:} ¿Qué tipo de información cualitativa (acuerdos comunales consuetudinarios, necesidades de subsistencia, conflictos entre comuneros y autoridades) es indispensable recopilar para entender el fenómeno?
-  \item \textbf{Diseño Mixto Convergente ($CUAN + CUAL$):} Proponga un estudio donde se evalúen simultáneamente las trayectorias temporales de NDVI/NBR en las celdas del territorio junto con talleres participativos de mapeo social, explicando cómo la integración de ambos datos permite diseñar incentivos de conservación viables.
-\end{enumerate}
-\end{casobox}
-
-\newpage
-
-\begin{casobox}{Caso de Estudio 3 (Equipo 3): Variabilidad Climática, Sequías Estacionales y Resiliencia Agrícola}
-\textbf{Contexto territorial:} El cantón Loja experimenta una marcada heterogeneidad climática debido a la barrera orográfica andina. El Equipo 3 analiza series de precipitación mensual acumulada (CHIRPS), velocidades del viento y conteos de días secos y húmedos por celda.
-
-En los valles interandinos y zonas agrícolas (Malacatos, Vilcabamba, Taquil, Chuquiribamba), los pequeños agricultores denuncian en asambleas que "el clima está completamente descontrolado", que "las sequías son ahora más largas y destructivas que hace veinte años" y que los calendarios agrícolas tradicionales han dejado de funcionar. Por otro lado, un reporte meteorológico preliminar señala que "el volumen total anual de lluvia en Loja se ha mantenido en el promedio histórico".
-
-\vspace{0.15cm}
-\textbf{Retos de Razonamiento para el Equipo 3:}
-\begin{enumerate}[leftmargin=*,itemsep=2pt]
-  \item \textbf{Divergencia entre dato agregado y percepción local:} ¿Cómo explica que el volumen anual acumulado de lluvia pueda parecer normal, mientras que para el agricultor la sequía sea devastadora? ¿Qué variables numéricas más finas (distribución intra-anual, duración de rachas secas, evapotranspiración) se deben correlacionar con los relatos agrícolas?
-  \item \textbf{Aporte cualitativo:} ¿Cómo documentaría el conocimiento ecológico tradicional de los campesinos sobre bioindicadores climáticos (vuelo de aves, floración de especies nativas, comportamiento de vientos locales)?
-  \item \textbf{Diseño Mixto Secuencial Exploratorio ($CUAL \to CUAN$):} Estructure un estudio donde primero se exploren cualitativamente las quejas y observaciones de los agricultores para formular hipótesis precisas, y luego se auditen las bases de datos climáticas satelitales para verificar estadísticamente dichas conjeturas.
-\end{enumerate}
-\end{casobox}
-
-\vspace{0.30cm}
-
-\begin{casobox}{Caso de Estudio 4 (Equipo 4): Dinámica de Incendios Forestales y Uso Tradicional del Fuego}
-\textbf{Contexto territorial:} Durante el estiaje (agosto a noviembre), los cerros orientales de Loja y el nudo de Cajanuma/Villonaco registran decenas de focos de incendio forestal. El Equipo 4 dispone de datos satelitales (VIIRS/MODIS) que reportan ocurrencia, conteo de quemas, fechas exactas, velocidades del viento y severidad del fuego.
-
-A pesar de intensas campañas publicitarias punitivas del MAATE con amenazas de prisión para quienes enciendan fuego, los incendios se repiten sistemáticamente cada año en las mismas coordenadas. En los sectores rurales, los campesinos realizan quemas controladas de rastrojos para renovación de pastos y control de plagas, fundamentadas en prácticas agrícolas ancestrales. Un funcionario afirma: \textit{"Solo debemos instalar cámaras térmicas y multar; no hay nada que investigar con la gente"}.
-
-\vspace{0.15cm}
-\textbf{Retos de Razonamiento para el Equipo 4:}
-\begin{enumerate}[leftmargin=*,itemsep=2pt]
-  \item \textbf{Crítica al reduccionismo técnico:} ¿Por qué asumir que el fuego es únicamente una variable biofísica de calor, viento y biomasa seca conduce al fracaso de las políticas de prevención de incendios?
-  \item \textbf{Aporte cualitativo:} ¿Qué lógicas de manejo campesino del fuego, calendarios lunares y tensiones por linderos territoriales se requieren comprender mediante entrevistas a profundidad y grupos focales?
-  \item \textbf{Diseño Mixto Integral:} Proponga un diseño mixto de investigación ambiental que combine la modelación espacial del riesgo cuantitativo (VIIRS + viento + cobertura) con la zonificación comunitaria de prácticas de quema controlada, para generar una ordenanza municipal de manejo integral del fuego.
-\end{enumerate}
-\end{casobox}
-
-\newpage
+\vspace{0.2cm}
 
 % ============================================================
-% 4. PARTE II: AUDITORÍA DE ERRORES METODOLÓGICOS (4 SITUACIONES)
+% PARTE 1: MATRIZ DE LOS CUATRO CASOS AMBIENTALES
 % ============================================================
+\section*{Parte 1: Desglose Metodológico de Casos Reales del Cantón Loja}
 
-\section*{\color{azulOscuro}Parte II: Auditoría de Errores Metodológicos (4 Situaciones Críticas)}
+\textit{Para cada uno de los cuatro escenarios descritos, complete con precisión técnica los elementos de muestreo correspondientes:}
 
-\noindent\textit{Instrucción: A continuación se presentan 4 fragmentos adaptados de proyectos de investigación ambiental que contienen graves errores metodológicos o falacias científicas en la elección o articulación del enfoque. En la plantilla de entrega, identifique con precisión el error epistemológico y redacte la corrección técnica correspondiente.}
-
-\vspace{0.20cm}
-
-\begin{alertbox}[title=Situación 1: Falacia Muestral y Pseudo-Inferencia Cuantitativa a Partir del Discurso]
-\textbf{Texto analizado:} \textit{"Para evaluar el nivel de satisfacción ciudadana con la gestión de residuos sólidos en la ciudad de Loja, se realizaron entrevistas semiestructuradas en profundidad a 5 transeúntes en la plaza de San Sebastián. De los cinco entrevistados, cuatro afirmaron que el servicio es deficiente. Por lo tanto, el estudio concluye con un 95\% de nivel de confianza que el 80\% de la población del cantón Loja rechaza el servicio municipal de recolección."}
-\end{alertbox}
-\textbf{Desafío 1:} Explique por qué esta inferencia estadística es metodológicamente absurda. ¿Qué confusión existe entre la representatividad analítica cualitativa y la representatividad probabilística cuantitativa? ¿Cómo debió estructurarse el estudio si el objetivo era estimar el porcentaje poblacional?
-
-\vspace{0.25cm}
-
-\begin{alertbox}[title=Situación 2: Reduccionismo Instrumental Fisicoquímico ante Problemas de Conducta Humana]
-\textbf{Texto analizado:} \textit{"Un equipo de investigación ambiental se propuso como objetivo general: 'Determinar las razones por las cuales los agricultores de la parroquia Malacatos continúan utilizando plaguicidas de etiqueta roja prohibidos por la normativa nacional'. Para responder a esta interrogante, los investigadores instalaron 10 estaciones de monitoreo continuo de agua y midieron concentraciones de clorpirifos y glifosato durante 6 meses mediante cromatografía líquida de alta resolución."}
-\end{alertbox}
-\textbf{Desafío 2:} ¿Por qué los instrumentos de laboratorio de alta tecnología no responden a la pregunta de investigación planteada? ¿Qué tipo de información cualitativa se debió indagar para responder al "por qué" del uso de plaguicidas prohibidos?
-
-\vspace{0.25cm}
-
-\begin{alertbox}[title=Situación 3: El Falso Enfoque Mixto ("Estudios Paralelos Aislados sin Triangulación")]
-\textbf{Texto analizado:} \textit{"Un informe de consultoría ambiental se titula: 'Estudio Mixto de la Cuenca del Río Zamora'. El documento contiene el Capítulo 1, dedicado a presentar tablas cuantitativas de calidad de agua ($\text{DBO}_5$, coliformes y metales pesados); y el Capítulo 2, que presenta una monografía etnográfica sobre los mitos y tradiciones de los pobladores respecto al río. En el capítulo de Conclusiones, se redactan dos párrafos totalmente independientes sin que los datos de laboratorio y los relatos dialoguen jamás."}
-\end{alertbox}
-\textbf{Desafío 3:} ¿Por qué esta yuxtaposición de datos no constituye un enfoque mixto legítimo? ¿Cuál es el requisito indispensable de triangulación e integración metodológica que fue ignorado?
-
-\vspace{0.25cm}
-
-\begin{alertbox}[title=Situación 4: Sobregeneralización Cualitativa sin Respaldo Cuantitativo Territorial]
-\textbf{Texto analizado:} \textit{"Un estudio sobre impacto del cambio climático en la microcuenca San Lucas entrevistó a dos ancianos respetados de la comunidad, quienes relataron que 'en los últimos años el caudal de la quebrada se ha reducido a la mitad y los páramos están secos'. Con base en estos testimonios, los autores concluyen en su resumen ejecutivo que 'el caudal hídrico del cantón Loja ha disminuido en un 50\% debido a una sequía climática generalizada'."}
-\end{alertbox}
-\textbf{Desafío 4:} ¿Cuál es el error de convertir percepciones cualitativas legítimas en cifras numéricas de escala cantonal sin verificación hidrométrica ni climática? ¿Cómo se debió triangular la memoria oral con series de aforo y sensores satelitales?
-
-\newpage
-
-% ============================================================
-% 5. RÚBRICA DE EVALUACIÓN
-% ============================================================
-\section*{\color{azulOscuro}Rúbrica de Evaluación del Razonamiento Metodológico (10 Puntos)}
-
-\begin{table}[h!]
-\centering
+\begin{casobox}{Caso A: Monitoreo de Calidad de Agua en la Microcuenca del Río Malacatos}
 \small
-\renewcommand{\arraystretch}{1.25}
-\begin{tabularx}{\textwidth}{|>{\bfseries\color{azulOscuro}}L{3.0cm}|Y|Y|Y|C{1.5cm}|}
-\hline
-\textbf{Criterio} & \textbf{Sobresaliente (9--10)} & \textbf{En Desarrollo (7--8)} & \textbf{Insuficiente ($<7$)} & \textbf{Puntaje} \\
-\hline
-\textbf{1. Distinción epistemológica de enfoques} & Diferencia con rigor la evidencia numérica de la narrativa. Supera el reduccionismo metodológico en problemas ambientales. & Identifica los enfoques pero confunde el tipo de inferencia o dato aplicable a situaciones complejas. & Elige enfoques por preferencia personal o asume que solo los números constituyen ciencia válida. & / 2.5 pts \\
-\hline
-\textbf{2. Diseño de investigación mixta} & Formula con claridad diseños secuenciales o convergentes, demostrando el valor agregado de la triangulación de datos. & Propone un estudio mixto pero con débil articulación o sin justificar la integración de las fuentes. & No comprende cómo articular datos cuantitativos y cualitativos; los yuxtapone sin diálogo. & / 2.5 pts \\
-\hline
-\textbf{3. Argumentación y pertinencia ambiental} & Sustenta sus respuestas con criterio técnico contextualizado en la realidad ecológica y social de Loja. & Respuestas generales con débil contextualización territorial o ambiental. & Respuestas vagas, circulares o sin fundamentación ingenieril. & / 2.5 pts \\
-\hline
-\textbf{4. Auditoría de errores metodológicos} & Detecta con precisión las falacias muestrales, reduccionismos y falsos enfoques mixtos, proponiendo correcciones. & Identifica los errores pero las propuestas de corrección científica son imprecisas o incompletas. & No identifica las fallas metodológicas o incurre en las mismas falacias analizadas. & / 2.5 pts \\
-\hline
-\multicolumn{4}{|r|}{\textbf{Calificación Total:}} & \textbf{/ 10 pts} \\
-\hline
+\textbf{Situación:} Se requiere evaluar la concentración media de coliformes fecales y DBO$_5$ en tramos fluviales durante el invierno.\\
+\begin{tabularx}{\linewidth}{p{3.8cm}Y}
+\textbf{1. Población Objetivo ($N$):} & \dotfill \\
+\textbf{2. Población Accesible:} & \dotfill \\
+\textbf{3. Marco Muestral propuesto:} & \dotfill \\
+\textbf{4. Unidad Muestral:} & \dotfill \\
+\textbf{5. Unidad de Análisis:} & \dotfill \\
+\textbf{6. Parámetro ($\theta$) vs. Estadístico ($\hat{\theta}$):} & \dotfill \\
+\textbf{7. Método de Muestreo sugerido:} & \dotfill \\
 \end{tabularx}
-\end{table}
+\end{casobox}
 
-\vfill
-\begin{center}
-  \footnotesize\textbf{Universidad Nacional de Loja $\vert$ Facultad Agropecuaria y de Recursos Naturales Renovables}\\
-  \footnotesize Carrera de Ingeniería Ambiental $\vert$ Asignatura: Estadística Descriptiva $\vert$ Docente: Dr. Guillermo Chuncho
-\end{center}
+\begin{casobox}{Caso B: Separación en Origen de Residuos Sólidos Domiciliarios Urbanos}
+\small
+\textbf{Situación:} La Dirección de Higiene Municipal desea estimar la proporción de viviendas que separan orgánicos e inorgánicos.\\
+\begin{tabularx}{\linewidth}{p{3.8cm}Y}
+\textbf{1. Población Objetivo ($N$):} & \dotfill \\
+\textbf{2. Marco Muestral propuesto:} & \dotfill \\
+\textbf{3. Unidad Muestral vs. Análisis:} & \dotfill \\
+\textbf{4. Parámetro ($p$) vs. Estimador ($\hat{p}$):} & \dotfill \\
+\textbf{5. Método de Muestreo sugerido:} & \dotfill \\
+\end{tabularx}
+\end{casobox}
+
+\begin{casobox}{Caso C: Ocurrencia y Severidad de Incendios Forestales (Celdas VIIRS 375 m)}
+\small
+\textbf{Situación:} Evaluación cantonal de celdas de $500 \times 500$ m con presencia de focos de calor y cicatrices de quemas.\\
+\begin{tabularx}{\linewidth}{p{3.8cm}Y}
+\textbf{1. Población Objetivo ($N$ celdas):} & \dotfill \\
+\textbf{2. Marco Muestral disponible:} & \dotfill \\
+\textbf{3. Unidad Muestral y de Análisis:} & \dotfill \\
+\textbf{4. Método de Muestreo sugerido:} & \dotfill \\
+\end{tabularx}
+\end{casobox}
+
+\begin{casobox}{Caso D: Material Particulado PM$_{2.5}$ en el Anillo Vial Céntrico de Loja}
+\small
+\textbf{Situación:} Estimación de la concentración horaria promedio de PM$_{2.5}$ ($\mu$g/m$^3$) en horarios de alto flujo vehicular.\\
+\begin{tabularx}{\linewidth}{p{3.8cm}Y}
+\textbf{1. Población Objetivo (horas/año):} & \dotfill \\
+\textbf{2. Marco Muestral temporal:} & \dotfill \\
+\textbf{3. Unidad Muestral vs. Análisis:} & \dotfill \\
+\textbf{4. Método de Muestreo sugerido:} & \dotfill \\
+\end{tabularx}
+\end{casobox}
+
+\vspace{0.2cm}
+
+% ============================================================
+% PARTE 2: BANCO DE LOS 10 REACTIVOS DEL MICRORETO
+% ============================================================
+\section*{Parte 2: Banco de Reactivos de Razonamiento Crítico (Microreto)}
+
+\textit{Seleccione la opción correcta (marque con una \textbf{X}) y redacte su justificación técnica en el espacio provisto:}
+
+\begin{reactivobox}{Reactivo 1: Subcobertura del Marco Muestral y Sesgo de Selección}
+Un proyecto busca evaluar metales pesados en suelos de huertos familiares periurbanos de Loja. Se dispone del catastro del Registro de la Propiedad de 2018 (3.200 predios formalizados). No obstante, en la zona existen 1.400 huertos en asentamientos informales sin escrituras. Si se sortea la muestra exclusivamente del catastro 2018, ¿cuál es el diagnóstico metodológico?\\
+\textbf{[A]} El error muestral será nulo porque se conoce con exactitud el tamaño $N = 3.200$.\\
+\textbf{[B]} Existe subcobertura en el marco muestral que genera un sesgo de selección sistemático, impidiendo generalizar a toda la población.\\
+\textbf{[C]} Es un muestreo estratificado no proporcional perfectamente válido según la normativa ecuatoriana.\\
+\textbf{[D]} El parámetro $\mu$ variará aleatoriamente según el número de huertos que se decida muestrear.\\[4pt]
+\textbf{Opción seleccionada:} [ \quad ] $\quad \vert \quad$ \textbf{Justificación Técnica:}\\
+\rule{\linewidth}{0.4pt}\\[2pt]
+\rule{\linewidth}{0.4pt}
+\end{reactivobox}
+
+\begin{reactivobox}{Reactivo 2: Unidad Muestral vs. Unidad de Análisis en Diseños Complejos}
+Para evaluar residuos plásticos en quebradas de la microcuenca Zamora-Huacapamba, un ingeniero sortea 8 subcuencas de 32 existentes. En cada una recorre 2 km pesando y clasificando cada botella plástica hallada en el cauce. En este diseño experimental:\\
+\textbf{[A]} La subcuenca es la unidad muestral y cada botella plástica es la unidad de análisis.\\
+\textbf{[B]} La unidad muestral y la de análisis son idénticas y corresponden al cauce completo de 2 km.\\
+\textbf{[C]} Cada botella plástica es la unidad muestral y el cantón Loja es el marco muestral.\\
+\textbf{[D]} No existen unidades de análisis porque se trata de un muestreo no probabilístico por juicio.\\[4pt]
+\textbf{Opción seleccionada:} [ \quad ] $\quad \vert \quad$ \textbf{Justificación Técnica:}\\
+\rule{\linewidth}{0.4pt}\\[2pt]
+\rule{\linewidth}{0.4pt}
+\end{reactivobox}
+
+\begin{reactivobox}{Reactivo 3: Error Muestral vs. Sesgo Sistemático e Incremento de $n$}
+Un sensor continuo de PM$_{2.5}$ en Loja tiene suciedad en su lente óptico que causa una sobrestimación constante del +20\%. Un tesista toma 300.000 lecturas horarias en lugar de 500 para ``corregir el error con una muestra enorme''. ¿Qué ocurre estadísticamente?\\
+\textbf{[A]} El error del +20\% se disipa por el teorema del límite central al tener $n = 300.000$.\\
+\textbf{[B]} La estimación gana altísima precisión (error muestral casi cero), pero retiene intacto el sesgo sistemático del +20\%, arrojando una conclusión matemáticamente precisa pero científicamente falsa.\\
+\textbf{[C]} El estadístico $\bar{x}$ se convierte automáticamente en el parámetro verdadero $\mu$.\\
+\textbf{[D]} El sesgo pasa a comportarse como un error aleatorio simétrico centrado en cero.\\[4pt]
+\textbf{Opción seleccionada:} [ \quad ] $\quad \vert \quad$ \textbf{Justificación Técnica:}\\
+\rule{\linewidth}{0.4pt}\\[2pt]
+\rule{\linewidth}{0.4pt}
+\end{reactivobox}
+
+\begin{reactivobox}{Reactivo 4: Naturaleza Inferencial del Parámetro vs. Estadístico}
+Al analizar 40 vertientes de agua para consumo en Vilcabamba se obtiene $\bar{x} = 18.4$ mg/L de nitratos y $s = 3.2$ mg/L. El informe afirma: ``Se ha demostrado que la media poblacional $\mu$ de toda la parroquia es exactamente 18.4 mg/L sin margen de duda''. ¿Por qué es inadmisible técnicamente?\\
+\textbf{[A]} Porque el parámetro $\mu$ solo existe en aguas superficiales y no subterráneas.\\
+\textbf{[B]} Porque $\bar{x}$ es un estadístico muestral que estima a $\mu$, pero nunca equivale de forma determinista al parámetro sin su respectivo intervalo de confianza o margen de error.\\
+\textbf{[C]} Porque la desviación estándar debió ser mayor a la media aritmética para validar el parámetro.\\
+\textbf{[D]} Porque los nitratos en agua subterránea son una variable cualitativa ordinal.\\[4pt]
+\textbf{Opción seleccionada:} [ \quad ] $\quad \vert \quad$ \textbf{Justificación Técnica:}\\
+\rule{\linewidth}{0.4pt}\\[2pt]
+\rule{\linewidth}{0.4pt}
+\end{reactivobox}
+
+\begin{reactivobox}{Reactivo 5: Muestreo Sistemático y el Peligro de Periodicidad Cíclica}
+Se programa un muestreo sistemático de DBO$_5$ cada 7 días exactamente a las 09:00 AM ($k=7$). La industria láctea realiza el lavado de líneas con soda cáustica todos los miércoles a las 08:30 AM. Si el sorteo aleatorio cayó en día miércoles, ¿qué consecuencia estadística tendrá el estudio?\\
+\textbf{[A]} Ninguna, pues el muestreo sistemático siempre produce resultados idénticos al MAS.\\
+\textbf{[B]} La muestra capturará sistemáticamente el pico máximo contaminante por sincronización con la periodicidad cíclica del proceso, sobrestimando la contaminación media.\\
+\textbf{[C]} El error muestral se anulará porque los miércoles representan exactamente toda la semana.\\
+\textbf{[D]} El muestreo se transformará automáticamente en un diseño estratificado óptimo.\\[4pt]
+\textbf{Opción seleccionada:} [ \quad ] $\quad \vert \quad$ \textbf{Justificación Técnica:}\\
+\rule{\linewidth}{0.4pt}\\[2pt]
+\rule{\linewidth}{0.4pt}
+\end{reactivobox}
+
+\begin{reactivobox}{Reactivo 6: Afijación Proporcional vs. No Proporcional en Ecosistemas Raros}
+En el Parque Nacional Podocarpus, las turberas y lagunas glaciares representan solo el 3\% del área total, pero poseen alta fragilidad y endemismo. Si con $n = 100$ se aplica afijación proporcional ($n_h = 3$ parcelas), ¿cuál es el problema metodológico y cómo se corrige?\\
+\textbf{[A]} Al estrato de turberas solo le corresponden 3 parcelas, tamaño insuficiente para estimar su biodiversidad; debe aplicarse afijación no proporcional asignando mayor muestra a las turberas y luego reponderar los estimadores.\\
+\textbf{[B]} Debe eliminarse el bosque montano para que las turberas alcancen el 50\% de la muestra.\\
+\textbf{[C]} Debe sustituirse por un muestreo por conveniencia en senderos turísticos.\\
+\textbf{[D]} La afijación proporcional siempre garantiza la varianza mínima sin importar el tamaño del estrato.\\[4pt]
+\textbf{Opción seleccionada:} [ \quad ] $\quad \vert \quad$ \textbf{Justificación Técnica:}\\
+\rule{\linewidth}{0.4pt}\\[2pt]
+\rule{\linewidth}{0.4pt}
+\end{reactivobox}
+
+\begin{reactivobox}{Reactivo 7: Muestreo por Conveniencia y Falsa Generalización}
+Para diagnosticar plaguicidas prohibidos en la cuenca Malacatos-Vilcabamba, unos tesistas entrevistan a 80 agricultores que vendían hortalizas en el mercado mayorista un sábado por la mañana. Concluyen: ``El 78\% de los campesinos de la cuenca usa plaguicidas de etiqueta roja''. ¿Cuál es la crítica principal?\\
+\textbf{[A]} El tamaño muestral $n = 80$ es ilegal según las ordenanzas del cantón Loja.\\
+\textbf{[B]} Es un muestreo por conveniencia con severo sesgo de selección: no representa a campesinos de autoconsumo, fincas orgánicas ni zonas remotas sin transporte que no asisten a ese mercado.\\
+\textbf{[C]} El estudio debió realizarse en días hábiles porque los fines de semana los químicos se degradan.\\
+\textbf{[D]} El estimador $\hat{p}$ debió calcularse con una integral definida continua.\\[4pt]
+\textbf{Opción seleccionada:} [ \quad ] $\quad \vert \quad$ \textbf{Justificación Técnica:}\\
+\rule{\linewidth}{0.4pt}\\[2pt]
+\rule{\linewidth}{0.4pt}
+\end{reactivobox}
+
+\begin{reactivobox}{Reactivo 8: Estructura Interna: Estratificado vs. Conglomerados (Clusters)}
+¿Cuál es la diferencia teórica fundamental en la conformación de los grupos entre el Muestreo Estratificado y el Muestreo por Conglomerados?\\
+\textbf{[A]} En el estratificado los grupos son internamente homogéneos y heterogéneos entre sí; en conglomerados deben ser internamente heterogéneos y similares entre sí.\\
+\textbf{[B]} En el estratificado se eligen solo algunos grupos al azar; en conglomerados se muestrean todos obligatoriamente.\\
+\textbf{[C]} El estratificado es siempre no probabilístico y el de conglomerados es el único probabilístico.\\
+\textbf{[D]} En conglomerados no existe marco muestral en ninguna de las fases de sorteo.\\[4pt]
+\textbf{Opción seleccionada:} [ \quad ] $\quad \vert \quad$ \textbf{Justificación Técnica:}\\
+\rule{\linewidth}{0.4pt}\\[2pt]
+\rule{\linewidth}{0.4pt}
+\end{reactivobox}
+
+\begin{reactivobox}{Reactivo 9: Muestreo de Poblaciones Ocultas (Bola de Nieve)}
+En una investigación socioambiental sobre tala clandestina de especies forestales protegidas (Romerillo) en Loja, los infractores operan en la clandestinidad y no existen registros públicos. ¿Qué técnica no probabilística es la más indicada?\\
+\textbf{[A]} Muestreo aleatorio simple mediante sorteo con software estadístico.\\
+\textbf{[B]} Muestreo por bola de nieve (snowball), donde contactos iniciales de confianza refieren progresivamente a otros involucrados en la red clandestina.\\
+\textbf{[C]} Muestreo sistemático espacial sobre cuadrículas de 1 km$^2$.\\
+\textbf{[D]} Muestreo por conglomerados catastrales municipales.\\[4pt]
+\textbf{Opción seleccionada:} [ \quad ] $\quad \vert \quad$ \textbf{Justificación Técnica:}\\
+\rule{\linewidth}{0.4pt}\\[2pt]
+\rule{\linewidth}{0.4pt}
+\end{reactivobox}
+
+\begin{reactivobox}{Reactivo 10: Diseño Polietápico en Auditoría Cantonal}
+Para evaluar contaminación acústica en Loja: 1° se sortean 4 parroquias de 6; 2° en cada una se sortean 5 barrios; 3° en cada barrio se miden 3 esquinas con sonómetro. ¿Cómo se clasifica este diseño?\\
+\textbf{[A]} Muestreo no probabilístico accidental por cuotas.\\
+\textbf{[B]} Muestreo probabilístico polietápico (multietápico por conglomerados sucesivos con selección aleatoria en cada nivel).\\
+\textbf{[C]} Muestreo aleatorio simple con reposición infinita.\\
+\textbf{[D]} Muestreo intencional por juicio técnico especializado.\\[4pt]
+\textbf{Opción seleccionada:} [ \quad ] $\quad \vert \quad$ \textbf{Justificación Técnica:}\\
+\rule{\linewidth}{0.4pt}\\[2pt]
+\rule{\linewidth}{0.4pt}
+\end{reactivobox}
 
 \end{document}

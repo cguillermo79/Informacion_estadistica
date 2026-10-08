@@ -405,20 +405,22 @@ elif modo == "📁 Recursos y Guías de Estudio":
     
     col_g1, col_g2 = st.columns(2)
     with col_g1:
-        st.subheader("📘 Guía de Estudio 1")
-        st.write("Fundamentos y conceptos introductorios.")
+        st.subheader("📘 Guía de Estudio 1 (Bloque C)")
+        st.markdown("**Fundamentos Teóricos de Muestreo Ambiental**")
+        st.write("Población objetivo vs. accesible, marco muestral y subcobertura, parámetros vs. estadísticos, error muestral vs. sesgo sistemático y los 4 casos del cantón Loja.")
         ruta_g1 = os.path.join(BASE_DIR, "Unidad 1", "01_guias", "Guia 1.pdf")
         if os.path.exists(ruta_g1):
             with open(ruta_g1, "rb") as f:
-                st.download_button("Descargar Guía 1 (PDF)", f, file_name="Guia_1_Estadistica.pdf")
+                st.download_button("📥 Descargar Guía 1 (PDF)", f, file_name="Guia_1_Muestreo_Bloque_C.pdf")
                 
     with col_g2:
-        st.subheader("📗 Guía de Estudio 2")
-        st.write("Ejercicios prácticos y casos de estudio de razonamiento.")
+        st.subheader("📗 Guía de Estudio 2 (Bloque C)")
+        st.markdown("**Taller Práctico y Microreto de Razonamiento**")
+        st.write("Matriz de caracterización operativa de los 4 casos de Loja y formato estructurado de resolución y justificación de los 10 reactivos del Microreto.")
         ruta_g2 = os.path.join(BASE_DIR, "Unidad 1", "01_guias", "Guia 2.pdf")
         if os.path.exists(ruta_g2):
             with open(ruta_g2, "rb") as f:
-                st.download_button("Descargar Guía 2 (PDF)", f, file_name="Guia_2_Estadistica.pdf")
+                st.download_button("📥 Descargar Guía 2 (PDF)", f, file_name="Guia_2_Taller_Microreto_Bloque_C.pdf")
                 
     st.markdown("---")
     st.markdown("### 🗃️ Bases de Datos del Proyecto Integrador")
