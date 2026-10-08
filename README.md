@@ -5,9 +5,8 @@
 
 [![Abrir en Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app)
 
-> 🚀 **Aplicación Web Oficial en Línea (Streamlit Cloud):**  
+> 🚀 **Aplicación Web Oficial (Streamlit Cloud):**  
 > 👉 **[https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app](https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app)**  
-> *(Enlace corto alternativo si lo personalizó: [https://estadistica-unl.streamlit.app](https://estadistica-unl.streamlit.app))*  
 > *(Dashboard interactivo de muestreo, simulador Monte Carlo de parámetros vs. estadísticos y **Microreto Evaluativo Calificado de 10 reactivos** con calificación automática y envío a `carlos.chuncho@unl.edu.ec`)*.
 
 ---
@@ -16,10 +15,10 @@ Este repositorio reúne el material oficial del proyecto integrador y los recurs
 
 ---
 
-## 🌐 Formas de Acceso a la Aplicación
+## 🌐 Acceso a la Aplicación
 
-1. **En Línea (Sin instalar nada):** Ingrese a **[https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app](https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app)** o a **[https://estadistica-unl.streamlit.app](https://estadistica-unl.streamlit.app)** desde cualquier PC, tablet o celular.
-2. **Local con Streamlit (en su entorno virtual):**
+1. **En Línea (Estudiantes y Docente):** Ingrese directamente a **[https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app](https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app)** desde cualquier dispositivo sin instalar nada.
+2. **Local (Desarrollo):**
    ```bash
    pip install -r requirements.txt
    streamlit run app.py
