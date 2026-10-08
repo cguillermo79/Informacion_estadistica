@@ -3,21 +3,28 @@
 **Carrera de Ingeniería Ambiental · Universidad Nacional de Loja · Ciclo septiembre 2026 – febrero 2027**  
 **Docente:** Guillermo Chuncho (`carlos.chuncho@unl.edu.ec`)
 
+[![Abrir en Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://estadistica-unl.streamlit.app)
+
+> 🚀 **Aplicación Web Oficial en Línea:**  
+> 👉 **[https://estadistica-unl.streamlit.app](https://estadistica-unl.streamlit.app)**  
+> *(Dashboard interactivo de muestreo, simulador Monte Carlo de parámetros vs. estadísticos y **Microreto Evaluativo Calificado de 10 reactivos** con calificación automática)*.
+
+---
+
 Este repositorio reúne el material oficial del proyecto integrador y los recursos didácticos de la asignatura. Durante todo el semestre, cada grupo trabaja con datos ambientales reales y georreferenciados del cantón Loja (2019–2024) del proyecto FIRELAB-Loja: relieve, cobertura vegetal, clima e incendios forestales.
 
 ---
 
-## 🌐 Aplicación Web y Recursos en Línea (streamlit.app)
+## 🌐 Formas de Acceso a la Aplicación
 
-* **Aplicación en la Nube (Streamlit Cloud):** Despliegue listo en `streamlit.app` conectando este repositorio (`cguillermo79/Informacion_estadistica`):
-  * **Archivo principal:** `app.py` (o `streamlit_app.py`)
-  * **Características:** Incluye el Dashboard interactivo completo del Bloque C, el **Microreto evaluativo calificado de 10 reactivos** con envío automático al docente Guillermo Chuncho (`carlos.chuncho@unl.edu.ec`), simulador Monte Carlo en vivo con Python/NumPy y descarga de guías.
-* **Ejecución Local con Streamlit:**
-  ```bash
-  pip install -r requirements.txt
-  streamlit run app.py
-  ```
-* **Acceso Directo HTML sin dependencias:** Abra directamente [`index.html`](index.html) o [`Unidad 1/01_guias/dashboard_bloque_c_parte1.html`](Unidad%201/01_guias/dashboard_bloque_c_parte1.html) en cualquier navegador web.
+1. **En Línea (Sin instalar nada):** Ingrese directamente a **[https://estadistica-unl.streamlit.app](https://estadistica-unl.streamlit.app)** desde cualquier PC, tablet o celular.
+2. **Local con Streamlit (en su entorno virtual):**
+   ```bash
+   pip install -r requirements.txt
+   streamlit run app.py
+   ```
+3. **Local directo en el navegador (archivo HTML independiente):**
+   Abra directamente [`index.html`](index.html) o [`Unidad 1/01_guias/dashboard_bloque_c_parte1.html`](Unidad%201/01_guias/dashboard_bloque_c_parte1.html).
 
 ---
 
