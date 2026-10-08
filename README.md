@@ -7,10 +7,17 @@ Este repositorio reúne el material oficial del proyecto integrador y los recurs
 
 ---
 
-## 🌐 Recursos Interactivos en Línea
+## 🌐 Aplicación Web y Recursos en Línea (streamlit.app)
 
-* **[Dashboard Interactivo y Microreto Evaluativo (Bloque C)](https://cguillermo79.github.io/Informacion_estadistica/)**: Aplicación web pública para explorar fundamentos de muestreo ambiental, simulación de parámetros vs. estadísticos, análisis visual de sesgo vs. error muestral, y resolución del **Microreto calificado de 10 reactivos de razonamiento** con envío automático de calificaciones a la cátedra.
-  * *Acceso local sin conexión:* También puede abrir directamente [`index.html`](index.html) o [`Unidad 1/01_guias/dashboard_bloque_c_parte1.html`](Unidad%201/01_guias/dashboard_bloque_c_parte1.html) en su navegador web.
+* **Aplicación en la Nube (Streamlit Cloud):** Despliegue listo en `streamlit.app` conectando este repositorio (`cguillermo79/Informacion_estadistica`):
+  * **Archivo principal:** `app.py` (o `streamlit_app.py`)
+  * **Características:** Incluye el Dashboard interactivo completo del Bloque C, el **Microreto evaluativo calificado de 10 reactivos** con envío automático al docente Guillermo Chuncho (`carlos.chuncho@unl.edu.ec`), simulador Monte Carlo en vivo con Python/NumPy y descarga de guías.
+* **Ejecución Local con Streamlit:**
+  ```bash
+  pip install -r requirements.txt
+  streamlit run app.py
+  ```
+* **Acceso Directo HTML sin dependencias:** Abra directamente [`index.html`](index.html) o [`Unidad 1/01_guias/dashboard_bloque_c_parte1.html`](Unidad%201/01_guias/dashboard_bloque_c_parte1.html) en cualquier navegador web.
 
 ---
 
