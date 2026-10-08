@@ -1,12 +1,12 @@
-﻿# Estadística Descriptiva — Proyecto Integrador y Recursos de Aprendizaje
+# Estadística Descriptiva — Proyecto Integrador y Recursos de Aprendizaje
 
 **Carrera de Ingeniería Ambiental · Universidad Nacional de Loja · Ciclo septiembre 2026 – febrero 2027**  
 **Docente:** Guillermo Chuncho (`carguille2@gmail.com`)
 
-[![Abrir en Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app)
+[![Abrir en Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://informacion-estadistica-unl.streamlit.app/)
 
-> 🚀 **Aplicación Web Oficial (Streamlit Cloud):**  
-> 👉 **[https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app](https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app)**  
+> ### 🚀 Aplicación Web Oficial (Streamlit Cloud):
+> 👉 **[https://informacion-estadistica-unl.streamlit.app/](https://informacion-estadistica-unl.streamlit.app/)**  
 > *(Dashboard interactivo de muestreo, simulador Monte Carlo de parámetros vs. estadísticos y **Microreto Evaluativo Calificado de 10 reactivos** con calificación automática y envío a `carguille2@gmail.com`)*.
 
 ---
@@ -17,7 +17,7 @@ Este repositorio reúne el material oficial del proyecto integrador y los recurs
 
 ## 🌐 Acceso a la Aplicación
 
-1. **En Línea (Estudiantes y Docente):** Ingrese directamente a **[https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app](https://informacionestadistica-etzfkqjbmr8tyfno47xvsi.streamlit.app)** desde cualquier dispositivo sin instalar nada.
+1. **En Línea (Estudiantes y Docente):** Ingrese directamente a **[https://informacion-estadistica-unl.streamlit.app/](https://informacion-estadistica-unl.streamlit.app/)** desde cualquier dispositivo sin instalar nada.
 2. **Local (Desarrollo):**
    ```bash
    pip install -r requirements.txt
