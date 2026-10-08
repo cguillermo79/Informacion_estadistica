@@ -1,0 +1,11 @@
+# Librerías de Python para Estadística Descriptiva (proyecto integrador FIRELAB-Loja)
+# Instalar con:  pip install -r requirements.txt
+pandas          # lectura y manejo de las bases (tablas)
+numpy           # cálculos numéricos
+matplotlib      # gráficos
+seaborn         # gráficos estadísticos
+scipy           # pruebas estadísticas (chi-cuadrado, intervalos)
+statsmodels     # regresión logística y series temporales (ARIMA)
+jupyter         # cuadernos (notebooks)
+ipykernel       # conecta el entorno virtual con los cuadernos de VS Code
+openpyxl        # lectura y escritura de archivos de Excel

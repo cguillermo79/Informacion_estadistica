@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Bloque C: Población, Muestra y Diseños de Muestreo</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Estilos personalizados para animaciones y elementos gráficos */
+    .tab-btn.active {
+      background-color: #005b41;
+      color: #ffffff;
+      border-color: #005b41;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .badge-pop { background-color: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+    .badge-sample { background-color: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+    .badge-param { background-color: #fef3c7; color: #b45309; border-color: #fde68a; }
+    .badge-stat { background-color: #ede9fe; color: #6d28d9; border-color: #ddd6fe; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen p-3 md:p-6 custom-scroll">
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="max-w-7xl mx-auto space-y-6">
+
+    <!-- HEADER INSTITUCIONAL -->
+    <header class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-6 transition-all">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-800 mb-1">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span>
+            Universidad Nacional de Loja &bull; FARNR &bull; Ingeniería Ambiental
+          </div>
+          <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Dashboard Interactivo &bull; Bloque C (Fase 1: Fundamentos y Muestreo)
+          </h1>
+          <p class="text-sm md:text-base text-slate-600 mt-1">
+            De la pregunta de investigación ambiental a la base de datos: población, muestra, marco muestral, parámetros, sesgos y tipos de muestreo.
+          </p>
+        </div>
+        
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="bg-emerald-50 border border-emerald-200 text-emerald-900 px-3.5 py-1.5 rounded-xl text-xs font-medium">
+            <strong>Asignatura:</strong> Estadística Descriptiva
+          </div>
+          <div class="bg-blue-50 border border-blue-200 text-blue-900 px-3.5 py-1.5 rounded-xl text-xs font-medium">
+            <strong>Docente:</strong> Guillermo Chuncho
+          </div>
+          <span class="bg-amber-100 text-amber-900 text-xs px-3 py-1.5 rounded-xl font-bold border border-amber-300">
+            Avance Bloque C: 50%
+          </span>
+        </div>
+      </div>
+
+      <!-- BARRA DE NAVEGACIÓN DE PESTAÑAS -->
+      <nav class="flex flex-wrap gap-2 mt-6 pt-4 border-t border-slate-100" id="tabsNav">
+        <button onclick="setTab('conceptos')" id="btn-conceptos" class="tab-btn active px-4 py-2 rounded-xl text-xs md:text-sm font-semibold border transition-all">
+          1. Elementos del Muestreo
+        </button>
+        <button onclick="setTab('param-stat')" id="btn-param-stat" class="tab-btn px-4 py-2 rounded-xl text-xs md:text-sm font-semibold border border-slate-200 bg-white text-slate-700 hover:bg-slate-100 transition-all">
+          2. Parámetro vs. Estadístico
+        </button>
+        <button onclick="setTab('error-sesgo')" id="btn-error-sesgo" class="tab-btn px-4 py-2 rounded-xl text-xs md:text-sm font-semibold border border-slate-200 bg-white text-slate-700 hover:bg-slate-100 transition-all">
+          3. Error Muestral vs. Sesgo
+        </button>
+        <button onclick="setTab('tipos-muestreo')" id="btn-tipos-muestreo" class="tab-btn px-4 py-2 rounded-xl text-xs md:text-sm font-semibold border border-slate-200 bg-white text-slate-700 hover:bg-slate-100 transition-all">
+          4. Tipos de Muestreo (Árbol y Casos)
+        </button>
+        <button onclick="setTab('ejercicios')" id="btn-ejercicios" class="tab-btn px-4 py-2 rounded-xl text-xs md:text-sm font-semibold border border-slate-200 bg-white text-slate-700 hover:bg-slate-100 transition-all">
+          5. Microreto Evaluativo (10 Preguntas)
+        </button>
+      </nav>
+    </header>
+
+    <!-- SECCIÓN 1: ELEMENTOS DEL MUESTREO (POBLACIÓN, MUESTRA, UNIDAD, MARCO) -->
+    <section id="tab-conceptos" class="tab-content space-y-6">
+      
+      <!-- INTRODUCCIÓN GENERAL -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Tarjeta Población -->
+        <div class="bg-white p-5 rounded-2xl border border-sky-200 shadow-xs hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-50 px-2.5 py-1 rounded-lg border border-sky-100">
+              Población (P, N)
+            </span>
+            <span class="text-xl font-mono text-sky-600 font-bold">N</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base mb-1">Conjunto Total</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Totalidad de elementos o eventos sobre los que se desea inferir. Requiere definir: <strong>quiénes</strong>, <strong>dónde</strong> y <strong>cuándo</strong>.
+          </p>
+          <div class="mt-3 text-[11px] bg-slate-50 p-2 rounded-lg text-slate-500 border border-slate-100">
+            <strong>Objetivo:</strong> a la que se desea extrapolar.<br>
+            <strong>Accesible:</strong> la realmente disponible.
+          </div>
+        </div>
+
+        <!-- Tarjeta Muestra -->
+        <div class="bg-white p-5 rounded-2xl border border-emerald-200 shadow-xs hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-100">
+              Muestra (S, n)
+            </span>
+            <span class="text-xl font-mono text-emerald-600 font-bold">n &le; N</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base mb-1">Subconjunto Elegido</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Fracción representativa de la población que efectivamente se mide o inspecciona para aproximar las características globales.
+          </p>
+          <div class="mt-3 text-[11px] bg-emerald-50 p-2 rounded-lg text-emerald-800 border border-emerald-100">
+            Debe seleccionarse con rigor técnico para evitar conclusiones sesgadas.
+          </div>
+        </div>
+
+        <!-- Tarjeta Unidad Muestral vs Unidad de Análisis -->
+        <div class="bg-white p-5 rounded-2xl border border-indigo-200 shadow-xs hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-100">
+              Unidad Muestral
+            </span>
+            <span class="text-sm font-semibold text-indigo-600">vs. Análisis</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base mb-1">Elemento Operativo</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>U. Muestral:</strong> entidad seleccionada en el sorteo (ej. un predio, una estación).<br>
+            <strong>U. Análisis:</strong> entidad donde se mide la variable (ej. residuo por persona).
+          </p>
+          <div class="mt-3 text-[11px] bg-indigo-50 p-2 rounded-lg text-indigo-800 border border-indigo-100">
+            A menudo coinciden, pero en muestreos complejos son distintas.
+          </div>
+        </div>
+
+        <!-- Tarjeta Marco Muestral -->
+        <div class="bg-white p-5 rounded-2xl border border-amber-200 shadow-xs hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200">
+              Marco Muestral
+            </span>
+            <span class="text-sm font-mono text-amber-700 font-bold">{ID_1..ID_N}</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base mb-1">Lista Real de Selección</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Listado concreto, identificable y operativo de todas las unidades elegibles desde la cual se extrae la muestra (p. ej. catastro, red de estaciones).
+          </p>
+          <div class="mt-3 text-[11px] bg-amber-50 p-2 rounded-lg text-amber-900 border border-amber-200">
+            <strong>No confundir:</strong> No es la población abstracta ni la muestra ya escogida.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- DESGLOSE INTERACTIVO DE PROBLEMAS AMBIENTALES DE LOJA -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900">
+              Desglose Metodológico de Casos Reales del Cantón Loja
+            </h2>
+            <p class="text-xs text-slate-500">
+              Seleccione un problema de ingeniería ambiental para ver la identificación rigurosa de cada elemento.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 bg-slate-100 p-1.5 rounded-xl border border-slate-200" id="casoPills">
+            <button onclick="mostrarCaso(1)" id="btn-caso-1" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-emerald-700 text-white shadow-xs">
+              Caso 1: Río Malacatos
+            </button>
+            <button onclick="mostrarCaso(2)" id="btn-caso-2" class="px-3 py-1.5 text-xs font-bold rounded-lg text-slate-600 hover:bg-white">
+              Caso 2: Residuos Domiciliarios
+            </button>
+            <button onclick="mostrarCaso(3)" id="btn-caso-3" class="px-3 py-1.5 text-xs font-bold rounded-lg text-slate-600 hover:bg-white">
+              Caso 3: Incendios VIIRS
+            </button>
+            <button onclick="mostrarCaso(4)" id="btn-caso-4" class="px-3 py-1.5 text-xs font-bold rounded-lg text-slate-600 hover:bg-white">
+              Caso 4: Aire Urbano PM2.5
+            </button>
+          </div>
+        </div>
+
+        <!-- Contenedor dinámico del caso seleccionado -->
+        <div id="casoDetalle" class="space-y-4">
+          <!-- Renderizado dinámico vía JavaScript -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECCIÓN 2: PARÁMETRO VS ESTADÍSTICO -->
+    <section id="tab-param-stat" class="tab-content hidden space-y-6">
+      
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-900 mb-2">
+          ¿Qué es un Parámetro y qué es un Estadístico?
+        </h2>
+        <p class="text-xs md:text-sm text-slate-600 mb-6 leading-relaxed">
+          En estadística ambiental distinguimos rigurosamente entre la <em>verdad poblacional global</em> (parámetro, fijo pero desconocido) y la <em>evidencia calculada en la muestra observada</em> (estadístico, variable y accesible).
+        </p>
+
+        <!-- TABLA COMPARATIVA FORMAL -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs md:text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider text-[11px] border-b border-slate-200">
+                <th class="p-3 font-bold">Elemento</th>
+                <th class="p-3 font-bold">Ámbito de Origen</th>
+                <th class="p-3 font-bold">Naturaleza Matemática</th>
+                <th class="p-3 font-bold">Simbología Típica</th>
+                <th class="p-3 font-bold">Ejemplo Práctico en Loja</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="hover:bg-amber-50/50 transition-colors">
+                <td class="p-3 font-bold text-amber-900 bg-amber-50/30">
+                  Parámetro (&theta;)
+                </td>
+                <td class="p-3 text-slate-700">
+                  Proviene de la <strong>Población completa</strong> ($P$).
+                </td>
+                <td class="p-3 text-slate-600">
+                  Constante fija. Casi siempre desconocida, a menos que se realice un censo exhaustivo.
+                </td>
+                <td class="p-3 font-mono font-bold text-amber-700">
+                  &mu; (media), &sigma; (desviación), p (proporción), N (tamaño)
+                </td>
+                <td class="p-3 text-slate-600">
+                  La concentración media real de plomo en <em>todos</em> los 8.000 puntos del suelo del cantón.
+                </td>
+              </tr>
+              <tr class="hover:bg-purple-50/50 transition-colors">
+                <td class="p-3 font-bold text-purple-900 bg-purple-50/30">
+                  Estadístico (&theta;&#770;)
+                </td>
+                <td class="p-3 text-slate-700">
+                  Proviene de la <strong>Muestra observada</strong> ($S$).
+                </td>
+                <td class="p-3 text-slate-600">
+                  Variable aleatoria. Cambia de una muestra a otra; se usa como <strong>estimador</strong> de &theta;.
+                </td>
+                <td class="p-3 font-mono font-bold text-purple-700">
+                  x&#772; (media muestral), s (desviación), p&#770; (proporción), n (muestra)
+                </td>
+                <td class="p-3 text-slate-600">
+                  La media x&#772; = 14.2 mg/kg calculada con 60 muestras de suelo tomadas en campo.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SIMULADOR INTERACTIVO DE MUESTREO Y ESTIMACIÓN -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-100">
+              Simulador Didáctico en Vivo
+            </span>
+            <h3 class="text-base font-bold text-slate-900 mt-1">
+              Extracción de Muestras y Estimación del Parámetro Real
+            </h3>
+            <p class="text-xs text-slate-500">
+              Población simulada: N = 200 puntos de monitoreo de turbidez en la cuenca (NTU). El parámetro verdadero es <strong>&mu; = 45.0 NTU</strong>.
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="tomarMuestra(15)" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold shadow-xs transition-all">
+              Tomar muestra pequeña (n = 15)
+            </button>
+            <button onclick="tomarMuestra(60)" class="px-3.5 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold shadow-xs transition-all">
+              Tomar muestra grande (n = 60)
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <div class="bg-white p-3.5 rounded-lg border border-slate-200">
+            <span class="text-xs text-slate-500 uppercase font-semibold">Parámetro Poblacional Verdadero</span>
+            <div class="text-xl font-mono font-bold text-amber-700 mt-1">&mu; = 45.00 NTU</div>
+            <p class="text-[11px] text-slate-500 mt-0.5">Fijo e invariable para toda la cuenca (N=200)</p>
+          </div>
+
+          <div class="bg-white p-3.5 rounded-lg border border-slate-200">
+            <span class="text-xs text-slate-500 uppercase font-semibold">Estadístico Muestral Obtenido</span>
+            <div class="text-xl font-mono font-bold text-purple-700 mt-1" id="statValor">x&#772; = -- NTU</div>
+            <p class="text-[11px] text-slate-500 mt-0.5" id="statDetalle">Haga clic en un botón para extraer una muestra</p>
+          </div>
+
+          <div class="bg-white p-3.5 rounded-lg border border-slate-200">
+            <span class="text-xs text-slate-500 uppercase font-semibold">Error Muestral Absoluto</span>
+            <div class="text-xl font-mono font-bold text-rose-700 mt-1" id="errorValor">|x&#772; - &mu;| = --</div>
+            <p class="text-[11px] text-slate-500 mt-0.5">Diferencia aleatoria debida al azar del muestreo</p>
+          </div>
+        </div>
+
+        <div class="mt-4 p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900">
+          <strong>Lección Clave:</strong> Si toma repetidas muestras, el estadístico <code>x&#772;</code> variará en cada intento alrededor de <code>&mu; = 45</code>. Con <code>n = 60</code>, las fluctuaciones del estadístico son notablemente menores que con <code>n = 15</code> (mayor precisión).
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECCIÓN 3: ERROR MUESTRAL VS SESGO -->
+    <section id="tab-error-sesgo" class="tab-content hidden space-y-6">
+      
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-900 mb-1">
+          Diferencia Crucial: Error Muestral vs. Sesgo Sistemático
+        </h2>
+        <p class="text-xs text-slate-600 mb-6">
+          Uno de los errores más graves en proyectos de titulación y consultorías ambientales es confundir el error propio del azar con el sesgo metodológico de diseño.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Bloque Error Muestral -->
+          <div class="p-5 rounded-2xl border border-blue-200 bg-blue-50/40 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-800 bg-blue-100 px-2.5 py-1 rounded-md">
+                Error Muestral (&epsilon;)
+              </span>
+              <span class="text-xs font-mono text-blue-700 font-bold">&theta;&#770; - &theta; (Aleatorio)</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-base">Variabilidad Inevitable por Azar</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Surge simplemente por observar una muestra y no a la totalidad de la población. Las unidades seleccionadas por azar difieren ligeramente de la media global.
+            </p>
+            <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+              <li><strong>Naturaleza:</strong> Aleatoria, no direccionada (a veces sobrestima, a veces subestima).</li>
+              <li><strong>Solución matemática:</strong> <span class="font-bold text-emerald-800">Disminuye</span> conforme aumenta el tamaño de la muestra ($n$).</li>
+              <li><strong>Impacto:</strong> Afecta la <em>precisión</em> de la estimación.</li>
+            </ul>
+          </div>
+
+          <!-- Bloque Sesgo -->
+          <div class="p-5 rounded-2xl border border-rose-200 bg-rose-50/40 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-rose-800 bg-rose-100 px-2.5 py-1 rounded-md">
+                Sesgo Sistemático (Bias)
+              </span>
+              <span class="text-xs font-mono text-rose-700 font-bold">E(&theta;&#770;) - &theta; &ne; 0</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-base">Distorsión Direccional del Diseño</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Error sistemático introducido por defectos en el marco muestral, mala selección de sitios, sensores mal calibrados o preguntas mal redactadas.
+            </p>
+            <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+              <li><strong>Naturaleza:</strong> Sistemática y orientada en una sola dirección.</li>
+              <li><strong>Peligro latente:</strong> <span class="font-bold text-rose-800">NO desaparece</span> aumentando el tamaño de muestra $n$. Si mide con un sensor descalibrado, 10.000 datos tendrán el mismo sesgo que 10.</li>
+              <li><strong>Impacto:</strong> Destruye la <em>validez</em> científica del estudio.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- DIAGRAMA INTERACTIVO DE DIANAS (TARGETS) -->
+        <div class="mt-6 pt-6 border-t border-slate-100">
+          <h3 class="font-bold text-slate-900 text-sm mb-3">
+            Analogía Visual de la Diana: Precisión (Error Muestral) vs. Exactitud/Validez (Sesgo)
+          </h3>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+            
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <div class="w-20 h-20 mx-auto rounded-full border-4 border-slate-300 relative flex items-center justify-center bg-white mb-2">
+                <div class="w-10 h-10 rounded-full border-2 border-red-300 bg-red-50 flex items-center justify-center">
+                  <div class="w-3 h-3 rounded-full bg-red-600"></div>
+                </div>
+                <!-- Puntos dispersos pero centrados -->
+                <span class="absolute w-2 h-2 rounded-full bg-blue-600 top-2 left-6"></span>
+                <span class="absolute w-2 h-2 rounded-full bg-blue-600 bottom-3 right-5"></span>
+                <span class="absolute w-2 h-2 rounded-full bg-blue-600 top-8 left-3"></span>
+                <span class="absolute w-2 h-2 rounded-full bg-blue-600 bottom-6 left-7"></span>
+              </div>
+              <h4 class="font-bold text-xs text-slate-800">Sin Sesgo, Bajo n</h4>
+              <p class="text-[11px] text-slate-500 mt-1">Impreciso (alto error muestral), pero no sesgado al centro.</p>
+            </div>
+
+            <div class="bg-emerald-50/50 p-4 rounded-xl border border-emerald-200">
+              <div class="w-20 h-20 mx-auto rounded-full border-4 border-slate-300 relative flex items-center justify-center bg-white mb-2">
+                <div class="w-10 h-10 rounded-full border-2 border-red-300 bg-red-50 flex items-center justify-center">
+                  <div class="w-3 h-3 rounded-full bg-red-600"></div>
+                  <!-- Puntos concentrados en el centro -->
+                  <span class="absolute w-2 h-2 rounded-full bg-emerald-600 top-8 left-8"></span>
+                  <span class="absolute w-2 h-2 rounded-full bg-emerald-600 top-9 left-9"></span>
+                  <span class="absolute w-2 h-2 rounded-full bg-emerald-600 top-10 left-8"></span>
+                </div>
+              </div>
+              <h4 class="font-bold text-xs text-emerald-900">Sin Sesgo, Alto n (Ideal)</h4>
+              <p class="text-[11px] text-emerald-700 mt-1">Exacto y preciso. Error muestral mínimo y diseño válido.</p>
+            </div>
+
+            <div class="bg-rose-50/50 p-4 rounded-xl border border-rose-200">
+              <div class="w-20 h-20 mx-auto rounded-full border-4 border-slate-300 relative flex items-center justify-center bg-white mb-2">
+                <div class="w-10 h-10 rounded-full border-2 border-red-300 bg-red-50 flex items-center justify-center">
+                  <div class="w-3 h-3 rounded-full bg-red-600"></div>
+                </div>
+                <!-- Puntos concentrados fuera del centro -->
+                <span class="absolute w-2 h-2 rounded-full bg-rose-600 top-2 right-2"></span>
+                <span class="absolute w-2 h-2 rounded-full bg-rose-600 top-3 right-3"></span>
+                <span class="absolute w-2 h-2 rounded-full bg-rose-600 top-3 right-1"></span>
+              </div>
+              <h4 class="font-bold text-xs text-rose-900">Alto Sesgo, Alto n (Engañoso)</h4>
+              <p class="text-[11px] text-rose-700 mt-1">Muy preciso pero falso. Estimación segura de un valor erróneo.</p>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <div class="w-20 h-20 mx-auto rounded-full border-4 border-slate-300 relative flex items-center justify-center bg-white mb-2">
+                <div class="w-10 h-10 rounded-full border-2 border-red-300 bg-red-50 flex items-center justify-center">
+                  <div class="w-3 h-3 rounded-full bg-red-600"></div>
+                </div>
+                <!-- Puntos dispersos y fuera de centro -->
+                <span class="absolute w-2 h-2 rounded-full bg-amber-600 top-1 right-2"></span>
+                <span class="absolute w-2 h-2 rounded-full bg-amber-600 top-5 right-4"></span>
+                <span class="absolute w-2 h-2 rounded-full bg-amber-600 bottom-2 right-1"></span>
+              </div>
+              <h4 class="font-bold text-xs text-amber-900">Alto Sesgo, Bajo n</h4>
+              <p class="text-[11px] text-amber-700 mt-1">El peor escenario. Impreciso e inválido.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SECCIÓN 4: TIPOS DE MUESTREO (ÁRBOL DE DECISIÓN Y CASOS) -->
+    <section id="tab-tipos-muestreo" class="tab-content hidden space-y-6">
+      
+      <!-- MATRIZ COMPARATIVA DE MUESTREOS -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-900 mb-2">
+          Clasificación Completa: Muestreo Probabilístico vs. No Probabilístico
+        </h2>
+        <p class="text-xs text-slate-600 mb-5 leading-relaxed">
+          En el muestreo probabilístico cada elemento tiene una probabilidad conocida y no nula ($p_i > 0$) de ser seleccionado, permitiendo calcular intervalos de confianza y generalizar estadísticamente.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          
+          <!-- Bloque Probabilístico -->
+          <div class="border border-emerald-300 rounded-xl p-4 bg-emerald-50/30">
+            <h3 class="text-sm font-bold text-emerald-900 flex items-center gap-2 mb-3">
+              <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+              Métodos Probabilísticos (Permiten Inferencia)
+            </h3>
+            
+            <div class="space-y-3 text-xs">
+              <div class="bg-white p-3 rounded-lg border border-slate-200">
+                <span class="font-bold text-slate-800">1. Aleatorio Simple (MAS):</span>
+                <p class="text-slate-600 mt-0.5">Todas las unidades tienen la misma probabilidad de selección ($1/N$). Requiere marco muestral completo y población homogénea.</p>
+                <span class="text-[11px] text-emerald-700 font-semibold mt-1 inline-block">Ej: Sorteo aleatorio de 40 parcelas agrícolas de un catastro de 500.</span>
+              </div>
+
+              <div class="bg-white p-3 rounded-lg border border-slate-200">
+                <span class="font-bold text-slate-800">2. Estratificado:</span>
+                <p class="text-slate-600 mt-0.5">Población dividida en estratos mutuamente excluyentes (ej. pisos altitudinales o usos de suelo). Se muestrea dentro de cada estrato.</p>
+                <div class="mt-1 text-[11px] text-slate-500">
+                  &bull; <strong>Proporcional:</strong> $n_h = n (N_h / N)$ (mantiene estructura poblacional).<br>
+                  &bull; <strong>No proporcional:</strong> asignación deliberada para asegurar datos en estratos raros pero críticos (ej. páramos).
+                </div>
+              </div>
+
+              <div class="bg-white p-3 rounded-lg border border-slate-200">
+                <span class="font-bold text-slate-800">3. Sistemático:</span>
+                <p class="text-slate-600 mt-0.5">Se elige un inicio aleatorio $r$ y luego cada $k = N/n$ elementos. Ideal para muestreos espaciales continuos o líneas de transecto.</p>
+                <span class="text-[11px] text-emerald-700 font-semibold mt-1 inline-block">Ej: Tomar muestras de agua cada 250 metros a lo largo del cauce del río.</span>
+              </div>
+
+              <div class="bg-white p-3 rounded-lg border border-slate-200">
+                <span class="font-bold text-slate-800">4. Por Conglomerados (Clusters):</span>
+                <p class="text-slate-600 mt-0.5">Se seleccionan grupos enteros de unidades (conglomerados) para reducir costos logísticos cuando la población está muy dispersa.</p>
+                <span class="text-[11px] text-emerald-700 font-semibold mt-1 inline-block">Ej: Seleccionar al azar 5 microcuencas secundarias e inventariar todas sus descargas.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bloque No Probabilístico -->
+          <div class="border border-slate-300 rounded-xl p-4 bg-slate-50/50">
+            <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-3">
+              <span class="w-3 h-3 rounded-full bg-slate-500"></span>
+              Métodos No Probabilísticos (Exploratorios / Criterio)
+            </h3>
+            
+            <div class="space-y-3 text-xs">
+              <div class="bg-white p-3 rounded-lg border border-slate-200">
+                <span class="font-bold text-slate-800">1. Por Conveniencia:</span>
+                <p class="text-slate-600 mt-0.5">Selección basada en facilidad de acceso, bajo costo o proximidad al investigador.</p>
+                <span class="text-[11px] text-rose-700 font-semibold mt-1 inline-block">Limitación: No representativo. Ej: Medir agua solo donde hay puente vehicular.</span>
+              </div>
+
+              <div class="bg-white p-3 rounded-lg border border-slate-200">
+                <span class="font-bold text-slate-800">2. Por Cuotas:</span>
+                <p class="text-slate-600 mt-0.5">Se fija un número de unidades por categoría (ej. 20 agricultores convencionales y 20 agroecológicos) pero sin sorteo aleatorio.</p>
+                <span class="text-[11px] text-slate-500 mt-1 inline-block">Útil para exploraciones rápidas con representación de subgrupos.</span>
+              </div>
+
+              <div class="bg-white p-3 rounded-lg border border-slate-200">
+                <span class="font-bold text-slate-800">3. Intencional / Por Juicio Experto:</span>
+                <p class="text-slate-600 mt-0.5">El investigador escoge intencionalmente las unidades porque poseen características de interés crítico.</p>
+                <span class="text-[11px] text-blue-700 font-semibold mt-1 inline-block">Ej: Muestrear los 3 vertederos mineros clandestinos más conflictivos.</span>
+              </div>
+
+              <div class="bg-white p-3 rounded-lg border border-slate-200">
+                <span class="font-bold text-slate-800">4. Bola de Nieve:</span>
+                <p class="text-slate-600 mt-0.5">Los participantes contactados refieren a otros participantes de la misma población oculta o de difícil acceso.</p>
+                <span class="text-[11px] text-slate-500 mt-1 inline-block">Ej: Identificar familias que realizan quemas agrícolas no autorizadas.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ÁRBOL DE DECISIÓN RÁPIDO PARA EL INGENIERO AMBIENTAL -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <h3 class="text-base font-bold text-slate-900 mb-2">
+          Guía de Decisión: ¿Qué Muestreo Debe Elegir en su Proyecto?
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs mt-4">
+          <div class="p-4 rounded-xl bg-blue-50 border border-blue-200 space-y-2">
+            <span class="font-bold text-blue-900 text-sm">Escenario A: Homogeneidad</span>
+            <p class="text-slate-600">¿Existe un marco muestral completo y la variable tiene distribución similar en toda la zona?</p>
+            <div class="bg-white p-2.5 rounded-lg border border-blue-200 font-bold text-blue-800">
+              &rarr; Aleatorio Simple (MAS) o Sistemático
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-2">
+            <span class="font-bold text-emerald-900 text-sm">Escenario B: Heterogeneidad por Zonas</span>
+            <p class="text-slate-600">¿El territorio tiene pisos climáticos, tipos de bosque o estratos socioeconómicos marcadamente distintos?</p>
+            <div class="bg-white p-2.5 rounded-lg border border-emerald-200 font-bold text-emerald-800">
+              &rarr; Muestreo Estratificado (Proporcional o No)
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-purple-50 border border-purple-200 space-y-2">
+            <span class="font-bold text-purple-900 text-sm">Escenario C: Gran Dispersión Territorial</span>
+            <p class="text-slate-600">¿El costo de viajar entre puntos individuales es prohibitivo y las unidades se agrupan naturalmente?</p>
+            <div class="bg-white p-2.5 rounded-lg border border-purple-200 font-bold text-purple-800">
+              &rarr; Muestreo por Conglomerados
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECCIÓN 5: MICRORETO EVALUATIVO (10 PREGUNTAS DE RAZONAMIENTO) -->
+    <section id="tab-ejercicios" class="tab-content hidden space-y-6">
+      
+      <!-- ENCABEZADO DEL MICRORETO E IDENTIFICACIÓN DEL ESTUDIANTE -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5 mb-5">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                Microreto Evaluativo Calificado
+              </span>
+              <span class="text-xs text-slate-500 font-medium">10 Reactivos de Razonamiento Práctico</span>
+            </div>
+            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">
+              Microreto: Fundamentos de Muestreo y Diseño del Estudio (Bloque C)
+            </h2>
+            <p class="text-xs md:text-sm text-slate-600 mt-1">
+              Complete sus datos institucionales. Al finalizar los 10 problemas de razonamiento, su calificación y desglose se registrarán y enviarán formalmente al docente Guillermo Chuncho: <code class="text-emerald-700 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded">carlos.chuncho@unl.edu.ec</code>.
+            </p>
+          </div>
+          
+          <div class="text-right flex md:flex-col items-center md:items-end justify-between bg-slate-50 md:bg-transparent p-3 md:p-0 rounded-xl">
+            <span class="text-xs text-slate-500 uppercase font-semibold">Puntaje Actual</span>
+            <div class="text-2xl md:text-3xl font-extrabold text-emerald-700" id="liveScoreBanner">0 / 10</div>
+            <span class="text-[11px] text-slate-500 font-medium" id="progressBanner">0 de 10 respondidas</span>
+          </div>
+        </div>
+
+        <!-- FORMULARIO DE DATOS INSTITUCIONALES -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50/80 p-4 rounded-xl border border-slate-200">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1" for="studentName">
+              Nombres y Apellidos Completos <span class="text-rose-500">*</span>
+            </label>
+            <input type="text" id="studentName" placeholder="Ej. Ana Belén Carrión" 
+                   class="w-full text-xs md:text-sm px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1" for="studentEmail">
+              Correo Institucional UNL <span class="text-rose-500">*</span>
+            </label>
+            <input type="email" id="studentEmail" placeholder="usuario@unl.edu.ec" 
+                   class="w-full text-xs md:text-sm px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white">
+            <span class="text-[10px] text-slate-500 mt-0.5 block">Obligatorio: debe terminar en @unl.edu.ec</span>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1" for="studentGroup">
+              Carrera y Paralelo
+            </label>
+            <select id="studentGroup" class="w-full text-xs md:text-sm px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white">
+              <option value="Ingeniería Ambiental - Ciclo 3 (Paralelo A)">Ingeniería Ambiental - Paralelo A</option>
+              <option value="Ingeniería Ambiental - Ciclo 3 (Paralelo B)">Ingeniería Ambiental - Paralelo B</option>
+              <option value="Ingeniería Ambiental - Ciclo Regular">Ingeniería Ambiental - Ciclo Regular</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENEDOR DE LAS 10 PREGUNTAS -->
+      <div class="space-y-5" id="quizContainer">
+        <!-- Renderizado dinámico vía JavaScript -->
+      </div>
+
+      <!-- PANEL DE ENVÍO Y RESULTADOS FINALES -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm text-center">
+        <h3 class="text-base font-bold text-slate-900 mb-1">Finalización y Calificación del Microreto</h3>
+        <p class="text-xs text-slate-600 mb-5 max-w-xl mx-auto">
+          Asegúrese de contestar todas las preguntas. Al presionar el botón se calculará su nota final sobre 10.0 y se generará su comprobante con envío directo al correo de la cátedra.
+        </p>
+
+        <button onclick="finalizarYEnviar()" id="btnEnviarMicroreto" 
+                class="px-6 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm rounded-xl shadow-md transition-all inline-flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+          Finalizar y Enviar Microreto a carlos.chuncho@unl.edu.ec
+        </button>
+
+        <!-- TARJETA MODAL / RESULTADO OFICIAL (OCULTA INICIALMENTE) -->
+        <div id="modalResultado" class="hidden mt-6 text-left border border-slate-300 rounded-2xl p-6 bg-slate-50 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-200 gap-2">
+            <div>
+              <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                Comprobante Oficial de Calificación
+              </span>
+              <h4 class="text-lg font-extrabold text-slate-900 mt-1" id="resNombreEstudiante">--</h4>
+              <p class="text-xs text-slate-600" id="resEmailEstudiante">--</p>
+            </div>
+            <div class="text-right">
+              <span class="text-xs text-slate-500 font-semibold uppercase">Calificación Final</span>
+              <div class="text-3xl font-black text-emerald-700" id="resNotaFinal">-- / 10.0</div>
+              <span class="text-xs font-mono font-bold text-slate-600" id="resPorcentaje">--%</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs bg-white p-3.5 rounded-xl border border-slate-200">
+            <div>
+              <strong class="text-slate-500 block">Código Único de Validación:</strong>
+              <span class="font-mono font-bold text-slate-800" id="resCodigoEnvio">--</span>
+            </div>
+            <div>
+              <strong class="text-slate-500 block">Fecha y Hora de Registro:</strong>
+              <span class="text-slate-800 font-medium" id="resFechaEnvio">--</span>
+            </div>
+            <div>
+              <strong class="text-slate-500 block">Destinatario Docente:</strong>
+              <span class="text-emerald-700 font-bold">Guillermo Chuncho (carlos.chuncho@unl.edu.ec)</span>
+            </div>
+          </div>
+
+          <!-- ESTADO DEL ENVÍO AL CORREO -->
+          <div id="envioStatus" class="p-3.5 rounded-xl text-xs font-medium border bg-blue-50 border-blue-200 text-blue-900">
+            Procesando registro...
+          </div>
+
+          <!-- BOTONES DE RESPALDO Y COMPROBANTE -->
+          <div class="flex flex-wrap gap-2.5 pt-2">
+            <button onclick="enviarViaMailto()" class="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold rounded-lg transition-all inline-flex items-center gap-1.5 shadow-xs">
+              <span>✉️</span> Reenviar por Correo Directo (Mailto)
+            </button>
+            <button onclick="copiarComprobante()" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-lg transition-all inline-flex items-center gap-1.5 shadow-xs">
+              <span>📋</span> Copiar Reporte Completo
+            </button>
+            <button onclick="descargarComprobante()" class="px-4 py-2 bg-white border border-slate-300 hover:bg-slate-100 text-slate-800 text-xs font-bold rounded-lg transition-all inline-flex items-center gap-1.5">
+              <span>💾</span> Descargar Comprobante (.txt)
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- FOOTER DEL DASHBOARD PÚBLICO -->
+    <footer class="text-center text-xs text-slate-500 py-6 border-t border-slate-200 space-y-1">
+      <p class="font-semibold text-slate-700">Universidad Nacional de Loja &bull; Facultad Agropecuaria y de Recursos Naturales Renovables &bull; Carrera de Ingeniería Ambiental</p>
+      <p class="text-slate-500">Estadística Descriptiva &bull; Módulo de Muestreo y Diseño del Estudio (Bloque C) &bull; Guillermo Chuncho</p>
+      <p class="text-[11px] text-slate-400">Recurso académico interactivo público y de acceso libre para la formación en ciencias ambientales.</p>
+    </footer>
+
+  </div>
+
+  <!-- SCRIPT CON LA LÓGICA Y DATOS INTERACTIVOS -->
+  <script>
+    // CASOS AMBIENTALES DEL CANTÓN LOJA
+    const casosData = {
+      1: {
+        titulo: "Caso 1: Calidad de Agua y Contaminación en la Microcuenca del Río Malacatos",
+        descripcion: "Un proyecto busca evaluar la concentración media de coliformes fecales y demanda biológica de oxígeno (DBO5) en tramos periurbanos y rurales del río durante el ciclo invernal.",
+        elementos: {
+          poblacion: "Todos los tramos vadeables y puntos de afluencia de agua del Río Malacatos en el cantón Loja durante la temporada invernal 2026-2027.",
+          poblacionAccesible: "Los 140 tramos fluviales accesibles mediante sendas públicas o puentes comunales.",
+          marcoMuestral: "Mapa georreferenciado con los 140 tramos elegibles codificados de ID_001 a ID_140.",
+          unidadMuestral: "Cada tramo de 50 metros del río seleccionado para la instalación de estaciones.",
+          unidadAnalisis: "Cada muestra de 500 ml de agua extraída para el análisis de laboratorio.",
+          parametro: "&mu; = Concentración media poblacional real de coliformes (NMP/100 ml) en toda la microcuenca.",
+          estadistico: "x&#772; = Media muestral obtenida a partir de 30 tramos monitoreados.",
+          tipoMuestreo: "Muestreo Estratificado por piso altitudinal (alto, medio y bajo) para asegurar representatividad de las zonas con descarga agrícola vs. urbana."
+        }
+      },
+      2: {
+        titulo: "Caso 2: Generación de Residuos Sólidos Domiciliarios en el Cantón Loja",
+        descripcion: "La Dirección de Higiene Municipal requiere estimar la proporción de hogares que realiza una correcta separación de residuos en origen (tacho verde y tacho negro).",
+        elementos: {
+          poblacion: "Todos los hogares ocupados de las áreas urbanas y periurbanas del cantón Loja (N &asymp; 55.000 viviendas).",
+          poblacionAccesible: "Los hogares registrados en el catastro de contribuyentes de agua potable y recolección.",
+          marcoMuestral: "Catastro municipal con número de medidor, dirección y barrio de las 55.000 viviendas.",
+          unidadMuestral: "La vivienda o predio habitacional sorteado del catastro.",
+          unidadAnalisis: "El hogar que reside en la vivienda (composición de sus residuos en kg/día).",
+          parametro: "p = Proporción real de todos los hogares de Loja que separan correctamente los residuos.",
+          estadistico: "p&#770; = Proporción muestral calculada en una muestra de n = 384 hogares.",
+          tipoMuestreo: "Muestreo Estratificado Proporcional según estrato socioeconómico o zona barrial (central, intermedia, periurbana)."
+        }
+      },
+      3: {
+        titulo: "Caso 3: Ocurrencia y Severidad de Incendios Forestales (Datos Satelitales VIIRS)",
+        descripcion: "El MAATE y el Cuerpo de Bomberos investigan la severidad de las quemas en la vegetación nativa y páramos durante el estiaje (agosto a noviembre).",
+        elementos: {
+          poblacion: "Todas las 7.997 celdas espaciales de 500 m &times; 500 m que componen el cantón Loja.",
+          poblacionAccesible: "Las 7.997 celdas con datos satelitales válidos y sin interferencia densa de nubes.",
+          marcoMuestral: "Archivo de cuadrícula espacial con 7.997 filas identificadas de cell_id = 1 a 7.997.",
+          unidadMuestral: "La celda geográfica de 500 m &times; 500 m.",
+          unidadAnalisis: "La misma celda (donde se mide si hubo fuego, conteo de focos y valor del índice NBR).",
+          parametro: "p = Proporción cantonal exacta de celdas afectadas por fuego en el año.",
+          estadistico: "p&#770; = Proporción de celdas con fuego en una submuestra aleatoria de 400 celdas.",
+          tipoMuestreo: "Muestreo Estratificado por Formación Vegetal (páramo, matorral nativo, plantación de pino, área agrícola)."
+        }
+      },
+      4: {
+        titulo: "Caso 4: Calidad del Aire y Monitoreo de PM2.5 en el Centro Urbano de Loja",
+        descripcion: "Se desea estimar el promedio anual de material particulado fino (PM2.5) en microgramos por metro cúbico en horas de alto flujo vehicular.",
+        elementos: {
+          poblacion: "Todas las horas hábiles (06:00 a 20:00) del año en toda la malla vial del centro de Loja (N = 5.110 horas).",
+          poblacionAccesible: "Las horas monitoreadas por las 8 estaciones fijas y sensores portátiles autorizados.",
+          marcoMuestral: "Listado cronológico de días y tramos de calle donde es técnicamente viable instalar sensores.",
+          unidadMuestral: "La combinación de estación física y franja horaria programada de 1 hora.",
+          unidadAnalisis: "El volumen de aire muestreado durante esa hora (&mu;g/m&sup3; registrados).",
+          parametro: "&mu; = Concentración media real anual de PM2.5 en toda la zona céntrica.",
+          estadistico: "x&#772; = Media aritmética de las 250 mediciones horarias realizadas.",
+          tipoMuestreo: "Muestreo Sistemático Temporal (cada 3 días a las mismas horas fijas para captar variabilidad semanal)."
+        }
+      }
+    };
+
+    function mostrarCaso(id) {
+      for (let i = 1; i <= 4; i++) {
+        const btn = document.getElementById(`btn-caso-${i}`);
+        if (i === id) {
+          btn.className = "px-3 py-1.5 text-xs font-bold rounded-lg bg-emerald-700 text-white shadow-xs";
+        } else {
+          btn.className = "px-3 py-1.5 text-xs font-bold rounded-lg text-slate-600 hover:bg-white";
+        }
+      }
+
+      const caso = casosData[id];
+      const contenedor = document.getElementById("casoDetalle");
+      contenedor.innerHTML = `
+        <div class="bg-emerald-50/40 p-4 rounded-xl border border-emerald-200">
+          <h3 class="font-bold text-emerald-950 text-sm md:text-base">${caso.titulo}</h3>
+          <p class="text-xs text-slate-600 mt-1">${caso.descripcion}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs">
+          <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <span class="font-bold text-sky-800 uppercase text-[11px] block">1. Población Objetivo:</span>
+            <span class="text-slate-700">${caso.elementos.poblacion}</span>
+          </div>
+
+          <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <span class="font-bold text-sky-800 uppercase text-[11px] block">2. Población Accesible:</span>
+            <span class="text-slate-700">${caso.elementos.poblacionAccesible}</span>
+          </div>
+
+          <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <span class="font-bold text-amber-800 uppercase text-[11px] block">3. Marco Muestral:</span>
+            <span class="text-slate-700">${caso.elementos.marcoMuestral}</span>
+          </div>
+
+          <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <span class="font-bold text-indigo-800 uppercase text-[11px] block">4. Unidad Muestral:</span>
+            <span class="text-slate-700">${caso.elementos.unidadMuestral}</span>
+          </div>
+
+          <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <span class="font-bold text-indigo-800 uppercase text-[11px] block">5. Unidad de Análisis:</span>
+            <span class="text-slate-700">${caso.elementos.unidadAnalisis}</span>
+          </div>
+
+          <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <span class="font-bold text-purple-800 uppercase text-[11px] block">6. Parámetro vs. Estadístico:</span>
+            <span class="text-slate-700"><strong>Parámetro (&theta;):</strong> ${caso.elementos.parametro}<br><strong>Estadístico (&theta;&#770;):</strong> ${caso.elementos.estadistico}</span>
+          </div>
+        </div>
+
+        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-900">
+          <strong>Tipo de Muestreo Recomendado:</strong> ${caso.elementos.tipoMuestreo}
+        </div>
+      `;
+    }
+
+    // SIMULADOR DE MUESTREO
+    function tomarMuestra(n) {
+      const mediaReal = 45.00;
+      const sigma = 12.0;
+      const errorEstandar = sigma / Math.sqrt(n);
+      const u1 = Math.random();
+      const u2 = Math.random();
+      const z = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
+      const mediaMuestral = mediaReal + (z * errorEstandar);
+      const errorAbsoluto = Math.abs(mediaMuestral - mediaReal);
+
+      document.getElementById("statValor").innerText = `x\u0304 = ${mediaMuestral.toFixed(2)} NTU`;
+      document.getElementById("statDetalle").innerText = `Calculado con muestra aleatoria de n = ${n} puntos`;
+      document.getElementById("errorValor").innerText = `|${mediaMuestral.toFixed(2)} - 45.00| = ${errorAbsoluto.toFixed(2)} NTU`;
+    }
+
+    // BANCO DE 10 PREGUNTAS DE RAZONAMIENTO AVANZADO (MICRORETO BLOQUE C)
+    const quizData = [
+      {
+        id: 1,
+        pregunta: "1. Un proyecto en Loja busca evaluar la contaminación por metales pesados en suelos de huertos familiares periurbanos. El equipo dispone del catastro del Registro de la Propiedad de 2018 (3.200 predios formalizados). Sin embargo, en los últimos años se han levantado 1.400 huertos en asentamientos informales sin título de propiedad. Si se extrae la muestra únicamente del catastro 2018, ¿cuál es el problema metodológico y estadístico central?",
+        opciones: [
+          "El error muestral será nulo porque se conoce con precisión el tamaño N = 3.200.",
+          "Existe un defecto de subcobertura en el marco muestral que genera un sesgo de selección sistemático, impidiendo generalizar a toda la población de huertos periurbanos.",
+          "Es un muestreo estratificado no proporcional perfectamente válido según la normativa ambiental.",
+          "El parámetro poblacional μ variará aleatoriamente según el número de huertos censados."
+        ],
+        correcta: 1,
+        explicacion: "El marco muestral debe representar fielmente a la población objetivo. Al excluir a 1.400 huertos informales (que suelen ubicarse en laderas o zonas con mayor riesgo de contaminación), el marco sufre de subcobertura, induciendo un sesgo de selección sistemático que destruye la representatividad externa del estudio."
+      },
+      {
+        id: 2,
+        pregunta: "2. Para evaluar el volumen de residuos plásticos en quebradas de la microcuenca Zamora-Huacapamba, un ingeniero sortea 8 subcuencas completas de las 32 existentes. En cada subcuenca seleccionada, el equipo recorre un transecto de 2 km recolectando y pesando cada botella plástica hallada en el cauce. En este diseño experimental:",
+        opciones: [
+          "La subcuenca es la unidad muestral y cada botella plástica individual es la unidad de análisis.",
+          "La unidad muestral y la unidad de análisis son idénticas y corresponden al cauce completo de 2 km.",
+          "Cada botella plástica es la unidad muestral y el cantón Loja es el marco muestral.",
+          "No existen unidades de análisis porque se trata de un muestreo no probabilístico por juicio."
+        ],
+        correcta: 0,
+        explicacion: "La unidad muestral es la entidad seleccionada en el sorteo (la subcuenca o tramo hidrográfico), mientras que la unidad de análisis es la entidad donde se mide la variable de respuesta (cada botella/residuo pesado y caracterizado). En diseños por conglomerados y etapas, estas entidades difieren operativamente."
+      },
+      {
+        id: 3,
+        pregunta: "3. Un sensor óptico continuo de PM2.5 instalado en Loja presenta una película de polvo adherida al lente que causa una sobrestimación sistemática constante del +20% en todas las lecturas. El tesista, creyendo que un tamaño muestral gigantesco subsana cualquier falla, registra 300.000 lecturas horarias en lugar de 500. Desde el rigor estadístico, ¿qué ocurre con la estimación?",
+        opciones: [
+          "El error del +20% se reduce progresivamente hasta desaparecer gracias al teorema del límite central con n = 300.000.",
+          "La estimación adquiere una precisión altísima (error muestral casi nulo), pero conserva intacto el sesgo sistemático del +20%, arrojando un resultado seguro pero científicamente falso.",
+          "El estadístico x̄ se transforma automáticamente en el parámetro verdadero μ debido a la ley de los grandes números.",
+          "El sesgo sistemático pasa a comportarse como un error aleatorio simétrico centrado en cero."
+        ],
+        correcta: 1,
+        explicacion: "El sesgo sistemático (bias) es inherente al defecto instrumental o de diseño: NO disminuye al aumentar el tamaño muestral n. Aumentar n solo reduce la variabilidad aleatoria (error muestral). Medir cientos de miles de datos con un sensor descalibrado genera una estimación con varianza mínima alrededor de una falsedad (alta precisión, nula exactitud)."
+      },
+      {
+        id: 4,
+        pregunta: "4. En una auditoría sobre calidad del agua de vertientes para consumo humano en Vilcabamba, un consultor analiza una muestra aleatoria de 40 vertientes y obtiene una media de nitratos de x̄ = 18.4 mg/L con s = 3.2 mg/L. En su informe afirma: 'Se ha demostrado con certeza absoluta que la concentración media poblacional μ de todas las vertientes es exactamente 18.4 mg/L sin margen de duda'. ¿Por qué es inadmisible esta afirmación?",
+        opciones: [
+          "Porque el parámetro μ solo puede existir si el agua proviene de fuentes orgánicas y no freáticas.",
+          "Porque x̄ es un estadístico muestral (variable aleatoria sujeta a error de muestreo) que estima a μ, pero nunca equivale de manera exacta ni determinista al parámetro poblacional sin su respectivo intervalo de confianza.",
+          "Porque la desviación estándar s debió ser numéricamente mayor que la media aritmética para validar el parámetro.",
+          "Porque los nitratos en agua subterránea corresponden a una variable cualitativa ordinal y no continua."
+        ],
+        correcta: 1,
+        explicacion: "Los parámetros poblacionales (como μ) son constantes fijas pero desconocidas en ausencia de un censo completo. Los estadísticos (como x̄) son variables aleatorias calculadas a partir de una muestra. Tratar una estimación puntual muestral como una verdad determinista absoluta desconoce la naturaleza probabilística de la inferencia estadística."
+      },
+      {
+        id: 5,
+        pregunta: "5. Para monitorear las descargas de DBO5 de una procesadora de lácteos al río, un técnico programa un muestreo sistemático extrayendo una muestra puntual cada 7 días exactamente a las 09:00 AM (intervalo k = 7 días). Sin embargo, ignora que la fábrica realiza el lavado integral de líneas de producción con químicos todos los miércoles a las 08:30 AM. Si el inicio aleatorio cayó en día miércoles, ¿qué consecuencia estadística tendrá este diseño?",
+        opciones: [
+          "Ninguna, porque el muestreo sistemático siempre produce resultados idénticos al muestreo aleatorio simple.",
+          "La muestra capturará sistemáticamente el pico máximo de descarga contaminante, sobrestimando de forma masiva la contaminación media debido a la sincronización con un ciclo periódico del proceso.",
+          "El error muestral se anulará porque los miércoles representan con fidelidad la media de toda la semana.",
+          "El muestreo se convertirá de forma automática en un diseño estratificado óptimo."
+        ],
+        correcta: 1,
+        explicacion: "El riesgo crítico del muestreo sistemático ocurre cuando el paso de selección k coincide con la periodicidad del fenómeno. Si el intervalo se sincroniza con el ciclo de descargas de la fábrica (cada 7 días), se produce un sesgo grave por periodicidad oculta que distorsiona totalmente la representatividad."
+      },
+      {
+        id: 6,
+        pregunta: "6. En el Parque Nacional Podocarpus, el 84% de la superficie corresponde a bosque nublado montano, el 13% a matorral altoandino y solo el 3% a complejos lagunares y turberas glaciares (ecosistema frágil de alto endemismo). Si un botánico realiza un muestreo estratificado proporcional con n = 100 parcelas, ¿cuál es el problema metodológico y cómo debe corregirse?",
+        opciones: [
+          "Al estrato de turberas solo le corresponderían 3 parcelas (nh = 3), tamaño insuficiente para estimar su biodiversidad; debe aplicarse una asignación no proporcional asignando una muestra mayor a las turberas y luego ponderar matemáticamente los estimadores.",
+          "No se pueden calcular estratos cuando un área supera el 50%; debe reemplazarse por un muestreo por conveniencia.",
+          "El bosque nublado montano debe eliminarse del estudio porque acapara demasiadas muestras.",
+          "La afijación proporcional siempre garantiza la varianza mínima sin importar el tamaño del estrato."
+        ],
+        correcta: 0,
+        explicacion: "Cuando un estrato de interés prioritario tiene una proporción muy baja en la población (3%), la afijación proporcional le asigna muy pocas unidades (nh = 3), arrojando estimaciones sumamente imprecisas. En estos casos se aplica afijación no proporcional (óptima o por cupo analítico), y se reponderan los resultados para la estimación global."
+      },
+      {
+        id: 7,
+        pregunta: "7. Para diagnosticar el uso de plaguicidas de etiqueta roja en la cuenca Malacatos-Vilcabamba, un grupo de estudiantes entrevista a 80 agricultores que estaban vendiendo sus hortalizas en el mercado mayorista un sábado por la mañana. En su informe concluyen: 'El 78% de los productores agrícolas de la cuenca utiliza agroquímicos peligrosos'. ¿Cuál es la objeción estadística más severa a esta afirmación?",
+        opciones: [
+          "El tamaño muestral n = 80 es ilegal en la normativa ambiental ecuatoriana.",
+          "Se aplicó un muestreo no probabilístico por conveniencia: los agricultores que acuden al mercado mayorista no representan a la totalidad de la cuenca (excluye a campesinos de autoconsumo, fincas agroecológicas y productores remotos sin transporte).",
+          "El estudio debió realizarse en días hábiles porque los fines de semana los agroquímicos se degradan más rápido.",
+          "El estadístico p̂ debió transformarse en una variable continua mediante una integral definida."
+        ],
+        correcta: 1,
+        explicacion: "Entrevistar solo a quienes están en un punto comercial de fácil acceso constituye un muestreo por conveniencia. Los vendedores del mercado difieren sistemáticamente del resto de campesinos (productores familiares, fincas certificadas, áreas inaccesibles), incurriendo en un grave sesgo de selección que invalida la extrapolación."
+      },
+      {
+        id: 8,
+        pregunta: "8. ¿Cuál es la diferencia teórica fundamental en la composición de los grupos entre el Muestreo Estratificado y el Muestreo por Conglomerados (Clusters)?",
+        opciones: [
+          "En el estratificado los grupos son internamente homogéneos y heterogéneos entre sí (se muestrea dentro de todos los estratos); en conglomerados los grupos deben ser internamente heterogéneos y similares entre sí (se seleccionan solo algunos conglomerados al azar).",
+          "En el estratificado se eligen solo algunos grupos al azar; en conglomerados se muestrea obligatoriamente dentro de todos los grupos existentes.",
+          "El estratificado es siempre no probabilístico, mientras que el muestreo por conglomerados es el único probabilístico.",
+          "En conglomerados no existe marco muestral en ninguna de las etapas de selección."
+        ],
+        correcta: 0,
+        explicacion: "Principio fundamental de diseño muestral: En el muestreo estratificado se busca que cada estrato sea lo más homogéneo posible internamente y distinto de los demás, muestreando en cada uno. En el muestreo por conglomerados, cada conglomerado debe funcionar como un microcosmos diverso (heterogéneo por dentro), permitiendo sortear solo unos pocos conglomerados completos para reducir costos logísticos."
+      },
+      {
+        id: 9,
+        pregunta: "9. En una investigación socioambiental sobre la tala y comercialización clandestina de madera de especies amenazadas (ej. Romerillo) en la provincia de Loja, los involucrados operan al margen de la ley y no existen registros públicos. ¿Qué método de muestreo no probabilístico es el más pertinente y por qué?",
+        opciones: [
+          "Muestreo aleatorio simple mediante un sorteo computarizado de números aleatorios.",
+          "Muestreo por bola de nieve (snowball sampling), porque permite que informantes iniciales de confianza refieran e identifiquen progresivamente a otros miembros de la red oculta.",
+          "Muestreo sistemático espacial trazando una cuadrícula fija de 1 km².",
+          "Muestreo por conglomerados basado en el catastro predial del municipio."
+        ],
+        correcta: 1,
+        explicacion: "El muestreo por bola de nieve es la técnica idónea para investigar poblaciones ocultas, clandestinas o estigmatizadas donde no existe marco muestral formal. Los participantes reclutados refieren a otros integrantes de su red social de confianza, permitiendo acceder a información que sería inaccesible por métodos probabilísticos convencionales."
+      },
+      {
+        id: 10,
+        pregunta: "10. Para diseñar la auditoría acústica del cantón Loja: primero se sortean al azar 4 parroquias urbanas de las 6 existentes; luego, dentro de cada parroquia elegida, se seleccionan 5 barrios al azar; y finalmente, en cada barrio se monitorean 3 intersecciones viales durante 1 hora. ¿Cómo se clasifica rigurosamente este diseño de muestreo?",
+        opciones: [
+          "Muestreo no probabilístico accidental por cuotas.",
+          "Muestreo probabilístico polietápico (multietápico por conglomerados sucesivos con sorteo aleatorio en cada nivel).",
+          "Muestreo aleatorio simple con reposición.",
+          "Muestreo estratificado continuo no probabilístico."
+        ],
+        correcta: 1,
+        explicacion: "Es un diseño probabilístico polietápico (en tres etapas sucesivas: parroquias -> barrios -> intersecciones). Cada unidad en cada etapa tiene una probabilidad conocida y no nula de selección, permitiendo extender la inferencia a toda el área urbana manteniendo costos operativos viables."
+      }
+    ];
+
+    let userAnswers = {};
+    let submissionCode = "";
+
+    function renderQuiz() {
+      const container = document.getElementById("quizContainer");
+      container.innerHTML = quizData.map((q, idx) => `
+        <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-xs space-y-3.5 transition-all" id="q-card-${q.id}">
+          <div class="flex items-start justify-between gap-2 border-b border-slate-100 pb-2.5">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Reactivo ${idx + 1} de 10</span>
+            <span class="text-xs px-2.5 py-0.5 rounded-full font-bold hidden" id="q-badge-${q.id}"></span>
+          </div>
+          <p class="text-xs md:text-sm font-semibold text-slate-900 leading-relaxed">${q.pregunta}</p>
+          <div class="space-y-2 pt-1">
+            ${q.opciones.map((opt, optIdx) => `
+              <label class="flex items-start gap-3 p-2.5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-100/80 cursor-pointer text-xs md:text-sm transition-colors">
+                <input type="radio" name="pregunta_${q.id}" value="${optIdx}" onchange="responder(${q.id}, ${optIdx})" class="mt-0.5 text-emerald-600 focus:ring-emerald-500">
+                <span class="text-slate-700 leading-snug">${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div class="hidden text-xs md:text-sm p-3.5 rounded-xl mt-2 leading-relaxed" id="q-feedback-${q.id}"></div>
+        </div>
+      `).join('');
+    }
+
+    function responder(qId, selectedIdx) {
+      userAnswers[qId] = selectedIdx;
+      const q = quizData.find(item => item.id === qId);
+      const isCorrect = selectedIdx === q.correcta;
+
+      const badge = document.getElementById(`q-badge-${qId}`);
+      badge.classList.remove("hidden", "bg-emerald-100", "text-emerald-800", "bg-rose-100", "text-rose-800", "border", "border-emerald-200", "border-rose-200");
+      if (isCorrect) {
+        badge.classList.add("bg-emerald-100", "text-emerald-800", "border", "border-emerald-200");
+        badge.innerText = "¡Correcto! (+1.0)";
+      } else {
+        badge.classList.add("bg-rose-100", "text-rose-800", "border", "border-rose-200");
+        badge.innerText = "Incorrecto (0.0)";
+      }
+
+      const feedback = document.getElementById(`q-feedback-${qId}`);
+      feedback.classList.remove("hidden", "bg-emerald-50", "text-emerald-950", "border-emerald-200", "bg-rose-50", "text-rose-950", "border-rose-200");
+      feedback.classList.add("border");
+      if (isCorrect) {
+        feedback.classList.add("bg-emerald-50", "text-emerald-950", "border-emerald-200");
+        feedback.innerHTML = `<strong>Justificación Técnica:</strong> ${q.explicacion}`;
+      } else {
+        feedback.classList.add("bg-rose-50", "text-rose-950", "border-rose-200");
+        feedback.innerHTML = `<strong>Opción correcta:</strong> "${q.opciones[q.correcta]}".<br><span class="mt-1 block"><strong>Fundamento:</strong> ${q.explicacion}</span>`;
+      }
+
+      // Actualizar contadores en vivo
+      let score = 0;
+      let totalAnswered = 0;
+      quizData.forEach(item => {
+        if (userAnswers[item.id] !== undefined) {
+          totalAnswered++;
+          if (userAnswers[item.id] === item.correcta) score++;
+        }
+      });
+      document.getElementById("liveScoreBanner").innerText = `${score} / 10`;
+      document.getElementById("progressBanner").innerText = `${totalAnswered} de 10 respondidas`;
+    }
+
+    // FINALIZACIÓN Y ENVÍO DEL MICRORETO
+    async function finalizarYEnviar() {
+      const name = document.getElementById("studentName").value.trim();
+      const email = document.getElementById("studentEmail").value.trim().toLowerCase();
+      const group = document.getElementById("studentGroup").value;
+
+      if (!name) {
+        alert("Por favor ingrese sus Nombres y Apellidos completos.");
+        document.getElementById("studentName").focus();
+        return;
+      }
+
+      if (!email || !email.includes("@") || !email.endsWith("@unl.edu.ec")) {
+        alert("Por favor ingrese un correo institucional válido que termine en @unl.edu.ec (Ejemplo: nombre.apellido@unl.edu.ec)");
+        document.getElementById("studentEmail").focus();
+        return;
+      }
+
+      const totalAnswered = Object.keys(userAnswers).length;
+      if (totalAnswered < quizData.length) {
+        const confirmar = confirm(`Ha respondido ${totalAnswered} de las 10 preguntas. ¿Desea enviar y calificar el microreto con las preguntas restantes en blanco (puntuación 0.0)?`);
+        if (!confirmar) return;
+      }
+
+      // Cálculo de nota
+      let score = 0;
+      let desgloseTexto = [];
+      quizData.forEach((q, idx) => {
+        const userOpt = userAnswers[q.id];
+        const esCorrecta = userOpt === q.correcta;
+        if (esCorrecta) score++;
+        desgloseTexto.push(`P${idx+1}: ${esCorrecta ? 'CORRECTO (1.0)' : 'INCORRECTO (0.0)'} | Resp: ${userOpt !== undefined ? q.opciones[userOpt].substring(0, 50) + '...' : 'SIN RESPUESTA'}`);
+      });
+
+      const notaFinal = score.toFixed(1);
+      const porcentaje = ((score / quizData.length) * 100).toFixed(0);
+      const fechaNow = new Date().toLocaleString("es-EC", { timeZone: "America/Guayaquil" });
+      
+      // Código de verificación único
+      submissionCode = "UNL-EST-C-" + Math.random().toString(36).substring(2, 8).toUpperCase() + "-" + score;
+
+      // Actualizar UI Modal
+      document.getElementById("resNombreEstudiante").innerText = name;
+      document.getElementById("resEmailEstudiante").innerText = `${email} • ${group}`;
+      document.getElementById("resNotaFinal").innerText = `${notaFinal} / 10.0`;
+      document.getElementById("resPorcentaje").innerText = `${porcentaje}% de Acierto`;
+      document.getElementById("resCodigoEnvio").innerText = submissionCode;
+      document.getElementById("resFechaEnvio").innerText = fechaNow;
+
+      const modal = document.getElementById("modalResultado");
+      modal.classList.remove("hidden");
+      modal.scrollIntoView({ behavior: 'smooth' });
+
+      // Estado de envío por FormSubmit AJAX
+      const statusBox = document.getElementById("envioStatus");
+      statusBox.className = "p-3.5 rounded-xl text-xs font-medium border bg-blue-50 border-blue-200 text-blue-900";
+      statusBox.innerHTML = `<strong>Enviando:</strong> Transmitiendo calificación a <code>carlos.chuncho@unl.edu.ec</code>...`;
+
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/carlos.chuncho@unl.edu.ec", {
+          method: "POST",
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            _subject: `[MICRORETO BLOQUE C] Calificación: ${notaFinal}/10 - ${name} (${email})`,
+            _template: "table",
+            Estudiante: name,
+            Correo_Institucional: email,
+            Carrera_Paralelo: group,
+            Calificacion_Final: `${notaFinal} / 10.0 (${porcentaje}%)`,
+            Codigo_Verificacion: submissionCode,
+            Fecha_Entrega: fechaNow,
+            Detalle_Preguntas: desgloseTexto.join("\n")
+          })
+        });
+
+        if (response.ok) {
+          statusBox.className = "p-3.5 rounded-xl text-xs font-medium border bg-emerald-50 border-emerald-200 text-emerald-900";
+          statusBox.innerHTML = `<strong>✓ Envío Exitoso:</strong> Su calificación de <strong>${notaFinal}/10</strong> y el reporte detallado han sido remitidos directamente al correo de la cátedra: <code>carlos.chuncho@unl.edu.ec</code>.`;
+        } else {
+          statusBox.className = "p-3.5 rounded-xl text-xs font-medium border bg-amber-50 border-amber-200 text-amber-900";
+          statusBox.innerHTML = `<strong>Aviso:</strong> El servicio web tardó en responder. Por seguridad, utilice el botón azul <em>"Reenviar por Correo Directo (Mailto)"</em> para enviar su comprobante desde su cuenta institucional.`;
+        }
+      } catch (err) {
+        statusBox.className = "p-3.5 rounded-xl text-xs font-medium border bg-amber-50 border-amber-200 text-amber-900";
+        statusBox.innerHTML = `<strong>Aviso de Conexión:</strong> No se pudo conectar con el servidor externo. Utilice el botón azul <em>"Reenviar por Correo Directo (Mailto)"</em> o copie el comprobante para asegurar su registro con el docente Guillermo Chuncho.`;
+      }
+    }
+
+    // OPCIÓN DE RESPALDO: MAILTO DIRECTO
+    function generarTextoReporte() {
+      const name = document.getElementById("studentName").value.trim();
+      const email = document.getElementById("studentEmail").value.trim();
+      const group = document.getElementById("studentGroup").value;
+      const nota = document.getElementById("resNotaFinal").innerText;
+      const pct = document.getElementById("resPorcentaje").innerText;
+      const fecha = document.getElementById("resFechaEnvio").innerText;
+
+      let lineas = [
+        "==================================================",
+        "COMPROBANTE DE MICRORETO - ESTADÍSTICA (BLOQUE C)",
+        "UNIVERSIDAD NACIONAL DE LOJA - INGENIERÍA AMBIENTAL",
+        "Docente: Guillermo Chuncho (carlos.chuncho@unl.edu.ec)",
+        "==================================================",
+        `Estudiante: ${name}`,
+        `Correo Institucional: ${email}`,
+        `Paralelo: ${group}`,
+        `Calificación Final: ${nota} (${pct})`,
+        `Código de Verificación: ${submissionCode}`,
+        `Fecha de Registro: ${fecha}`,
+        "==================================================",
+        "DESGLOSE DE RESPUESTAS:"
+      ];
+
+      quizData.forEach((q, idx) => {
+        const userOpt = userAnswers[q.id];
+        const status = (userOpt === q.correcta) ? "ACIERTO (1.0 pt)" : "ERROR (0.0 pt)";
+        const selText = userOpt !== undefined ? q.opciones[userOpt] : "NO RESPONDIDA";
+        lineas.push(`[Reactivo ${idx+1}] ${status}`);
+        lineas.push(`  Selección: ${selText}`);
+      });
+      lineas.push("==================================================");
+      return lineas.join("\n");
+    }
+
+    function enviarViaMailto() {
+      const name = document.getElementById("studentName").value.trim();
+      const email = document.getElementById("studentEmail").value.trim();
+      const nota = document.getElementById("resNotaFinal").innerText;
+      const asunto = encodeURIComponent(`[MICRORETO BLOQUE C] Calificación: ${nota} - ${name} (${email})`);
+      const cuerpo = encodeURIComponent(generarTextoReporte());
+      window.location.href = `mailto:carlos.chuncho@unl.edu.ec?subject=${asunto}&body=${cuerpo}`;
+    }
+
+    function copiarComprobante() {
+      const texto = generarTextoReporte();
+      navigator.clipboard.writeText(texto).then(() => {
+        alert("¡Comprobante copiado al portapapeles! Puede pegarlo en un correo o guardarlo como respaldo.");
+      }).catch(() => {
+        alert("Seleccione y copie el texto manualmente.");
+      });
+    }
+
+    function descargarComprobante() {
+      const texto = generarTextoReporte();
+      const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `Comprobante_Microreto_BloqueC_${document.getElementById("studentName").value.replace(/\s+/g, '_') || 'Estudiante'}.txt`;
+      link.click();
+    }
+
+    // CONTROL DE PESTAÑAS
+    function setTab(tabName) {
+      document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
+      document.querySelectorAll(".tab-btn").forEach(el => {
+        el.classList.remove("active", "bg-emerald-800", "text-white");
+        el.classList.add("bg-white", "text-slate-700");
+      });
+
+      document.getElementById(`tab-${tabName}`).classList.remove("hidden");
+      const activeBtn = document.getElementById(`btn-${tabName}`);
+      activeBtn.classList.add("active");
+      activeBtn.classList.remove("bg-white", "text-slate-700");
+    }
+
+    // INICIALIZACIÓN
+    window.addEventListener("DOMContentLoaded", () => {
+      mostrarCaso(1);
+      renderQuiz();
+    });
+  </script>
+
+</body>
+</html>

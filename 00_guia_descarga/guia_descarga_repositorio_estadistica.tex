@@ -1,0 +1,466 @@
+% Guía para descargar el repositorio del curso y preparar el entorno de trabajo
+% Compilar con: pdflatex guia_descarga_repositorio_estadistica.tex (dos veces)
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm,top=2.4cm]{geometry}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{fvextra}
+
+\definecolor{petroleo}{HTML}{0B4F6C}
+\definecolor{verde}{HTML}{2E7D32}
+\definecolor{rojo}{HTML}{B3261E}
+\definecolor{fondo}{HTML}{EEF4F7}
+\definecolor{consola}{HTML}{1E1E1E}
+
+\hypersetup{colorlinks=true,linkcolor=petroleo,urlcolor=petroleo}
+\titleformat{\section}{\large\bfseries\color{petroleo}}{\thesection.}{0.5em}{}[\vspace{-0.4em}{\color{petroleo}\rule{\textwidth}{0.6pt}}]
+\titleformat{\subsection}{\normalsize\bfseries\color{petroleo}}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.1em}{0.6em}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\newtcolorbox{nota}[1][]{colback=fondo,colframe=petroleo,boxrule=0.6pt,arc=1pt,left=5pt,right=5pt,top=3pt,bottom=3pt,fonttitle=\bfseries,#1}
+\newtcolorbox{alerta}[1][]{colback=rojo!5,colframe=rojo,boxrule=0.6pt,arc=1pt,left=5pt,right=5pt,top=3pt,bottom=3pt,fonttitle=\bfseries,#1}
+\newtcolorbox{exito}[1][]{colback=verde!6,colframe=verde,boxrule=0.6pt,arc=1pt,left=5pt,right=5pt,top=3pt,bottom=3pt,fonttitle=\bfseries,#1}
+\newtcolorbox{paso}[1]{colback=white,colframe=petroleo,boxrule=0.8pt,arc=1pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,title={#1}}
+
+% Bloques de comandos (fondo oscuro, como una terminal)
+\DefineVerbatimEnvironment{comando}{Verbatim}{breaklines,breakanywhere,fontsize=\small,formatcom=\color{white}}
+\tcbset{terminal/.style={colback=consola,colframe=consola,arc=1pt,left=6pt,right=6pt,top=3pt,bottom=3pt,boxsep=1pt}}
+\newenvironment{terminal}{\begin{tcolorbox}[terminal]}{\end{tcolorbox}}
+\newcommand{\cmd}[1]{\texttt{\textcolor{petroleo}{#1}}}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\footnotesize\color{petroleo}\textbf{Estadística Descriptiva} $\vert$ Ingeniería Ambiental -- UNL}
+\fancyhead[R]{\footnotesize Descargar el repositorio y preparar el entorno}
+\fancyfoot[C]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist{itemsep=1.5pt,topsep=2pt}
+
+\begin{document}
+
+\begin{center}
+{\large\bfseries UNIVERSIDAD NACIONAL DE LOJA}\\[2pt]
+{\normalsize Carrera de Ingeniería Ambiental -- Estadística Descriptiva -- Ciclo septiembre 2026 -- febrero 2027}
+\end{center}
+\vspace{-0.3em}
+\begin{tcolorbox}[colback=petroleo,colframe=petroleo,arc=1pt,halign=center,top=6pt,bottom=6pt]
+\color{white}{\Large\bfseries GUÍA PASO A PASO}\\[3pt]
+{\normalsize\bfseries Descargar el repositorio del curso desde GitHub y preparar el entorno de trabajo}\\[3pt]
+{\footnotesize Repositorio: \texttt{github.com/cguillermo79/Informacion\_estadistica} \quad$\vert$\quad Docente: Carlos Guillermo Chuncho Morocho}
+\end{tcolorbox}
+
+\section{¿Qué vamos a lograr?}
+
+Al terminar esta guía usted tendrá en su computadora:
+
+\begin{enumerate}
+  \item Acceso al repositorio \textbf{privado} del curso en GitHub (aceptando la invitación del docente).
+  \item \textbf{Git} instalado y configurado.
+  \item Todo el material del curso descargado: guía del proyecto integrador, formato \LaTeX{} del informe y bases de datos.
+  \item Un \textbf{entorno virtual} de Python (\texttt{.venv}) con las librerías del curso.
+  \item La forma de \textbf{actualizar} el material cada vez que el docente publique algo nuevo.
+\end{enumerate}
+
+Siga los pasos \textbf{en orden}. Cada paso termina con una comprobación: no avance si la comprobación no sale como se indica. La guía está escrita para \textbf{Windows}; al final hay notas para macOS y Linux.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{L{3.6cm}Y}
+\toprule
+\textbf{Necesita} & \textbf{Detalle} \\
+\midrule
+Cuenta de GitHub & Con el \textbf{mismo correo} al que llegó la invitación (su correo institucional \texttt{@unl.edu.ec}). \\
+Conexión a internet & La descarga completa pesa unos 15 MB. \\
+Python y VS Code & Si aún no los tiene, se instalan en las secciones 6 y 7. \\
+Tiempo aproximado & 30 a 45 minutos la primera vez; luego, un minuto para actualizar. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{¿Qué es la terminal?}
+
+La \textbf{terminal} es una ventana donde usted le da órdenes a la computadora \textbf{escribiéndolas} en lugar de hacer clic. Cada orden se llama \textbf{comando}: se escribe en una línea y se ejecuta al presionar \textbf{Enter}. En Windows, la terminal que usaremos se llama \textbf{PowerShell}.
+
+\subsection{Cómo abrirla}
+
+\begin{itemize}
+  \item \textbf{Desde Windows:} presione la tecla \textbf{Windows}, escriba \textbf{PowerShell} y haga clic en \textbf{Windows PowerShell}.
+  \item \textbf{Desde Visual Studio Code} (más adelante): menú \textbf{Terminal $\rightarrow$ Nueva terminal}. Se abre en la parte inferior de la ventana.
+\end{itemize}
+
+\subsection{Cómo leerla}
+
+Al abrirla verá una línea parecida a esta, llamada \textbf{prompt}:
+
+\begin{terminal}
+\begin{comando}
+PS C:\Users\Ana>
+\end{comando}
+\end{terminal}
+
+\begin{itemize}
+  \item \texttt{PS} indica que está en PowerShell.
+  \item \texttt{C:\textbackslash Users\textbackslash Ana} es la \textbf{carpeta en la que está parada} la terminal. Los comandos actúan sobre esa carpeta.
+  \item \texttt{>} indica que la terminal espera un comando. Usted escribe \textbf{después} de ese símbolo.
+\end{itemize}
+
+\begin{alerta}[title=Reglas para escribir comandos]
+\begin{itemize}[leftmargin=*]
+  \item En esta guía los comandos aparecen en recuadros negros. \textbf{No copie el} \texttt{PS C:\textbackslash ...>}: solo lo que va después.
+  \item Escriba un comando por vez y presione \textbf{Enter}. Espere a que vuelva a aparecer el prompt antes del siguiente.
+  \item Puede copiar y pegar: en PowerShell se pega con \textbf{clic derecho} o \textbf{Ctrl + V}.
+  \item Si un comando muestra texto en \textcolor{rojo}{\textbf{rojo}}, es un error: léalo y busque la solución en la sección 11.
+\end{itemize}
+\end{alerta}
+
+\subsection{Cinco comandos básicos}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{L{3.6cm}Y}
+\toprule
+\textbf{Comando} & \textbf{Qué hace} \\
+\midrule
+\cmd{pwd} & Muestra en qué carpeta está la terminal. \\
+\cmd{dir} & Lista los archivos y carpetas de la carpeta actual. \\
+\cmd{cd Documents} & Entra a la carpeta \texttt{Documents}. \\
+\cmd{cd ..} & Sube a la carpeta anterior. \\
+\cmd{mkdir Estadistica} & Crea una carpeta nueva llamada \texttt{Estadistica}. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Si el nombre de una carpeta tiene espacios, escríbalo entre comillas: \cmd{cd "Unidad 1"}.
+
+\section{Aceptar la invitación al repositorio (solo la primera vez)}
+
+El repositorio del curso es \textbf{privado}: solo pueden verlo las personas invitadas por el docente.
+
+\begin{paso}{Paso 1. Tener una cuenta de GitHub con su correo institucional}
+\begin{itemize}[leftmargin=*]
+  \item Si \textbf{ya tiene cuenta} con ese correo, inicie sesión en \url{https://github.com}.
+  \item Si \textbf{no tiene cuenta}, créela en \url{https://github.com/signup} usando \textbf{el mismo correo al que llegó la invitación}. Elija un nombre de usuario sencillo (por ejemplo \texttt{ana-perez-unl}) y anote su contraseña.
+\end{itemize}
+\end{paso}
+
+\begin{paso}{Paso 2. Aceptar la invitación}
+\begin{enumerate}[leftmargin=*]
+  \item Abra el correo de GitHub con el asunto \emph{«cguillermo79 invited you to cguillermo79/Informacion\_estadistica»}. Revise también la carpeta de \textbf{correo no deseado}.
+  \item Haga clic en \textbf{View invitation} y luego en \textbf{Accept invitation}.
+  \item Si no encuentra el correo, inicie sesión en GitHub y entre a \url{https://github.com/cguillermo79/Informacion_estadistica/invitations}.
+\end{enumerate}
+\textbf{Comprobación:} al abrir \url{https://github.com/cguillermo79/Informacion_estadistica} con su sesión iniciada, ve las carpetas del curso (por ejemplo \texttt{Unidad 1}). Si ve «404 -- Not Found», aún no aceptó la invitación o inició sesión con otra cuenta.
+\end{paso}
+
+\begin{nota}
+La invitación \textbf{vence a los 7 días}. Si venció, pida al docente que la envíe de nuevo.
+\end{nota}
+
+\section{Instalar Git}
+
+\textbf{Git} es el programa que descarga el repositorio a su computadora y lo mantiene actualizado. \textbf{GitHub} es la página web donde el docente guarda el repositorio. Se necesitan los dos.
+
+\begin{paso}{Paso 3. Descargar e instalar Git}
+\begin{enumerate}[leftmargin=*]
+  \item Entre a \url{https://git-scm.com/download/win}. La descarga empieza sola (si no, haga clic en \textbf{Click here to download}).
+  \item Abra el instalador descargado (\texttt{Git-x.xx.x-64-bit.exe}) y responda \textbf{Sí} si Windows pide permiso.
+  \item Presione \textbf{Next} en todas las pantallas sin cambiar nada y, al final, \textbf{Install}. Las opciones predeterminadas incluyen el \textbf{Git Credential Manager}, que permitirá iniciar sesión en GitHub desde el navegador.
+  \item Al terminar, presione \textbf{Finish}.
+\end{enumerate}
+\end{paso}
+
+\begin{paso}{Paso 4. Comprobar que Git funciona}
+\textbf{Cierre todas las terminales abiertas} y abra una nueva (Git solo se reconoce en terminales abiertas después de instalarlo). Escriba:
+\begin{terminal}
+\begin{comando}
+git --version
+\end{comando}
+\end{terminal}
+\textbf{Comprobación:} responde algo como \texttt{git version 2.47.0.windows.1}. Si dice «\texttt{git} no se reconoce como nombre de un cmdlet», vea la sección 11.
+\end{paso}
+
+\begin{paso}{Paso 5. Presentarse ante Git (solo la primera vez)}
+Escriba estos dos comandos, uno por vez, con \textbf{su} nombre y \textbf{su} correo (el de GitHub), entre comillas:
+\begin{terminal}
+\begin{comando}
+git config --global user.name "Nombres Apellidos"
+git config --global user.email "nombre.apellido@unl.edu.ec"
+\end{comando}
+\end{terminal}
+\textbf{Comprobación:} \cmd{git config --global --list} muestra su nombre y correo.
+\end{paso}
+
+\section{Descargar (clonar) el repositorio}
+
+Descargar un repositorio con Git se llama \textbf{clonar}. Se hace \textbf{una sola vez}; después solo se actualiza (sección 9).
+
+\begin{paso}{Paso 6. Crear su carpeta de trabajo del curso}
+Usaremos la carpeta \texttt{Estadistica} dentro de \textbf{Documentos}. En la terminal:
+\begin{terminal}
+\begin{comando}
+cd $HOME\Documents
+mkdir Estadistica
+cd Estadistica
+\end{comando}
+\end{terminal}
+\textbf{Comprobación:} el prompt termina en \texttt{\textbackslash Documents\textbackslash Estadistica>}.
+\end{paso}
+
+\begin{paso}{Paso 7. Clonar el repositorio}
+\begin{terminal}
+\begin{comando}
+git clone https://github.com/cguillermo79/Informacion_estadistica.git
+\end{comando}
+\end{terminal}
+Como el repositorio es privado, \textbf{la primera vez} aparecerá una ventana para iniciar sesión en GitHub:
+\begin{enumerate}[leftmargin=*]
+  \item Elija \textbf{Sign in with your browser} (iniciar sesión con el navegador).
+  \item En el navegador, inicie sesión con \textbf{la cuenta que aceptó la invitación} y presione \textbf{Authorize git-ecosystem}.
+  \item Vuelva a la terminal: la descarga continúa sola. Windows recordará su sesión para las próximas veces.
+\end{enumerate}
+\textbf{Comprobación:} la terminal termina con un mensaje parecido a \texttt{Resolving deltas: 100\% ... done.} y, al escribir \cmd{dir}, aparece la carpeta \texttt{Informacion\_estadistica}.
+\end{paso}
+
+\subsection{Qué contiene lo que descargó}
+
+\begin{terminal}
+\begin{comando}
+Estadistica\                              <- su carpeta del curso
+`-- Informacion_estadistica\              <- el repositorio (material del docente)
+    |-- README.md
+    |-- requirements.txt                  <- librerías de Python del curso
+    |-- 00_guia_descarga\                 <- esta guía
+    `-- Unidad 1\
+        |-- guia_proyecto_integrador\     <- guía del proyecto (PDF)
+        |-- formato_proyecto_integrador\  <- formato LaTeX del informe
+        `-- bases_datos_proyecto_integrador\
+            |-- grupo_01_relieve\
+            |-- grupo_02_cobertura\
+            |-- grupo_03_clima\
+            `-- grupo_04_incendios\
+\end{comando}
+\end{terminal}
+
+\begin{alerta}[title=No trabaje dentro de \texttt{Informacion\_estadistica}]
+Esa carpeta es el material del docente y se actualiza desde GitHub. \textbf{No edite, mueva ni guarde archivos dentro de ella}: si lo hace, la actualización (sección 9) puede fallar. Su trabajo va en la carpeta \texttt{mis\_trabajos} (Paso 11).
+\end{alerta}
+
+\section{Instalar Python (si aún no lo tiene)}
+
+\begin{paso}{Paso 8. Comprobar o instalar Python}
+En la terminal escriba \cmd{python --version}.
+\begin{itemize}[leftmargin=*]
+  \item Si responde \texttt{Python 3.11} o superior, ya lo tiene: pase a la sección 7.
+  \item Si no, descárguelo de \url{https://www.python.org/downloads/}. En la \textbf{primera pantalla del instalador} marque la casilla \textbf{«Add python.exe to PATH»} y luego \textbf{Install Now}. Cierre y vuelva a abrir la terminal y repita \cmd{python --version}.
+\end{itemize}
+\end{paso}
+
+\section{Visual Studio Code y el entorno virtual (\texttt{.venv})}
+
+Un \textbf{entorno virtual} es una carpeta (\texttt{.venv}) con una copia de Python solo para este curso, donde se instalan las librerías que el curso necesita (pandas, matplotlib, etc.). Así las librerías de un curso no se mezclan con las de otro y todos trabajamos con las mismas versiones.
+
+\begin{paso}{Paso 9. Abrir la carpeta del curso en VS Code}
+\begin{enumerate}[leftmargin=*]
+  \item Si no tiene Visual Studio Code, descárguelo de \url{https://code.visualstudio.com/} e instálelo con las opciones predeterminadas.
+  \item Abra VS Code y vaya a \textbf{Archivo $\rightarrow$ Abrir carpeta\ldots}; elija \texttt{Documentos\textbackslash Estadistica} (la carpeta \textbf{del curso}, no la del repositorio).
+  \item Instale las extensiones \textbf{Python} y \textbf{Jupyter} de Microsoft: icono de \textbf{Extensiones} (cuatro cuadritos) o \textbf{Ctrl + Shift + X}, busque cada una y presione \textbf{Instalar}.
+  \item Abra la terminal de VS Code: \textbf{Terminal $\rightarrow$ Nueva terminal}.
+\end{enumerate}
+\textbf{Comprobación:} el prompt de la terminal termina en \texttt{\textbackslash Estadistica>}.
+\end{paso}
+
+\begin{paso}{Paso 10. Crear el entorno virtual (solo la primera vez)}
+\begin{terminal}
+\begin{comando}
+python -m venv .venv
+\end{comando}
+\end{terminal}
+Tarda unos segundos y no muestra mensajes. \textbf{Comprobación:} \cmd{dir -Force} muestra una carpeta llamada \texttt{.venv}.
+\end{paso}
+
+\begin{paso}{Paso 11. Activar el entorno virtual}
+\begin{terminal}
+\begin{comando}
+.\.venv\Scripts\Activate.ps1
+\end{comando}
+\end{terminal}
+\textbf{Comprobación:} el prompt ahora empieza con \texttt{(.venv)}:
+\begin{terminal}
+\begin{comando}
+(.venv) PS C:\Users\Ana\Documents\Estadistica>
+\end{comando}
+\end{terminal}
+\textbf{Si aparece un error en rojo} que dice que la ejecución de scripts está deshabilitada, escriba \textbf{una sola vez} el siguiente comando, responda \texttt{S} y repita la activación:
+\begin{terminal}
+\begin{comando}
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+\end{comando}
+\end{terminal}
+Para \textbf{desactivar} el entorno al terminar de trabajar, escriba \cmd{deactivate}.
+\end{paso}
+
+\begin{nota}
+El entorno se \textbf{crea una vez}, pero se \textbf{activa cada vez} que abre una terminal nueva. Si el prompt no empieza con \texttt{(.venv)}, el entorno no está activo y las librerías del curso no estarán disponibles.
+\end{nota}
+
+\begin{paso}{Paso 12. Instalar las librerías del curso}
+Con \texttt{(.venv)} visible en el prompt:
+\begin{terminal}
+\begin{comando}
+python -m pip install --upgrade pip
+pip install -r Informacion_estadistica\requirements.txt
+\end{comando}
+\end{terminal}
+La segunda instrucción puede tardar varios minutos y mostrar muchas líneas: es normal. \textbf{Comprobación:}
+\begin{terminal}
+\begin{comando}
+python -c "import pandas, matplotlib, scipy, statsmodels; print('Todo listo')"
+\end{comando}
+\end{terminal}
+Debe responder \texttt{Todo listo}.
+\end{paso}
+
+\begin{paso}{Paso 13. Decirle a VS Code que use el entorno}
+Presione \textbf{Ctrl + Shift + P}, escriba \textbf{Python: Select Interpreter} y elija la opción que termina en \texttt{.venv\textbackslash Scripts\textbackslash python.exe}. Si trabaja con cuadernos (\texttt{.ipynb}), en la esquina superior derecha del cuaderno elija \textbf{Select Kernel $\rightarrow$ Python Environments $\rightarrow$ .venv}.
+\end{paso}
+
+\clearpage
+\section{Comprobar que puede leer la base de su grupo}
+
+\begin{paso}{Paso 14. Crear su carpeta de trabajo y un archivo de prueba}
+\begin{enumerate}[leftmargin=*]
+  \item En el panel \textbf{Explorador} de VS Code (izquierda), cree la carpeta \texttt{mis\_trabajos} al mismo nivel que \texttt{Informacion\_estadistica} (icono \textbf{Nueva carpeta}).
+  \item Dentro de \texttt{mis\_trabajos}, cree el archivo \texttt{prueba\_base.py} y pegue este código:
+\end{enumerate}
+\begin{terminal}
+\begin{comando}
+import pandas as pd
+
+# CAMBIE SOLO ESTA LINEA por la carpeta de su grupo (ver lista abajo)
+GRUPO = "grupo_04_incendios"
+
+ruta = f"Informacion_estadistica/Unidad 1/bases_datos_proyecto_integrador/{GRUPO}/{GRUPO}.csv"
+df = pd.read_csv(ruta)
+print("Lectura exitosa")
+print("Filas:", df.shape[0], "| Columnas:", df.shape[1])
+print("Celdas de la muestra:", df["cell_id"].nunique())
+print(df.head(3))
+\end{comando}
+\end{terminal}
+Grupos: \texttt{grupo\_01\_relieve}, \texttt{grupo\_02\_cobertura}, \texttt{grupo\_03\_clima}, \texttt{grupo\_04\_incendios}.
+
+Guarde con \textbf{Ctrl + S} y ejecútelo en la terminal (con \texttt{(.venv)} activo):
+\begin{terminal}
+\begin{comando}
+python mis_trabajos\prueba_base.py
+\end{comando}
+\end{terminal}
+\textbf{Comprobación:} muestra \texttt{Lectura exitosa}, \texttt{Celdas de la muestra: 400} y las filas y columnas de su base: \textbf{400 $\times$ 24} en el grupo 1; \textbf{28.800 $\times$ 30} en el grupo 2; \textbf{28.800 $\times$ 26} en los grupos 3 y 4.
+\end{paso}
+
+\begin{nota}[title=Si trabaja en R / RStudio]
+Abra RStudio, vaya a \textbf{File $\rightarrow$ New Project $\rightarrow$ Existing Directory} y elija la carpeta \texttt{Documentos\textbackslash Estadistica}. Luego lea su base con (cambie el nombre del grupo):
+\begin{terminal}
+\begin{comando}
+df <- read.csv("Informacion_estadistica/Unidad 1/bases_datos_proyecto_integrador/grupo_04_incendios/grupo_04_incendios.csv")
+\end{comando}
+\end{terminal}
+\end{nota}
+
+\section{Actualizar el material cuando el docente publique algo nuevo}
+
+Cada vez que el docente avise que hay material nuevo (o al empezar cada semana), descargue solo los cambios:
+
+\begin{paso}{Paso 15. Traer lo nuevo del docente}
+Abra VS Code en la carpeta \texttt{Estadistica}, abra una terminal y escriba:
+\begin{terminal}
+\begin{comando}
+git -C Informacion_estadistica pull
+\end{comando}
+\end{terminal}
+\begin{itemize}[leftmargin=*]
+  \item \texttt{Already up to date.} significa que no hay novedades.
+  \item Una lista de archivos con signos \texttt{+} y \texttt{-} significa que se descargó material nuevo.
+\end{itemize}
+Si el docente avisa que cambió \texttt{requirements.txt}, active el entorno y repita \cmd{pip install -r Informacion\_estadistica\textbackslash requirements.txt}.
+\end{paso}
+
+\subsection{Resumen: cada vez que trabaje}
+
+\begin{enumerate}
+  \item Abra VS Code en la carpeta \texttt{Documentos\textbackslash Estadistica}.
+  \item Abra la terminal (\textbf{Terminal $\rightarrow$ Nueva terminal}).
+  \item Active el entorno: \cmd{.\textbackslash .venv\textbackslash Scripts\textbackslash Activate.ps1} (debe verse \texttt{(.venv)}).
+  \item Actualice el material: \cmd{git -C Informacion\_estadistica pull}.
+  \item Trabaje en \texttt{mis\_trabajos}.
+\end{enumerate}
+
+\section{Problemas frecuentes}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{L{5.0cm}Y}
+\toprule
+\textbf{Mensaje o problema} & \textbf{Solución} \\
+\midrule
+«\texttt{git} no se reconoce como nombre de un cmdlet» & Git no está instalado o la terminal se abrió antes de instalarlo. Cierre \textbf{todas} las terminales y VS Code, vuelva a abrirlos y repita \cmd{git --version}. Si persiste, reinstale Git (Paso 3). \\
+«\texttt{Repository not found}» o error 403 al clonar & No aceptó la invitación, la invitación venció, o inició sesión con otra cuenta de GitHub. Acepte la invitación (Paso 2). Si usó otra cuenta: tecla Windows $\rightarrow$ \textbf{Administrador de credenciales} $\rightarrow$ \textbf{Credenciales de Windows}, elimine la entrada \texttt{git:https://github.com} y clone de nuevo. \\
+No aparece la ventana para iniciar sesión & Cierre la terminal, ábrala de nuevo y repita el \texttt{git clone}. Compruebe que Git se instaló con las opciones predeterminadas (incluyen el Git Credential Manager). \\
+«\texttt{destination path ... already exists}» & Ya clonó el repositorio antes. No lo clone de nuevo: actualícelo con \cmd{git -C Informacion\_estadistica pull}. \\
+«La ejecución de scripts está deshabilitada en este sistema» & Ejecute una vez \cmd{Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned}, responda \texttt{S} y active de nuevo el entorno (Paso 11). \\
+«\texttt{python} no se reconoce» o abre la Microsoft Store & Python no está instalado o se instaló sin «Add python.exe to PATH». Reinstálelo marcando esa casilla (Paso 8). \\
+\texttt{ModuleNotFoundError: No module named 'pandas'} & El entorno no está activo o VS Code usa otro intérprete. Active el entorno (Paso 11), elija el intérprete \texttt{.venv} (Paso 13) e instale las librerías (Paso 12). \\
+\texttt{FileNotFoundError} al leer la base & La terminal no está en la carpeta \texttt{Estadistica} (compruebe con \cmd{pwd}) o el nombre del grupo está mal escrito. \\
+\texttt{git pull} dice que sus cambios serían sobrescritos & Modificó un archivo dentro de \texttt{Informacion\_estadistica}. Copie a \texttt{mis\_trabajos} lo que quiera conservar y luego ejecute \cmd{git -C Informacion\_estadistica restore .} y repita el \texttt{pull}. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection*{Alternativa sin Git (solo si Git no funciona)}
+
+Con su sesión de GitHub iniciada en el navegador, abra el repositorio, presione \textbf{Code $\rightarrow$ Download ZIP} y descomprima el archivo dentro de \texttt{Documentos\textbackslash Estadistica}, cambiando el nombre de la carpeta a \texttt{Informacion\_estadistica}. Con este método \textbf{no podrá actualizar} con \texttt{git pull}: deberá descargar el ZIP de nuevo cada vez.
+
+\subsection*{Notas para macOS y Linux}
+
+\begin{itemize}
+  \item La terminal se llama \textbf{Terminal}. Git se instala con \cmd{xcode-select --install} (macOS) o con el gestor de paquetes (Linux).
+  \item Use \cmd{python3} en lugar de \cmd{python}, cree el entorno con \cmd{python3 -m venv .venv} y actívelo con \cmd{source .venv/bin/activate}.
+  \item En las rutas use \texttt{/} en lugar de \texttt{\textbackslash}.
+\end{itemize}
+
+\section{Lista de verificación final}
+
+\begin{itemize}[label=$\square$]
+  \item Acepté la invitación y veo el repositorio en GitHub con mi sesión iniciada.
+  \item \cmd{git --version} responde con una versión.
+  \item Tengo la carpeta \texttt{Documentos\textbackslash Estadistica\textbackslash Informacion\_estadistica} con la carpeta \texttt{Unidad 1}.
+  \item Al activar el entorno, el prompt empieza con \texttt{(.venv)}.
+  \item El comando de comprobación del Paso 12 responde \texttt{Todo listo}.
+  \item \texttt{prueba\_base.py} lee la base de mi grupo y muestra 400 celdas.
+  \item Sé actualizar el material con \cmd{git -C Informacion\_estadistica pull}.
+\end{itemize}
+
+\vspace{0.4em}
+\begin{exito}
+Si cumple toda la lista, su computadora está lista para el proyecto integrador. Abra la \textbf{guía del proyecto integrador} en \texttt{Unidad 1\textbackslash guia\_proyecto\_integrador} para conocer lo que debe presentar en la Unidad 1.
+\end{exito}
+
+\end{document}
