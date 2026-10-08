@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -572,7 +572,7 @@
               Microreto: Fundamentos de Muestreo y Diseño del Estudio (Bloque C)
             </h2>
             <p class="text-xs md:text-sm text-slate-600 mt-1">
-              Complete sus datos institucionales. Al finalizar los 10 problemas de razonamiento, su calificación y desglose se registrarán y enviarán formalmente al docente Guillermo Chuncho: <code class="text-emerald-700 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded">carlos.chuncho@unl.edu.ec</code>.
+              Complete sus datos institucionales. Al finalizar los 10 problemas de razonamiento, su calificación y desglose se registrarán y enviarán formalmente al docente Guillermo Chuncho: <code class="text-emerald-700 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded">carguille2@gmail.com</code>.
             </p>
           </div>
           
@@ -628,7 +628,7 @@
         <button onclick="finalizarYEnviar()" id="btnEnviarMicroreto" 
                 class="px-6 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm rounded-xl shadow-md transition-all inline-flex items-center gap-2">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-          Finalizar y Enviar Microreto a carlos.chuncho@unl.edu.ec
+          Finalizar y Enviar Microreto a carguille2@gmail.com
         </button>
 
         <!-- TARJETA MODAL / RESULTADO OFICIAL (OCULTA INICIALMENTE) -->
@@ -659,7 +659,7 @@
             </div>
             <div>
               <strong class="text-slate-500 block">Destinatario Docente:</strong>
-              <span class="text-emerald-700 font-bold">Guillermo Chuncho (carlos.chuncho@unl.edu.ec)</span>
+              <span class="text-emerald-700 font-bold">Guillermo Chuncho (carguille2@gmail.com)</span>
             </div>
           </div>
 
@@ -1072,10 +1072,10 @@
       // Estado de envío por FormSubmit AJAX
       const statusBox = document.getElementById("envioStatus");
       statusBox.className = "p-3.5 rounded-xl text-xs font-medium border bg-blue-50 border-blue-200 text-blue-900";
-      statusBox.innerHTML = `<strong>Enviando:</strong> Transmitiendo calificación a <code>carlos.chuncho@unl.edu.ec</code>...`;
+      statusBox.innerHTML = `<strong>Enviando:</strong> Transmitiendo calificación a <code>carguille2@gmail.com</code>...`;
 
       try {
-        const response = await fetch("https://formsubmit.co/ajax/carlos.chuncho@unl.edu.ec", {
+        const response = await fetch("https://formsubmit.co/ajax/carguille2@gmail.com", {
           method: "POST",
           headers: { 
             'Content-Type': 'application/json',
@@ -1096,7 +1096,7 @@
 
         if (response.ok) {
           statusBox.className = "p-3.5 rounded-xl text-xs font-medium border bg-emerald-50 border-emerald-200 text-emerald-900";
-          statusBox.innerHTML = `<strong>✓ Envío Exitoso:</strong> Su calificación de <strong>${notaFinal}/10</strong> y el reporte detallado han sido remitidos directamente al correo de la cátedra: <code>carlos.chuncho@unl.edu.ec</code>.`;
+          statusBox.innerHTML = `<strong>✓ Envío Exitoso:</strong> Su calificación de <strong>${notaFinal}/10</strong> y el reporte detallado han sido remitidos directamente al correo de la cátedra: <code>carguille2@gmail.com</code>.`;
         } else {
           statusBox.className = "p-3.5 rounded-xl text-xs font-medium border bg-amber-50 border-amber-200 text-amber-900";
           statusBox.innerHTML = `<strong>Aviso:</strong> El servicio web tardó en responder. Por seguridad, utilice el botón azul <em>"Reenviar por Correo Directo (Mailto)"</em> para enviar su comprobante desde su cuenta institucional.`;
@@ -1120,7 +1120,7 @@
         "==================================================",
         "COMPROBANTE DE MICRORETO - ESTADÍSTICA (BLOQUE C)",
         "UNIVERSIDAD NACIONAL DE LOJA - INGENIERÍA AMBIENTAL",
-        "Docente: Guillermo Chuncho (carlos.chuncho@unl.edu.ec)",
+        "Docente: Guillermo Chuncho (carguille2@gmail.com)",
         "==================================================",
         `Estudiante: ${name}`,
         `Correo Institucional: ${email}`,
@@ -1149,7 +1149,7 @@
       const nota = document.getElementById("resNotaFinal").innerText;
       const asunto = encodeURIComponent(`[MICRORETO BLOQUE C] Calificación: ${nota} - ${name} (${email})`);
       const cuerpo = encodeURIComponent(generarTextoReporte());
-      window.location.href = `mailto:carlos.chuncho@unl.edu.ec?subject=${asunto}&body=${cuerpo}`;
+      window.location.href = `mailto:carguille2@gmail.com?subject=${asunto}&body=${cuerpo}`;
     }
 
     function copiarComprobante() {

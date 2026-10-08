@@ -1,4 +1,4 @@
-import streamlit as st
+﻿import streamlit as st
 import streamlit.components.v1 as components
 import os
 import random
@@ -43,7 +43,7 @@ with st.sidebar:
     st.markdown("**Carrera de Ingeniería Ambiental**")
     st.markdown("**Asignatura:** Estadística Descriptiva")
     st.markdown("**Docente:** Guillermo Chuncho")
-    st.markdown("**Contacto:** `carlos.chuncho@unl.edu.ec`")
+    st.markdown("**Contacto:** `carguille2@gmail.com`")
     st.markdown("---")
     
     modo = st.radio(
@@ -150,7 +150,7 @@ elif modo == "📝 Microreto Evaluativo Nativo":
     st.markdown(
         """
         Complete los 10 reactivos de razonamiento. Al finalizar, su nota se calculará sobre **10.0 puntos** 
-        y podrá remitirla directamente a la cátedra: `carlos.chuncho@unl.edu.ec`.
+        y podrá remitirla directamente a la cátedra: `carguille2@gmail.com`.
         """
     )
     
@@ -342,10 +342,10 @@ elif modo == "📝 Microreto Evaluativo Nativo":
 
             st.info(f"**Código de Verificación:** `{codigo_verificacion}` | **Fecha:** {fecha_entrega}")
 
-            # Transmisión a carlos.chuncho@unl.edu.ec vía FormSubmit
+            # Transmisión a carguille2@gmail.com vía FormSubmit
             try:
                 res = requests.post(
-                    "https://formsubmit.co/ajax/carlos.chuncho@unl.edu.ec",
+                    "https://formsubmit.co/ajax/carguille2@gmail.com",
                     json={
                         "_subject": f"[MICRORETO STREAMLIT] {nota_final:.1f}/10 - {est_nombre} ({est_email})",
                         "_template": "table",
@@ -360,7 +360,7 @@ elif modo == "📝 Microreto Evaluativo Nativo":
                     timeout=8
                 )
                 if res.status_code == 200:
-                    st.success("✅ **Calificación enviada automáticamente a la bandeja del docente:** `carlos.chuncho@unl.edu.ec`")
+                    st.success("✅ **Calificación enviada automáticamente a la bandeja del docente:** `carguille2@gmail.com`")
                 else:
                     st.warning("⚠️ El servicio externo tardó en confirmar. Utilice el comprobante descargable como respaldo.")
             except Exception:
@@ -371,7 +371,7 @@ elif modo == "📝 Microreto Evaluativo Nativo":
                 f"==================================================\n"
                 f"COMPROBANTE OFICIAL DE MICRORETO - BLOQUE C\n"
                 f"UNIVERSIDAD NACIONAL DE LOJA - INGENIERÍA AMBIENTAL\n"
-                f"Docente: Guillermo Chuncho (carlos.chuncho@unl.edu.ec)\n"
+                f"Docente: Guillermo Chuncho (carguille2@gmail.com)\n"
                 f"==================================================\n"
                 f"Estudiante: {est_nombre}\n"
                 f"Correo Institucional: {est_email}\n"
